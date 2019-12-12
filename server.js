@@ -48,16 +48,18 @@ require("dotenv").config();
 //     res.send("Hello")
 // })
 
-app.get("/", (req, res) => {
-    res.send("Hello from server")
-})
+
 
 if(process.env.NODE_ENV === "production") {
+    console.log("production")
     app.use(express.static("client/build"))
-
     app.get("*", (req, res) => {
         res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
     })
+} else {
+   app.get("/", (req, res) => {
+       res.send("not production bucko")
+   })
 }
 
 app.listen( process.env.PORT || 5002 , () => {
