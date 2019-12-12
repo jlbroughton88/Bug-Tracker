@@ -1,0 +1,34 @@
+{
+  "name": "Bug-Tracker",
+  "version": "1.0.0",
+  "description": "This bug tracker allows users to log and keep track of errors that pop up during development.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": " node server.js",
+    "client": "PORT=3001 npm start --prefix client",
+    "server": "nodemon server.js",
+    "dev": "concurrently \"npm run client\" \"npm run server\" ",
+    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client",
+    "find": "pgrep node",
+    "kill": "pkill node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jlbroughton88/Bug-Tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jlbroughton88/Bug-Tracker/issues"
+  },
+  "homepage": "https://github.com/jlbroughton88/Bug-Tracker#readme",
+  "dependencies": {
+    "@auth0/auth0-spa-js": "^1.6.0",
+    "concurrently": "^5.0.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "react-router-dom": "^5.1.2"
+  }
+}
