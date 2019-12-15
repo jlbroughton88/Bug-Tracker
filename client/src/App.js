@@ -2,10 +2,8 @@ import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./components/pages/Home";
-import allActions from "./actions/index";
 import NavBar from "./components/NavBar";
-import { useAuth0 } from "./react-auth0-spa";
-import RevealText from "./components/textState";
+import { useAuth0 } from "./AuthProvider";
 import Profile from "./components/pages/Profile";
 import './App.css';
 

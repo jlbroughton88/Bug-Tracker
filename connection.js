@@ -6,10 +6,10 @@ const connection = mysql.createConnection(process.env.JAWSDB_URL)
 connection.connect();
 
 
-router.get("/all", (req, res) => {
-        connection.query("SELECT * FROM users", (err, rows, fields) => {
+router.get("/:email", (req, res) => {
+        connection.query(`SELECT * FROM users where email = "${req.params.email}"` , (err, rows, fields) => {
         if(err) throw err;
-        console.log(rows)
+        // console.log(rows)
         res.send(rows)
     })
 })

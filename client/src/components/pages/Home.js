@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import allActions from "../../actions/index";
-import { useAuth0 } from "../../react-auth0-spa";
+import { useAuth0 } from "../../AuthProvider";
 import RevealText from "../textState";
 
 const Home = () => {

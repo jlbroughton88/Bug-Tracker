@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
 import store from "./store";
 
-import { Auth0Provider } from "./react-auth0-spa";
+import { Auth0Provider } from "./AuthProvider";
 import config from "./auth_config.json";
 import history from "./utils/history";
 
