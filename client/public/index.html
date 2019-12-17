@@ -1,40 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+  <title>React App</title>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
 
 
-    <script src="https://cdn.auth0.com/js/lock/11.19.0/lock.min.js"></script>
-<script>
-  var lock = new Auth0Lock('piWchDvXGOycCbEuR95WgYqkX0BvC6cQ', 'jlb1999.auth0.com', {
-    auth: {
-      redirectUrl: 'http://localhost:3001',
-      responseType: 'code',
-      params: {
-        scope: 'openid email' // Learn about scopes: https://auth0.com/docs/scopes
-      }
+  <script src="https://cdn.auth0.com/js/lock/11.19.0/lock.min.js"></script>
+  <script>
+    var options = {
+      additionalSignUpFields: [
+        {
+          name: "first_name",
+          placeholder: "Enter your first name",
+          // The following properties are optional
+          validator: function (first_name) {
+            return {
+              valid: first_name.length >= 2,
+              hint: "You must include a first name" // optional
+            };
+          }
+        },
+        {
+          name: "last_name",
+          placeholder: "Enter your last name",
+          validator: function (last_name) {
+            return {
+              valid: last_name.length >= 2,
+              hint: "You must include a last name"
+            };
+          }
+        }
+      ]
     }
-  });
-</script>
-<button onclick="lock.show();">Login</button>
-  </body>
+
+    var lock = new Auth0Lock('piWchDvXGOycCbEuR95WgYqkX0BvC6cQ', 'jlb1999.auth0.com', options, {
+      auth: {
+        redirectUrl: 'http://localhost:3001',
+        responseType: 'token',
+        params: {
+          scope: 'openid profile email' // Learn about scopes: https://auth0.com/docs/scopes
+        }
+      }
+    });
+  </script>
+  <button onclick="lock.show();">Login</button>
+</body>
+
 </html>

@@ -7,6 +7,7 @@ import useAxios from "axios-hooks";
 
 
 const Profile = () => {    
+    // console.log(useAuth0());
     const {user} = useAuth0();
 
     const [{ data, loading, error, response}, refetch] = useAxios(

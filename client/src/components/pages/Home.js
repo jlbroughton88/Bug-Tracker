@@ -3,13 +3,19 @@ import { useSelector, useDispatch } from "react-redux";
 import allActions from "../../actions/index";
 import { useAuth0 } from "../../AuthProvider";
 import RevealText from "../textState";
+import useAxios from "axios-hooks";
 
 const Home = () => {
 
   const counter = useSelector(state => state.reducer);
-  const { loading } = useAuth0();
+  // const { loading } = useAuth0();
 
   const dispatch = useDispatch();
+
+  const [{data, loading, error, response}, refetch] = useAxios(
+    'http://localhost:3001'
+  )
+  // console.log(response)
 
 
   if (loading) {
