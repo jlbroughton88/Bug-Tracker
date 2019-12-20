@@ -1,12 +1,11 @@
 import React from "react";
 import { useAuth0 } from "../AuthProvider";
-import isAuthenticated from "../Auth/isAuthenticated";
 import { Link } from "react-router-dom";
 const { Auth0Lock } = require("auth0-lock");
 
 const NavBar = () => {
     // console.log(useAuth0());
-    const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+    const { logout } = useAuth0();
 
     // return (
     //     <div>
@@ -51,7 +50,7 @@ const NavBar = () => {
         auth: {
             redirectUrl: 'http://localhost:3001',
             responseType: 'token id_token',
-            audience: 'https://' + 'jlb1999.auth0.com' + '/userinfo',
+            audience: 'https://jlb1999.auth0.com/userinfo',
             params: {
                 scope: 'openid profile email' // Learn about scopes: https://auth0.com/docs/scopes
             }
@@ -64,24 +63,33 @@ const NavBar = () => {
         lock.show()
     }
 
+    var accessToken = null;
+    var profile = null;
+
     lock.on('authenticated', (authResult) => {
-        console.log("hello");
+        console.log(authResult);
+        lock.getUserInfo(authResult.accessToken, (error, profileResult) => {
+            if(error) {
+                return;
+            };
+
+            accessToken = authResult.accessToken;
+            profile = profileResult;
+            console.log(profile);
+        })
+
+
     })
-    
     return (
         <div>
+            <div>
+                < button onClick={handleClick} > Login</button >
+            </div>
 
-                    <div>
-                        < button onClick={handleClick} > Login</button >
-                    </div>
-
-                    < div >
-                        <button onClick={() => logout()}>Log Out</button>
-                        <button><Link to="/profile">Profile</Link></button>
-                    </div >
-
-
-
+            < div >
+                <button onClick={() => logout()}>Log Out</button>
+                <button><Link to="/profile">Profile</Link></button>
+            </div >
         </div>
     )
 }

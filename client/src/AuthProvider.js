@@ -22,6 +22,7 @@ export const Auth0Provider = ({
     const [popupOpen, setPopupOpen] = useState(false);
 
 
+
     // Similar to componentDidMount.
     // Can be used for side effects such as data fetching, setting up a subscription, or changing the DOM.
     useEffect(() => {

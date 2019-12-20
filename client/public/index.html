@@ -23,44 +23,7 @@
 
 
   <script src="https://cdn.auth0.com/js/lock/11.19.0/lock.min.js"></script>
-  <script>
-    var options = {
-      additionalSignUpFields: [
-        {
-          name: "first_name",
-          placeholder: "Enter your first name",
-          // The following properties are optional
-          validator: function (first_name) {
-            return {
-              valid: first_name.length >= 2,
-              hint: "You must include a first name" // optional
-            };
-          }
-        },
-        {
-          name: "last_name",
-          placeholder: "Enter your last name",
-          validator: function (last_name) {
-            return {
-              valid: last_name.length >= 2,
-              hint: "You must include a last name"
-            };
-          }
-        }
-      ]
-    }
 
-    var lock = new Auth0Lock('piWchDvXGOycCbEuR95WgYqkX0BvC6cQ', 'jlb1999.auth0.com', options, {
-      auth: {
-        redirectUrl: 'http://localhost:3001',
-        responseType: 'token',
-        params: {
-          scope: 'openid profile email' // Learn about scopes: https://auth0.com/docs/scopes
-        }
-      }
-    });
-  </script>
-  <button onclick="lock.show();">Login</button>
 </body>
 
 </html>
