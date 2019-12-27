@@ -7,8 +7,9 @@ connection.connect();
 
 
 router.get("/", () => {
+    console.log(connection);
     connection.query('SELECT * FROM users', (err, rows, fields) => {
-        if(err) throw err
+        if(err) throw err;
             res.send(rows)
         
     })
