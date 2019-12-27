@@ -20,25 +20,68 @@ const NavBar = () => {
     // ===============================
     // This works, but need to figure out how to get response logged
     // and how to make the log in button go away when user is authenticated.
-    var options = {
+
+    // var options = {
+    //     additionalSignUpFields: [
+    //         {
+    //             name: "first_name",
+    //             placeholder: "Enter your first name",
+    //             // The following properties are optional
+    //             validator: function (first_name) {
+    //                 return {
+    //                     valid: first_name.length >= 2,
+    //                     hint: "You must include a first name" // optional
+    //                 };
+    //             }
+    //         },
+    //         {
+    //             name: "last_name",
+    //             placeholder: "Enter your last name",
+    //             validator: function (last_name) {
+    //                 return {
+    //                     valid: last_name.length >= 2,
+    //                     hint: "You must include a last name"
+    //                 };
+    //             }
+    //         }
+    //     ]
+    // }
+
+    let lock;
+
+    let options = {
+        auth: {
+            // redirectUrl: 'http://localhost:3001',
+            // responseType: 'token id_token',
+            // audience: 'https://jlb1999.auth0.com/userinfo',
+            // params: {
+            //     scope: 'openid id_token profile email user_metadata app_metadata' // Learn about scopes: https://auth0.com/docs/scopes
+            // }
+            responseType: "token id_token",
+            audience: "https://jlb1999.auth0.com/userinfo",
+            redirectUrl: "http://localhost:3001",
+            scope: "openid profile"
+        },
+        autoclose: true,
+        oidcConformant: false,
         additionalSignUpFields: [
             {
-                name: "first_name",
+                name: "given_name",
                 placeholder: "Enter your first name",
                 // The following properties are optional
-                validator: function (first_name) {
+                validator: function (given_name) {
                     return {
-                        valid: first_name.length >= 2,
+                        valid: given_name.length >= 2,
                         hint: "You must include a first name" // optional
                     };
                 }
             },
             {
-                name: "last_name",
+                name: "family_name",
                 placeholder: "Enter your last name",
-                validator: function (last_name) {
+                validator: function (family_name) {
                     return {
-                        valid: last_name.length >= 2,
+                        valid: family_name.length >= 2,
                         hint: "You must include a last name"
                     };
                 }
@@ -46,18 +89,7 @@ const NavBar = () => {
         ]
     }
 
-    var lock = new Auth0Lock('piWchDvXGOycCbEuR95WgYqkX0BvC6cQ', 'jlb1999.auth0.com', options, {
-        auth: {
-            redirectUrl: 'http://localhost:3001',
-            responseType: 'token id_token',
-            audience: 'https://jlb1999.auth0.com/userinfo',
-            params: {
-                scope: 'openid profile email' // Learn about scopes: https://auth0.com/docs/scopes
-            }
-        }
-    });
-
-
+    lock = new Auth0Lock('piWchDvXGOycCbEuR95WgYqkX0BvC6cQ', 'jlb1999.auth0.com', options)
 
     const handleClick = () => {
         lock.show()
@@ -68,8 +100,10 @@ const NavBar = () => {
 
     lock.on('authenticated', (authResult) => {
         console.log(authResult);
+
+
         lock.getUserInfo(authResult.accessToken, (error, profileResult) => {
-            if(error) {
+            if (error) {
                 return;
             };
 
