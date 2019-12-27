@@ -4,63 +4,16 @@ import { Link } from "react-router-dom";
 const { Auth0Lock } = require("auth0-lock");
 
 const NavBar = () => {
-    // console.log(useAuth0());
-    const { logout } = useAuth0();
-
-    // return (
-    //     <div>
-    //         <button><Link to="/">Home</Link></button>
-    //         {/* {!isAuthenticated && (
-    //             <button onClick={() => loginWithRedirect({})}>Log In</button>
-    //         )}
-    //     </div>
-
-    // )
-
-    // ===============================
-    // This works, but need to figure out how to get response logged
-    // and how to make the log in button go away when user is authenticated.
-
-    // var options = {
-    //     additionalSignUpFields: [
-    //         {
-    //             name: "first_name",
-    //             placeholder: "Enter your first name",
-    //             // The following properties are optional
-    //             validator: function (first_name) {
-    //                 return {
-    //                     valid: first_name.length >= 2,
-    //                     hint: "You must include a first name" // optional
-    //                 };
-    //             }
-    //         },
-    //         {
-    //             name: "last_name",
-    //             placeholder: "Enter your last name",
-    //             validator: function (last_name) {
-    //                 return {
-    //                     valid: last_name.length >= 2,
-    //                     hint: "You must include a last name"
-    //                 };
-    //             }
-    //         }
-    //     ]
-    // }
+    const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
     let lock;
 
     let options = {
         auth: {
-            // redirectUrl: 'http://localhost:3001',
-            // responseType: 'token id_token',
-            // audience: 'https://jlb1999.auth0.com/userinfo',
-            // params: {
-            //     scope: 'openid id_token profile email user_metadata app_metadata' // Learn about scopes: https://auth0.com/docs/scopes
-            // }
             responseType: "token id_token",
             audience: "https://jlb1999.auth0.com/userinfo",
             redirectUrl: "http://localhost:3001",
-            scope: "openid profile"
+            scope: "openid profile family_name given_name"
         },
         autoclose: true,
         oidcConformant: false,
@@ -117,7 +70,7 @@ const NavBar = () => {
     return (
         <div>
             <div>
-                < button onClick={handleClick} > Login</button >
+                < button onClick={() => loginWithRedirect({})} > Login</button >
             </div>
 
             < div >

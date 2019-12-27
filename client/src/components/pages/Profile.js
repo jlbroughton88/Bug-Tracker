@@ -9,6 +9,7 @@ import useAxios from "axios-hooks";
 const Profile = () => {    
     // console.log(useAuth0());
     const {user} = useAuth0();
+    console.log(user)
 
     const [{ data, loading, error, response}, refetch] = useAxios(
          `http://localhost:5002/api/${user.email}`
@@ -16,7 +17,7 @@ const Profile = () => {
 
     if(loading) return <p>Loading...</p>
     if(error) return <p>Error</p>
-    console.log(response.data[0])
+    // console.log(response.data[0])
     const profile = response.data[0];
     const name = profile.first_name + " " + profile.last_name
     const email = profile.email;
