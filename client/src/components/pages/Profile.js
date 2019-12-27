@@ -12,7 +12,7 @@ const Profile = () => {
     console.log(user)
 
     const [{ data, loading, error, response}, refetch] = useAxios(
-         `http://localhost:5002/api/${user.email}`
+         `https://bug-tracker-jb.herokuapp.com/api/${user.email}`
     )
 
     if(loading) return <p>Loading...</p>
