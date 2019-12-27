@@ -6,6 +6,14 @@ const connection = mysql.createConnection(process.env.JAWSDB_URL)
 connection.connect();
 
 
+router.get("/", () => {
+    connection.query('SELECT * FROM users', (err, rows, fields) => {
+        if(err) throw err
+            res.send(rows)
+        
+    })
+})
+
 router.get("/:email", (req, res) => {
         connection.query(`SELECT * FROM users where email = "${req.params.email}"` , (err, rows, fields) => {
         if(err) throw err;
