@@ -4,7 +4,7 @@ const connection = require("./connection")
 const path = require("path");
 
 require("dotenv").config();
-console.log("Hello from server");
+console.log("This is working");
 
 if(process.env.NODE_ENV === "production") {
     console.log("production")
