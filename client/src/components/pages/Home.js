@@ -14,7 +14,7 @@ const Home = () => {
 
   const [{data, loading, error, response}, refetch] = useAxios(
     // 'http://localhost:3001'
-    "https://bug-tracker-jb.herokuapp.com/"
+    "https://bug-tracker-jb.herokuapp.com"
   )
   // console.log(response)
 

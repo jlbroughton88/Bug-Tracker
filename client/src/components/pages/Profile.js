@@ -7,13 +7,12 @@ import useAxios from "axios-hooks";
 
 
 const Profile = () => {    
-    // console.log(useAuth0());
     const {user} = useAuth0();
     console.log(user)
 
     const [{ data, loading, error, response}, refetch] = useAxios(
-        //  `https://bug-tracker-jb.herokuapp.com/api/${user.email}`
-        `http://localhost:3001/api/${user.email}`
+         `https://bug-tracker-jb.herokuapp.com/api/${user.email}`
+        // `http://localhost:3001/api/${user.email}`
     )
     console.log(error)
     if(loading) return <p>Loading...</p>

@@ -12,8 +12,8 @@ const NavBar = () => {
         auth: {
             responseType: "token id_token",
             audience: "https://jlb1999.auth0.com/userinfo",
-            redirectUrl: "http://localhost:3001",
-            // redirectUrl: "https://bug-tracker-jb.herokuapp.com/",
+            // redirectUrl: "http://localhost:3001",
+            redirectUrl: "https://bug-tracker-jb.herokuapp.com",
             scope: "openid profile family_name given_name"
         },
         autoclose: true,
