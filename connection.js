@@ -10,6 +10,7 @@ router.get("/", () => {
     console.log(connection);
     connection.query('SELECT * FROM users', (err, rows, fields) => {
         if(err) throw err;
+        console.log(rows)
             res.send(rows)
         
     })
@@ -18,7 +19,7 @@ router.get("/", () => {
 router.get("/:email", (req, res) => {
         connection.query(`SELECT * FROM users where email = "${req.params.email}"` , (err, rows, fields) => {
         if(err) throw err;
-        // console.log(rows)
+        console.log(rows)
         res.send(rows)
     })
 })
