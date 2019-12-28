@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const connection = require("./connection")
+const path = require("path");
 
 require("dotenv").config();
 console.log("Hello from server");
