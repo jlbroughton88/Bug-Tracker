@@ -3,6 +3,7 @@ const app = express();
 const connection = require("./connection")
 
 require("dotenv").config();
+console.log("Hello from server");
 
 if(process.env.NODE_ENV === "production") {
     console.log("production")
