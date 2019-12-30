@@ -7,7 +7,7 @@ connection.connect();
 
 
 router.get("/", (req, res) => {
-    console.log("=====================================================" + connection);
+    console.log(connection);
     connection.query('SELECT * FROM users', (err, rows, fields) => {
         if(err) throw err;
         console.log(rows)
@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
 })
 
 router.get("/:email", (req, res) => {
-        console.log("=====================================================" + connection);
+        console.log(connection);
         connection.query(`SELECT * FROM users where email = "${req.params.email}"` , (err, rows, fields) => {
         if(err) throw err;
         console.log(rows)

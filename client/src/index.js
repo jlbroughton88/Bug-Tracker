@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
 import store from "./store";
-import { Auth0Provider } from "./AuthProvider";
-import config from "./auth_config.json";
+import { Auth0Provider } from "./contexts/auth0-context";
+// import config from "./auth_config.json";
 import history from "./utils/history";
 import './index.css';
 import App from './App';
@@ -19,12 +19,7 @@ const onRedirectCallback = appState => {
 }
 
 ReactDOM.render(
-    <Auth0Provider
-        domain={config.domain}
-        client_id={config.clientId}
-        redirect_uri={window.location.origin}
-        onRedirectCallback={onRedirectCallback}
-    >
+    <Auth0Provider>
         <Provider store={store}>
             <App />
         </Provider>
