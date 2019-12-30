@@ -24,8 +24,10 @@ const NavBar = () => {
                         )}
                         { !isLoading && user && (
                             <div className="loggedInSect">
-                                <h2 className="navGreeting">Hello, {user.given_name ? user.given_name : user.nickname}!</h2>
+                                {/* <h2 className="navGreeting">Hello, {user.given_name ? user.given_name : user.nickname}!</h2> */}
                                 <button className="navLogOut" onClick={logout}> Log Out</button>
+                                <img className="navPicture" src={user.picture} alt={user.given_name ? user.given_name : user.nickname + "'s picture"}></img>
+                                
                             </div>
                         )}
                     </div>
