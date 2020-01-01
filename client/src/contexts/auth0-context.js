@@ -1,5 +1,8 @@
 import React, { Component, createContext, useContext } from "react";
 import createAuth0Client from "@auth0/auth0-spa-js";
+const axios = require("axios");
+const CancelToken = axios.CancelToken;
+const source = CancelToken.source();
 
 // Create the context
 export const Auth0Context = createContext();
@@ -22,10 +25,35 @@ export class Auth0Provider extends Component {
     };
 
     componentDidMount() {
-        console.log(process.env.REACT_APP_AUTH0_DOMAIN);
-        console.log(process.env.REACT_APP_AUTH0_CLIENT_ID)
         this.initializeAuth0();
     };
+
+    addUser = async (newUser) => {
+        try {
+            await axios.get(`http://localhost:5002/api/newuser/${newUser.email}/${newUser.given_name}/${newUser.family_name}/${newUser.nickname}`);
+        } catch (error) {
+            console.log(error);
+        }
+        
+        source.cancel("Request ended")
+    }
+
+    findUser = async (newUser) => {
+        axios.get(`http://localhost:5002/api/finduser/${newUser.email}`)
+            .then(response => {
+                if(response.data === "") {
+                    this.addUser(newUser);
+                    console.log("user added!")
+                    
+                } else {
+                    console.log("User already exists!")
+                    source.cancel("Request ended");
+                }
+            }).catch(error => {
+                console.log(error);
+            }
+            )
+    }
 
     // Initialize the auth0 library
     initializeAuth0 = async () => {
@@ -34,7 +62,7 @@ export class Auth0Provider extends Component {
         this.setState({ auth0Client });
 
         // Check to see if they have been redirected after login
-        if(window.location.search.includes("code=")) {
+        if (window.location.search.includes("code=")) {
             return this.handleRedirectCallback();
         };
 
@@ -50,8 +78,10 @@ export class Auth0Provider extends Component {
 
         await this.state.auth0Client.handleRedirectCallback();
         const user = await this.state.auth0Client.getUser();
+        this.setState({ user, isAuthenticated: true, isLoading: false })
 
-        this.setState({ user, isAuthenticated: true, isLoading: false });
+        await this.findUser(user);
+
         window.history.replaceState({}, document.title, window.location.pathname);
     };
 
@@ -69,7 +99,7 @@ export class Auth0Provider extends Component {
             logout: (...p) => auth0Client.logout(...p)
         };
 
-        return(
+        return (
             <Auth0Context.Provider value={configObject}>
                 {children}
             </Auth0Context.Provider>
