@@ -6,7 +6,7 @@ connection.connect();
 exports.get_user = (req, res) => {
     connection.query(`SELECT * FROM users WHERE email = "${req.params.email}"`, (err, rows, fields) => {
         if (err) throw err;
-        res.send(rows[0])
+        res.send(rows[0]);
     })
 }
 

@@ -29,14 +29,16 @@ export class Auth0Provider extends Component {
     };
 
     addUser = async (newUser) => {
-        try {
-            await axios.get(`http://localhost:5002/api/newuser/${newUser.email}/${newUser.given_name}/${newUser.family_name}/${newUser.nickname}`);
-        } catch (error) {
-            console.log(error);
-        }
-        
-        source.cancel("Request ended")
-    }
+        // try {
+        //     await axios.get(`http://localhost:5002/api/newuser/${newUser.email}/${newUser.given_name}/${newUser.family_name}/${newUser.nickname}`);
+        // } catch (error) {
+        //     console.log(error.toJSON());
+        // )
+        await axios
+            .get(`http://localhost:5002/api/newuser/${newUser.email}/${newUser.given_name}/${newUser.family_name}/${newUser.nickname}`, { timeout: 1 })
+            .then(response =>  response)
+            .catch(error => { console.log(error)})
+    } 
 
     findUser = async (newUser) => {
         axios.get(`http://localhost:5002/api/finduser/${newUser.email}`)
@@ -44,15 +46,12 @@ export class Auth0Provider extends Component {
                 if(response.data === "") {
                     this.addUser(newUser);
                     console.log("user added!")
-                    
                 } else {
                     console.log("User already exists!")
-                    source.cancel("Request ended");
                 }
             }).catch(error => {
-                console.log(error);
-            }
-            )
+                console.log(error.toJSON());
+            })
     }
 
     // Initialize the auth0 library
@@ -81,6 +80,7 @@ export class Auth0Provider extends Component {
         this.setState({ user, isAuthenticated: true, isLoading: false })
 
         await this.findUser(user);
+        // await source.cancel("request canceled")
 
         window.history.replaceState({}, document.title, window.location.pathname);
     };
