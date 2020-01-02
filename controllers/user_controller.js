@@ -15,7 +15,8 @@ exports.test = (req, res) => {
 }
 
 exports.add_user_social = (req, res) => {
-    connection.query(`INSERT INTO users (email, given_name, family_name, nickname) VALUES ("${req.params.email}","${req.params.given_name}","${req.params.family_name}","${req.params.nickname}")`, 
+    console.log(req.params.uid)
+    connection.query(`INSERT INTO users (uid, email, given_name, family_name, nickname) VALUES ("${req.params.uid}","${req.params.email}","${req.params.given_name}","${req.params.family_name}","${req.params.nickname}")`, 
         (err, rows, fields) => { 
             if (err) throw err;
          }

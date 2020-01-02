@@ -3,6 +3,7 @@ import createAuth0Client from "@auth0/auth0-spa-js";
 const axios = require("axios");
 const CancelToken = axios.CancelToken;
 const source = CancelToken.source();
+const uuidv4 = require("uuid");
 
 // Create the context
 export const Auth0Context = createContext();
@@ -21,31 +22,44 @@ export class Auth0Provider extends Component {
     config = {
         domain: process.env.REACT_APP_AUTH0_DOMAIN,
         client_id: process.env.REACT_APP_AUTH0_CLIENT_ID,
-        redirect_uri: window.location.origin
+        redirect_uri: window.location.origin, 
+        options: {
+            allowSignUp: false
+        }
     };
+
 
     componentDidMount() {
-        this.initializeAuth0();
+        this.initializeAuth0();       
     };
 
-    addUser = async (newUser) => {
-        // try {
-        //     await axios.get(`http://localhost:5002/api/newuser/${newUser.email}/${newUser.given_name}/${newUser.family_name}/${newUser.nickname}`);
-        // } catch (error) {
-        //     console.log(error.toJSON());
-        // )
-        await axios
-            .get(`http://localhost:5002/api/newuser/${newUser.email}/${newUser.given_name}/${newUser.family_name}/${newUser.nickname}`, { timeout: 1 })
-            .then(response =>  response)
-            .catch(error => { console.log(error)})
+    getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min
+    }
+
+    addUser = async (newUser, randomNum) => {
+        if(newUser.given_name) {
+            await axios
+                .get(`http://localhost:5002/api/newuser/${randomNum}/${newUser.email}/${newUser.given_name}/${newUser.family_name}/${newUser.nickname}`, { timeout: 200 })
+                .then(response =>  console.log(response))
+                .catch(error => console.log(error)) 
+        } else if(newUser.email ) {
+            await axios 
+                .get(`http://localhost:5002/api/newuser/${randomNum}/${newUser.email}/${"null"}/${"null"}/${newUser.nickname}`, { timeout: 200 })
+                .then(response =>  console.log(response))
+                .catch(error => console.log(error)) 
+        }
+
     } 
 
     findUser = async (newUser) => {
         axios.get(`http://localhost:5002/api/finduser/${newUser.email}`)
             .then(response => {
                 if(response.data === "") {
-                    this.addUser(newUser);
-                    console.log("user added!")
+                    let uid = this.getRandomInt(100000000, 1000000000); 
+                    this.addUser(newUser, uid);
                 } else {
                     console.log("User already exists!")
                 }
