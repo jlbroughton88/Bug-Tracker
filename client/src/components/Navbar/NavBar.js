@@ -12,7 +12,7 @@ const NavBar = () => {
             <div className="navMain">
                 <section className="leftNav">
                     <div className="logoDiv">
-                        <div className="logo">Bug Tracker</div>
+                        <Link to="/" className="logo">Bug Tracker</Link>
                     </div>
                 </section>
                 <section className="rightNav">
@@ -26,7 +26,9 @@ const NavBar = () => {
                             <div className="loggedInSect">
                                 {/* <h2 className="navGreeting">Hello, {user.given_name ? user.given_name : user.nickname}!</h2> */}
                                 <button className="navLogOut" onClick={logout}> Log Out</button>
+                                <Link to="/profile">
                                 <img className="navPicture" src={user.picture} alt={user.given_name ? user.given_name : user.nickname + "'s picture"}></img>
+                                </Link>
                                 
                             </div>
                         )}
