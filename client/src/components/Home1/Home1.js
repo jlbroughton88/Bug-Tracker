@@ -6,7 +6,7 @@ import axios from "axios";
 
 const Home1 = () => {
 
-    const [currentId, setId] = useState();
+    const [ currentId, setId ] = useState(0);
     const { isLoading, user } = useAuth0();
 
     useEffect(() => {
@@ -20,6 +20,10 @@ const Home1 = () => {
         }
 
     })
+
+    if (isLoading) {
+        return <div>Loading...</div> 
+      }
 
 
     return (

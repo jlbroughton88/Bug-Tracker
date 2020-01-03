@@ -1,16 +1,14 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import Home from "./components/pages/Home";
 import NavBar from "./components/Navbar/NavBar";
 import { useAuth0 } from "./contexts/auth0-context";
-import Profile from "./components/pages/Profile";
 import AppRouter from "./components/Router";
 import './App.css';
 
 const App = () => {
 
-  const { isLoading, user, loginWithRedirect, logout } = useAuth0();
+  const { isLoading, user } = useAuth0();
 
   if (isLoading) {
     return <div>Loading...</div> 
@@ -21,10 +19,6 @@ const App = () => {
       <div className="App">
         <NavBar />
         <AppRouter/>
-        {/* <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route path="/profile" component={Profile}/>
-        </Switch> */}
       </div>
    </Router>
 
