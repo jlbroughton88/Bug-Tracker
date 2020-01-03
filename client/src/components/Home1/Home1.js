@@ -6,8 +6,9 @@ import axios from "axios";
 
 const Home1 = () => {
 
-    const [ currentId, setId ] = useState(0);
+
     const { isLoading, user } = useAuth0();
+    const [currentId, setId] = useState(0);
 
     useEffect(() => {
         if (user) {
@@ -18,12 +19,11 @@ const Home1 = () => {
         } else {
             console.log("no user yet")
         }
-
-    })
+    }, [])
 
     if (isLoading) {
-        return <div>Loading...</div> 
-      }
+        return <div>Loading...</div>
+    }
 
 
     return (
