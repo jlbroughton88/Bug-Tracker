@@ -8,14 +8,16 @@ const Profile1 = () => {
     const { isLoading, user } = useAuth0();
     const [first, setFirst] = useState("");
     const [last, setLast] = useState("");
-    const [dbUser, setUser ] = useState("");
+    const [dbUser, setUser] = useState("");
 
-
-    
     useEffect(() => {
         console.log("hello")
         getDbUser();
     }, [])
+
+    if (isLoading) {
+        return <div>Loading...</div>
+    }
 
     const getDbUser = () => {
         if (user) {
@@ -28,17 +30,10 @@ const Profile1 = () => {
         }
     }
 
-
-    if (isLoading) {
-        return <div>Loading...</div>
-    }
-
     const handleSubmit = (e) => {
         console.log(`Submitting name: ${first} ${last}`);
         addName();
     }
-
-    // console.log(dbUser)
 
     const addName = () => {
         axios
