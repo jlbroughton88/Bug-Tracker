@@ -1,12 +1,12 @@
 import React from 'react';
-import { useSelector, useDispatch } from "react-redux";
-import allActions from "../../actions/index";
-import RevealText from "../textState";
+// import { useSelector, useDispatch } from "react-redux";
+// import allActions from "../../actions/index";
+// import RevealText from "../textState";
 import Home1 from "../Home1/Home1";
 
 const Home = () => {
-  const counter = useSelector(state => state.reducer);
-  const dispatch = useDispatch();
+  // const counter = useSelector(state => state.reducer);
+  // const dispatch = useDispatch();
 
   return (
       <div className="Home">

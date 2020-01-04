@@ -5,5 +5,25 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+
+        form{
+            .nameInputs{
+                border: none;
+                border: #333 solid 1px;
+                padding: 5px 10px;
+                border-radius: 5px;
+                margin: 10px;
+                font-size: 1rem;
+            }
+
+            .nameSubmit{
+                border: none;
+                border: #333 solid 1px;
+                padding: 5px 10px;
+                border-radius: 5px;
+                margin: 10px;
+                font-size: 1rem;
+            }
+        }
     }
 }

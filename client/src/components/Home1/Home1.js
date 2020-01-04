@@ -6,26 +6,7 @@ import axios from "axios";
 
 const Home1 = () => {
 
-    const { isLoading, user } = useAuth0();
-    const [dbUser, setUser] = useState(0);
-
-    useEffect(() => {
-        getDbUser();
-    }, [])
-
-    if (isLoading) {
-        return <div>Loading...</div>
-    }
-    const getDbUser = () => {
-        if (user) {
-            axios
-                .get(`http://localhost:5002/api/finduser/${user.email}`, { timeout: 200 })
-                .then(response => setUser(response.data))
-                .catch(err => console.log(err))
-        } else {
-            console.log("no user yet")
-        }
-    }
+    const { isLoading, user, dbUser } = useAuth0();
 
     return (
         <div className="home1Mother">
@@ -34,11 +15,10 @@ const Home1 = () => {
                 {!isLoading && !user && (
                     <h1>Welcome to Bug Tracker!</h1>
                 )}
-
-                {!isLoading && user && (
+                {!isLoading && dbUser && (
                     <div>
-                        {/* <h1>Welcome to Bug Tracker, {user.given_name ? user.given_name : user.nickname}!</h1> */}
-                        <h1>Welcome to Bug Tracker {dbUser.given_name ? dbUser.given_name : dbUser.nickname}</h1>
+                        <div>{dbUser.email}</div>
+                        <h1>Welcome to Bug Tracker, {dbUser.given_name != "null" ? dbUser.given_name : dbUser.nickname}!</h1>
                         <Link to="profile">Profile</Link>
                     </div>
                 )}

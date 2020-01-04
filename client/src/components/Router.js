@@ -14,13 +14,11 @@ const AppRouter = () => (
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
     const { user } = useAuth0();
-    console.log(user)
 
     return (
         <Route
             {...rest}
             render={props =>
-
                 user ? 
                 ( <Component {...props} /> ) 
                 : 
@@ -29,8 +27,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             }
         />
     )
-
-
 }
 
 

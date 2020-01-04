@@ -1,36 +1,31 @@
 import React, { Component, createContext, useContext } from "react";
 import createAuth0Client from "@auth0/auth0-spa-js";
 const axios = require("axios");
-const CancelToken = axios.CancelToken;
-const source = CancelToken.source();
-const uuidv4 = require("uuid");
 
 // Create the context
 export const Auth0Context = createContext();
-
 export const useAuth0 = () => useContext(Auth0Context);
 
 // Create a provider
 export class Auth0Provider extends Component {
+
     state = {
         auth0Client: null,
         isLoading: true,
         isAuthenticated: false,
-        user: null
+        user: null,
+        dbUser: null
     };
 
     config = {
         domain: process.env.REACT_APP_AUTH0_DOMAIN,
         client_id: process.env.REACT_APP_AUTH0_CLIENT_ID,
-        redirect_uri: window.location.origin, 
-        options: {
-            allowSignUp: false
-        }
+        redirect_uri: window.location.origin
     };
 
 
     componentDidMount() {
-        this.initializeAuth0();       
+        this.initializeAuth0()
     };
 
     getRandomInt(min, max) {
@@ -39,33 +34,57 @@ export class Auth0Provider extends Component {
         return Math.floor(Math.random() * (max - min)) + min
     }
 
-    addUser = async (newUser, randomNum) => {
-        if(newUser.given_name) {
-            await axios
+    addUser = (newUser, randomNum) => {
+        if (newUser.given_name) {
+            axios
                 .get(`http://localhost:5002/api/newuser/${randomNum}/${newUser.email}/${newUser.given_name}/${newUser.family_name}/${newUser.nickname}`, { timeout: 200 })
-                .then(response =>  console.log(response))
-                .catch(error => console.log(error)) 
-        } else if(newUser.email ) {
-            await axios 
+                .then(response => console.log(response.data))
+                .catch(error => console.log(error))
+
+        } else if (newUser.email) {
+            axios
                 .get(`http://localhost:5002/api/newuser/${randomNum}/${newUser.email}/${"null"}/${"null"}/${newUser.nickname}`, { timeout: 200 })
-                .then(response =>  console.log(response))
-                .catch(error => console.log(error)) 
+                .then(response => console.log(response.data))
+                .catch(error => console.log(error))
         }
 
-    } 
+    }
 
-    findUser = async (newUser) => {
-        axios.get(`http://localhost:5002/api/finduser/${newUser.email}`)
+    findUser = (newUser) => {
+        this.setState({ isLoading: true });
+        console.log(newUser)
+        axios
+            .get(`http://localhost:5002/api/finduser/${newUser.email}`)
             .then(response => {
-                if(response.data === "") {
-                    let uid = this.getRandomInt(100000000, 1000000000); 
+                if (response.data === "") {
+                    let uid = this.getRandomInt(100000000, 1000000000);
                     this.addUser(newUser, uid);
+                    console.log("added user")
+                    this.findUserAgain();
+                    this.setState({ isLoading: false })
                 } else {
                     console.log("User already exists!")
+                    console.log(response.data);
+
+                    this.setState({ dbUser: response.data, isLoading: false  })
                 }
-            }).catch(error => {
+            })
+            .catch(error => {
                 console.log(error.toJSON());
             })
+    }
+
+    findUserAgain = () => {
+        const user = this.state.user;
+        if(user) {
+            axios
+                .get(`http://localhost:5002/api/finduser/${user.email}`)
+                .then(response => this.setState({ dbUser: response.data, isLoading: false }))
+                .catch(err => console.log(err))
+        } else {
+            console.log("no user, cant do it")
+            this.setState({ isLoading: false })
+        }
     }
 
     // Initialize the auth0 library
@@ -82,7 +101,9 @@ export class Auth0Provider extends Component {
         const isAuthenticated = await auth0Client.isAuthenticated();
         const user = isAuthenticated ? await auth0Client.getUser() : null;
 
-        this.setState({ isLoading: false, isAuthenticated, user });
+        this.setState({ isAuthenticated, user });
+
+        this.findUserAgain();
     };
 
     // Handles the authentication callback
@@ -93,20 +114,22 @@ export class Auth0Provider extends Component {
         const user = await this.state.auth0Client.getUser();
         this.setState({ user, isAuthenticated: true, isLoading: false })
 
-        await this.findUser(user);
-        // await source.cancel("request canceled")
+        this.findUser(user);
+        
 
         window.history.replaceState({}, document.title, window.location.pathname);
-    };
+    };    
+
 
     render() {
-        const { auth0Client, isLoading, isAuthenticated, user } = this.state;
+        const { auth0Client, isLoading, isAuthenticated, user, dbUser } = this.state;
         const { children } = this.props;
 
         const configObject = {
             isLoading,
             isAuthenticated,
             user,
+            dbUser,
             loginWithRedirect: (...p) => auth0Client.loginWithRedirect(...p),
             getTokenSilently: (...p) => auth0Client.getTokenSilently(...p),
             getIdTokenClaims: (...p) => auth0Client.getIdTokenClaims(...p),
@@ -114,8 +137,10 @@ export class Auth0Provider extends Component {
         };
 
         return (
-            <Auth0Context.Provider value={configObject}>
-                {children}
+            <Auth0Context.Provider  value={configObject}>
+                {/* <DatabaseProvider> */}
+                    {children}
+                {/* </DatabaseProvider> */}
             </Auth0Context.Provider>
         )
     }

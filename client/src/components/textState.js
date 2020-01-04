@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 function RevealText({ text, maxLength }) {
     const [hidden, setHidden] = useState(true);

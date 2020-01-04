@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import NavBar from "./components/Navbar/NavBar";
 import { useAuth0 } from "./contexts/auth0-context";
@@ -13,6 +13,7 @@ const App = () => {
   if (isLoading) {
     return <div>Loading...</div> 
   }
+  
 
   return (
     <Router> 
