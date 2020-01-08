@@ -1,14 +1,14 @@
 # Alright, heres the plan.
 
-1. Create server, add scripts
+<!-- 1. Create server, add scripts -->
 
-2. Make empty file structure.
+<!-- 2. Make empty file structure. -->
 
 3. Set Redux Up
 
-4. Create Oauth authentication login for users. (Email/Password)
+<!-- 4. Create Oauth authentication login for users. (Email/Password) -->
 
-5. Integrate SQL.
+<!-- 5. Integrate SQL.  -->
 
 6. Group users into work-spaces (Passcode protected.)
 

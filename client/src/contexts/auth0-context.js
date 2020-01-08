@@ -1,6 +1,7 @@
 import React, { Component, createContext, useContext } from "react";
 import createAuth0Client from "@auth0/auth0-spa-js";
 const axios = require("axios");
+const moment = require("moment");
 
 // Create the context
 export const Auth0Context = createContext();
@@ -34,16 +35,20 @@ export class Auth0Provider extends Component {
         return Math.floor(Math.random() * (max - min)) + min
     }
 
-    addUser = (newUser, randomNum) => {
+    addUser = (newUser, randomNum, date, time) => {
+        console.log(newUser)
+        console.log(typeof(randomNum))
+        console.log(typeof(date));
+        console.log(typeof(time))
         if (newUser.given_name) {
             axios
-                .get(`http://localhost:5002/api/newuser/${randomNum}/${newUser.email}/${newUser.given_name}/${newUser.family_name}/${newUser.nickname}`, { timeout: 200 })
+                .get(`http://localhost:5002/api/newuser/${randomNum}/${newUser.email}/${newUser.given_name}/${newUser.family_name}/${newUser.nickname}/${"null"}/${"null"}/${date}/${time}`, { timeout: 200 })
                 .then(response => console.log(response.data))
                 .catch(error => console.log(error))
 
         } else if (newUser.email) {
             axios
-                .get(`http://localhost:5002/api/newuser/${randomNum}/${newUser.email}/${"null"}/${"null"}/${newUser.nickname}`, { timeout: 200 })
+                .get(`http://localhost:5002/api/newuser/${randomNum}/${newUser.email}/${"null"}/${"null"}/${newUser.nickname}/${"null"}/${"null"}/${date}/${time}`, { timeout: 200 })
                 .then(response => console.log(response.data))
                 .catch(error => console.log(error))
         }
@@ -58,24 +63,26 @@ export class Auth0Provider extends Component {
             .then(response => {
                 if (response.data === "") {
                     let uid = this.getRandomInt(100000000, 1000000000);
-                    this.addUser(newUser, uid);
-                    console.log("added user")
+                    let time = moment().format('LT');
+                    let date = moment().format('L')
+                    let formattedTime = time.replace(/\s/, "")
+                    let formattedDate = date.replace(/\//g, "-")
+                    this.addUser(newUser, uid, formattedDate, formattedTime);
+
                     this.findUserAgain();
                     this.setState({ isLoading: false })
                 } else {
-                    console.log("User already exists!")
+                    console.log("User already exists!");
                     console.log(response.data);
-
-                    this.setState({ dbUser: response.data, isLoading: false  })
+                    this.setState({ dbUser: response.data, isLoading: false  });
                 }
             })
-            .catch(error => {
-                console.log(error.toJSON());
-            })
+            .catch(error =>  console.log(error.toJSON()))
     }
 
     findUserAgain = () => {
         const user = this.state.user;
+        console.log(user)
         if(user) {
             axios
                 .get(`http://localhost:5002/api/finduser/${user.email}`)
@@ -116,7 +123,6 @@ export class Auth0Provider extends Component {
 
         this.findUser(user);
         
-
         window.history.replaceState({}, document.title, window.location.pathname);
     };    
 
@@ -130,6 +136,7 @@ export class Auth0Provider extends Component {
             isAuthenticated,
             user,
             dbUser,
+
             loginWithRedirect: (...p) => auth0Client.loginWithRedirect(...p),
             getTokenSilently: (...p) => auth0Client.getTokenSilently(...p),
             getIdTokenClaims: (...p) => auth0Client.getIdTokenClaims(...p),
@@ -138,9 +145,7 @@ export class Auth0Provider extends Component {
 
         return (
             <Auth0Context.Provider  value={configObject}>
-                {/* <DatabaseProvider> */}
                     {children}
-                {/* </DatabaseProvider> */}
             </Auth0Context.Provider>
         )
     }

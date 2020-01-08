@@ -6,8 +6,6 @@ const routes = require("./routes/routes.js")
 const bodyParser = require("body-parser")
 require("dotenv").config();
 
-
-
 if(process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"))
     app.get("*", (req, res) => {
@@ -31,7 +29,6 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/api", routes);
-
 
 const port = process.env.PORT || 5002;
 
