@@ -36,10 +36,6 @@ export class Auth0Provider extends Component {
     }
 
     addUser = (newUser, randomNum, date, time) => {
-        console.log(newUser)
-        console.log(typeof(randomNum))
-        console.log(typeof(date));
-        console.log(typeof(time))
         if (newUser.given_name) {
             axios
                 .get(`http://localhost:5002/api/newuser/${randomNum}/${newUser.email}/${newUser.given_name}/${newUser.family_name}/${newUser.nickname}/${"null"}/${"null"}/${date}/${time}`, { timeout: 200 })
@@ -82,12 +78,12 @@ export class Auth0Provider extends Component {
 
     findUserAgain = () => {
         const user = this.state.user;
-        console.log(user)
         if(user) {
             axios
                 .get(`http://localhost:5002/api/finduser/${user.email}`)
                 .then(response => this.setState({ dbUser: response.data, isLoading: false }))
                 .catch(err => console.log(err))
+
         } else {
             console.log("no user, cant do it")
             this.setState({ isLoading: false })
@@ -136,7 +132,6 @@ export class Auth0Provider extends Component {
             isAuthenticated,
             user,
             dbUser,
-
             loginWithRedirect: (...p) => auth0Client.loginWithRedirect(...p),
             getTokenSilently: (...p) => auth0Client.getTokenSilently(...p),
             getIdTokenClaims: (...p) => auth0Client.getIdTokenClaims(...p),

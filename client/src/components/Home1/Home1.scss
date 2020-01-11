@@ -4,5 +4,16 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        text-align: center;
+
+        .issuePromptBtn{
+            border: none;
+            border-radius: 5px;
+            background: lightgrey;
+            
+            &:hover{
+                cursor: pointer;
+            }
+        }
     }
 }

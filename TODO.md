@@ -1,5 +1,4 @@
-Update profile page to allow users to add their company/role
-Allow users to post issues / bugs that they're facing
+Make issues show on profile
 Let users comment on issues
 Let users upvote on comments, reply to them.
 
@@ -15,6 +14,8 @@ Text: use nvarchar (unicode, many languages)
     - nickname
     - company
     - role
+    - Date created
+    - Time created
 
  - Issues
     - user UID

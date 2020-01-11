@@ -17,9 +17,12 @@ const Home1 = () => {
                 )}
                 {!isLoading && dbUser && (
                     <div>
-                        <div>{dbUser.email}</div>
                         <h1>Welcome to Bug Tracker, {dbUser.given_name != "null" ? dbUser.given_name : dbUser.nickname}!</h1>
-                        <Link to="profile">Profile</Link>
+                        <Link to="/post">
+                            <button className="issuePromptBtn">
+                                <h3 className="issuePromptHead">Post an issue?</h3>
+                            </button>
+                        </Link>
                     </div>
                 )}
             </div>

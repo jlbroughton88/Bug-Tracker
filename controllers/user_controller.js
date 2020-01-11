@@ -38,3 +38,26 @@ exports.add_comp_role = (req, res) => {
         }
     )
 }
+
+exports.get_issue = (req, res) => {
+    connection.query(`SELECT * FROM issues WHERE user_uid="${req.params.user_uid}"`, 
+        (err, rows, fields) => {
+            if(err) throw err;
+            res.send(rows)
+        }
+        
+    )
+    
+}
+
+exports.post_issue = (req, res) => {
+    console.log(req.body)
+    const iss = req.body;
+    
+    connection.query(`INSERT INTO issues (uid, user_uid, nickname, issue_title, issue_text, date_created, time_created) VALUES ("${iss.uid}","${iss.user_uid}","${iss.nickname}", "${iss.issue_title}", "${iss.issue}","${iss.date_created}","${iss.time_created}")`, 
+        (err, rows, fields) => {
+            if(err) throw err;
+        }
+    )
+    console.log("Issue posted!")
+}

@@ -3,11 +3,13 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import Home from "./pages/Home";
 import { useAuth0 } from "../contexts/auth0-context";
 import Profile from "./pages/Profile";
+import IssuePost from "./pages/IssuePost";
 
 
 const AppRouter = () => (
     <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/post" component={IssuePost}/>
         <PrivateRoute path="/profile" component={Profile} />
     </Switch>
 )
