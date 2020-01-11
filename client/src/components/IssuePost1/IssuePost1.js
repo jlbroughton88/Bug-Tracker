@@ -8,9 +8,7 @@ const IssuePost = () => {
 
     const [issueTitle, setIssueTitle] = useState("");
     const [issueText, setIssueText] = useState("");
-    const [issueArr, setIssueArr] = useState([]);
     const { dbUser } = useAuth0();
-    const [issueArrLen, setIssueArrLen] = useState(0);
     const [loading, setLoading] = useState(true);
 
 
@@ -50,19 +48,12 @@ const IssuePost = () => {
     return (
         <div className="issuePost1Mother">
             <div className="issuePost1Main">
-                <h1>Post an issue?</h1>
+                <h1 className="issueHead">Post an issue?</h1>
                 <form className="issueForm" onSubmit={handleSubmit}>
                     <input className="issueTitleInput" placeholder="Title your issue..." type="text" value={issueTitle} onChange={e => setIssueTitle(e.target.value)} />
                     <textarea className="issueTextInput" value={issueText} type="text" placeholder="Explain your issue..." onChange={e => setIssueText(e.target.value)} />
                     <input className="issueSubmit" type="submit" />
                 </form>
-                <div className="issuesWrapper">
-                    {issueArr.map(issue =>
-                        <div className="issuePost">
-                            {issue.issue_text}
-                        </div>
-                    )}
-                </div>
             </div>
         </div>
     )

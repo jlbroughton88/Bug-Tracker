@@ -10,7 +10,7 @@ router.get("/newuser/:uid/:email/:given_name/:family_name/:nickname/:company/:ro
 router.get("/addname/:given_name/:family_name/:email", user_controller.add_name);
 router.get("/addcomprole/:company/:role/:email", user_controller.add_comp_role);
 router.post("/issue/post", user_controller.post_issue);
-router.get("/issues/:user_uid", user_controller.get_issue);
-
+router.get("/issues/:user_uid", user_controller.get_user_issues);
+router.get("/getissue/:uid", user_controller.get_selected_issue);
 
 module.exports = router;

@@ -39,15 +39,22 @@ exports.add_comp_role = (req, res) => {
     )
 }
 
-exports.get_issue = (req, res) => {
+exports.get_selected_issue = (req, res) => {
+    connection.query(`SELECT * FROM issues WHERE uid="${req.params.uid}"`, 
+        (err, rows, fields) => {
+            if(err) throw err;
+            res.send(rows[0])
+        }
+    )
+}
+
+exports.get_user_issues = (req, res) => {
     connection.query(`SELECT * FROM issues WHERE user_uid="${req.params.user_uid}"`, 
         (err, rows, fields) => {
             if(err) throw err;
             res.send(rows)
-        }
-        
-    )
-    
+        }   
+    ) 
 }
 
 exports.post_issue = (req, res) => {
