@@ -12,7 +12,7 @@ const SingleIssue1 = () => {
             .get(`http://localhost:5002/api/getissue/${issueUid}`)
             .then(response => setIssue(response.data))
             .catch(err => console.log(err))
-    })
+    }, [])
 
 
     return (

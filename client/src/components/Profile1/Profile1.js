@@ -15,7 +15,7 @@ const Profile1 = () => {
     const getIssue = (() => {
         axios
             .get(`http://localhost:5002/api/issues/${dbUser.uid}`)
-            .then(response => response.data.map(setIssueArr([...response.data])))
+            .then(response => setIssueArr([...response.data]))
             .catch(err => console.log(err))
     })
 
