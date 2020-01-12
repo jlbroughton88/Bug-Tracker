@@ -16,12 +16,15 @@ const SingleIssue1 = () => {
 
 
     return (
-        <div>
-            <h1>{issue.issue_title}</h1>
-            <h3>{issue.nickname}</h3>
-            <p>{issue.issue_text}</p>
-            <p>{issue.date_created}</p>
-            <p>{issue.time_created}</p>
+        <div className="singleMother">
+            <div className="singleMain">
+                <h1 className="singleTitle">{issue.issue_title}</h1>
+                <h3 className="singleNickname">{issue.nickname}</h3>
+                <p className="singleText">{issue.issue_text}</p>
+                <p className="singleDate">{issue.date_created}</p>
+                <p className="singleTime">{issue.time_created}</p>
+            </div>
+
         </div>
     )
 }

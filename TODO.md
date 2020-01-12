@@ -1,4 +1,4 @@
-Make issues show on profile
+Add styles to everything, make it preeeetty
 Let users comment on issues
 Let users upvote on comments, reply to them.
 

@@ -11,11 +11,12 @@ const Profile1 = () => {
     const [company, setCompany] = useState("");
     const [role, setRole] = useState("");
     const [issueArr, setIssueArr] = useState([]);
+    const [reversedArr, setReversedArr] = useState([]);
 
     const getIssue = (() => {
         axios
             .get(`http://localhost:5002/api/issues/${dbUser.uid}`)
-            .then(response => setIssueArr([...response.data]))
+            .then(response => setIssueArr(() => [...response.data]))
             .catch(err => console.log(err))
     })
 
@@ -55,25 +56,18 @@ const Profile1 = () => {
         <div className="profile1Mother">
             <div className="profile1Main">
 
-                <div className="issuesWrapper">
-                    {issueArr.map(issue =>
-                        <div key={issue.uid} className="issuePost">
-                            <h3>{issue.nickname}</h3>
-                            <h2>{issue.issue_title}</h2>
-                            <p>{issue.issue_text}</p>
-                            <p>{`${issue.date_created} | ${issue.time_created}`}</p>
-                            <Link to={`/issues/${issue.uid}`}>
-                                <button>View</button>
-                            </Link>
-                        </div>
-                    )}
-                </div>
 
                 <section className="bioSection">
-                    <h1>{dbUser.given_name !== "null" ? dbUser.given_name : dbUser.nickname}'s Profile</h1>
-                    {dbUser.company !== "null" && dbUser.role !== "null" && (
-                        <h1>{dbUser.role} at {dbUser.company}</h1>
-                    )}
+                    <img className="profilePic" src={user.picture} alt={dbUser.nickname} />
+
+                    <div className="bioInfo">
+                        <h1 className="profileName">{dbUser.given_name !== "null" ? dbUser.given_name : dbUser.nickname}'s Profile</h1>
+
+                        {dbUser.company !== "null" && dbUser.role !== "null" && (
+                            <h1 className="profileRoleComp">{dbUser.role} at {dbUser.company}</h1>
+                        )}
+                    </div>
+
 
                     {dbUser.given_name === "null" && dbUser.family_name === "null" && (
                         <form onSubmit={handleSubmitName} value="Submit">
@@ -90,6 +84,33 @@ const Profile1 = () => {
                     )}
                 </section>
 
+
+                <div className="issuesWrapper">
+                    <div className="issuesDiv">
+
+                        {issueArr.length <= 5 ?
+
+                            issueArr.reverse().map(issue =>
+                                <div key={issue.uid} className="issuePost">
+                                    {console.log("not slicing")}
+                                    <Link to={`/issues/${issue.uid}`}>
+                                        <h2 className="issueTitle">{issue.issue_title}</h2>
+                                    </Link>
+                                    <p className="issuePara">{`${issue.date_created} | ${issue.time_created}`}</p>
+                                </div>
+                            ) :
+                            issueArr.reverse().slice(0, 5).map(issue =>
+                                <div key={issue.uid} className="issuePost">
+                                    {console.log("slicing 5")}
+                                    <Link to={`/issues/${issue.uid}`}>
+                                        <h2 className="issueTitle">{issue.issue_title}</h2>
+                                    </Link>
+                                    <p className="issuePara">{`${issue.date_created} | ${issue.time_created}`}</p>
+                                </div>
+                            )
+                        }
+                    </div>
+                </div>
             </div>
         </div>
 

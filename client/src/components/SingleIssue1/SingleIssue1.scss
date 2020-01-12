@@ -1,0 +1,25 @@
+.singleMother{
+    height: calc(100vh - 100px);
+    .singleMain{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+
+        .singleTitle{ 
+            text-align: center;
+        }
+        .singleNickname{
+            text-align: center;
+        }
+        .singleText{
+            text-align: center;
+        }
+        .singleDate{
+            text-align: center;
+        }
+        .singleTime{
+            text-align: center;
+        }
+    }
+}

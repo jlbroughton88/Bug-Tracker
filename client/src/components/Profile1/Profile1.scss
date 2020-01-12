@@ -5,45 +5,89 @@ h1, h2, h3, h4, h5, h6, p{
 .profile1Mother{ 
     .profile1Main{
         height: calc(100vh - 100px);
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        justify-content: center;
+        display: flex;
         flex-direction: column;
         justify-items: center;
         align-items: center;
-        align-content: center;
+        // align-content: center;
 
-        form{
-            .profileInput{
-                border: none;
-                border: #333 solid 1px;
-                padding: 5px 10px;
+        .bioSection{
+            display: flex;
+            flex-direction: row;
+            border-bottom: black solid 3px;
+            width: 100%;
+            padding-top: 30px;
+            padding-left: 30px;
+            padding-bottom: 20px;
+
+            .profilePic{
+                height: auto;
+                width: 100px;
                 border-radius: 5px;
-                margin: 10px;
-                font-size: 1rem;
             }
 
-            .profileSubmit{
-                border: none;
-                border: #333 solid 1px;
-                padding: 5px 10px;
-                border-radius: 5px;
-                margin: 10px;
-                font-size: 1rem;
-            }
-        }
-
-        .issuesWrapper{
-            max-width: 500px;
-            align-self: flex-start;
-            .issuePost{                
+            .bioInfo{
                 display: flex;
                 flex-direction: column;
-                border: 1px solid #333;
-                border-radius: 5px;
-                padding: 5px 10px;
-                margin: 10px;
+                padding-left: 20px;
+                .profileName{
+                    font-size: 3rem;
+
+                }
+                .profileRoleComp{}   
             }
+
+          
+            form{
+                .profileInput{
+                    border: none;
+                    border: #333 solid 1px;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    margin: 10px;
+                    font-size: 1rem;
+                }
+
+                .profileSubmit{
+                    border: none;
+                    border: #333 solid 1px;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    margin: 10px;
+                    font-size: 1rem;
+                }
+            }  
+        }
+
+
+        .issuesWrapper{
+            // max-width: 500px;
+            align-self: flex-start;
+            max-width: 1000px;
+
+            .issuesDiv{
+                display: flex;
+                flex-direction: column;
+                .issuePost{                
+                    display: flex;
+                    flex-direction: column;
+                    border-bottom: 1px solid #333;
+                    padding: 10px 20px;
+
+                    .issueTitle{
+                        font-size: 1.3rem;
+                        margin-bottom: 5px;
+                        color: blue;
+                    }
+                    .issuePara{}
+                    .issueViewBtn{
+                        background: skyblue;
+                        border-radius: 5px;
+                        font-size: 1rem;
+                    }
+                }
+            }
+
         }
     }
 }
