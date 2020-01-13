@@ -16,7 +16,7 @@ const Profile1 = () => {
     const getIssue = (() => {
         axios
             .get(`http://localhost:5002/api/issues/${dbUser.uid}`)
-            .then(response => setIssueArr(() => [...response.data]))
+            .then(response => setIssueArr(() => [...response.data].reverse()))
             .catch(err => console.log(err))
     })
 
@@ -90,9 +90,9 @@ const Profile1 = () => {
 
                         {issueArr.length <= 5 ?
 
-                            issueArr.reverse().map(issue =>
+                            issueArr.map(issue =>
                                 <div key={issue.uid} className="issuePost">
-                                    {console.log("not slicing")}
+                                    {console.log(issueArr)}
                                     <Link to={`/user/issues/${issue.uid}`}>
                                         <h2 className="issueTitle">{issue.issue_title}</h2>
                                     </Link>
@@ -101,8 +101,9 @@ const Profile1 = () => {
                             ) :
                             <div>
                                 {
-                                    issueArr.reverse().slice(0, 5).map(issue =>
+                                    issueArr.slice(0, 5).map(issue =>
                                         <div key={issue.uid} className="issuePost">
+                                           
                                             {console.log("slicing 5")}
                                             <Link to={`/issues/${issue.uid}`}>
                                                 <h2 className="issueTitle">{issue.issue_title}</h2>
@@ -110,6 +111,7 @@ const Profile1 = () => {
                                             <p className="issuePara">{`${issue.date_created} | ${issue.time_created}`}</p>
                                         </div>
                                     )
+                              
                                 }
                                 <Link to={`/all/${dbUser.uid}/`}>
                                     <button className="issueViewBtn">View All</button>

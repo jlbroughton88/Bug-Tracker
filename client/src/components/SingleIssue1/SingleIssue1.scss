@@ -4,28 +4,54 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        padding: 50px;
 
 
         .singleTitle{ 
-            text-align: center;
+            text-align: start;
+            margin-bottom: 10px;
         }
-        .singleNickname{
-            text-align: center;
-        }
+
         .singleText{
-            text-align: center;
+            text-align: start;
+            margin-bottom: 10px;
         }
-        .singleDate{
-            text-align: center;
+
+        .descDiv{
+            display: flex;
+            justify-content: flex-end;
+            flex-direction: column;
+            align-items: flex-end;
+            .dateTime{
+                display: flex;
+                flex-direction: row;
+                .singleDate{
+                    &:before{
+                        content: "\00a0 on \00a0";
+                    }
+                }
+                .singleTime{
+                    &:before{
+                        content: "At\00a0";
+                    }
+
+                }        
+            }
+
+            .singleNickname{
+                font-weight: 700;
+                &:before{
+                    content: 'Asked by ';
+                    font-weight: 400;
+                }
+            }
+            .singleUpvotes{
+                // text-align: center;
+            }
+            .singleDownvotes{
+                // text-align: center;
+            }
         }
-        .singleTime{
-            text-align: center;
-        }
-        .singleUpvotes{
-            text-align: center;
-        }
-        .singleDownvotes{
-            text-align: center;
-        }
+
     }
 }

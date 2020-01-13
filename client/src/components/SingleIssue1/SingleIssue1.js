@@ -12,19 +12,31 @@ const SingleIssue1 = () => {
             .get(`http://localhost:5002/api/getissue/${issueUid}`)
             .then(response => setIssue(response.data))
             .catch(err => console.log(err))
+
+       
     }, [])
+
+    const calculateUpvotes = () => {
+        console.log(issue)
+    } 
 
 
     return (
         <div className="singleMother">
             <div className="singleMain">
                 <h1 className="singleTitle">{issue.issue_title}</h1>
-                <h3 className="singleNickname">{issue.nickname}</h3>
                 <p className="singleText">{issue.issue_text}</p>
-                <p className="singleDate">{issue.date_created}</p>
-                <p className="singleTime">{issue.time_created}</p>
-                <p className="singleUpvotes">Upvotes: {issue.upvotes}</p>
-                <p className="singleDownvotes">Downvotes: {issue.downvotes}</p>
+                <div className="descDiv">
+                    <p className="singleNickname">{issue.nickname}</p>
+                    <div className="dateTime">
+                        <p className="singleTime">{issue.time_created}</p>
+                        <p className="singleDate">{issue.date_created}</p>
+                    </div>
+                    
+                    {/* <p className="singleUpvotes">Upvotes: {issue.upvotes}</p>
+                    <p className="singleDownvotes">Downvotes: {issue.downvotes}</p> */}
+                </div>
+
             </div>
 
         </div>

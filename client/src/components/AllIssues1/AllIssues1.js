@@ -41,7 +41,7 @@ const AllIssues1 = () => {
                             issueArr.reverse().map(issue =>
                                 <div key={issue.uid} className="issuePost">
                                     {console.log("not slicing")}
-                                    <Link to={`/user/issues/${issue.uid}`}>
+                                    <Link to={`/issues/${issue.uid}`}>
                                         <h2 className="issueTitle">{issue.issue_title}</h2>
                                     </Link>
                                     <p className="issuePara">{`${issue.date_created} | ${issue.time_created}`}</p>
