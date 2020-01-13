@@ -58,13 +58,19 @@ exports.get_user_issues = (req, res) => {
 }
 
 exports.post_issue = (req, res) => {
-    console.log(req.body)
     const iss = req.body;
-    
     connection.query(`INSERT INTO issues (uid, user_uid, nickname, issue_title, issue_text, date_created, time_created, downvotes, upvotes, solved) VALUES ("${iss.uid}","${iss.user_uid}","${iss.nickname}", "${iss.issue_title}", "${iss.issue}","${iss.date_created}","${iss.time_created}", "${0}", "${0}", "${false}")`, 
         (err, rows, fields) => {
             if(err) throw err;
         }
     )
-    console.log("Issue posted!")
+}
+
+exports.delete_selected_issue = (req, res) => {
+    connection.query(`DELETE FROM issues WHERE uid = "${req.params.uid}"`, 
+        (err, rows, fields) => {
+            if(err) throw err;
+        }
+    )
+    console.log(`Issue ${req.params.uid} deleted!`)
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import "./IssuePost1.scss";
 import axios from "axios";
 import { useAuth0 } from "../../contexts/auth0-context";
@@ -10,8 +10,9 @@ const IssuePost = () => {
     const [issueTitle, setIssueTitle] = useState("");
     const [issueText, setIssueText] = useState("");
     const { dbUser } = useAuth0();
+    const [issueUid, setIssueUid] = useState("")
     const [loading, setLoading] = useState(true);
-
+      
     // useEffect(() => {
     //     document.getElementById("issueForm").onkeypress = function (e) {
     //         var key = e.charCode || e.keyCode || 0;
@@ -27,7 +28,6 @@ const IssuePost = () => {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min) + max)
     }
-
 
 
     const postIssue = (uid) => {
@@ -54,8 +54,9 @@ const IssuePost = () => {
     const handleSubmit = (e) => {
         const uid = getRandomInt(10000000, 100000000);
         postIssue(uid);
+        setIssueUid(uid);
         e.preventDefault();
-        return <Redirect to={`/issues/${uid}`}/>
+        // return <Redirect to={`/issues/${uid}`}/>
         
     };
 
@@ -66,7 +67,9 @@ const IssuePost = () => {
                 <form id="issueForm" className="issueForm" onSubmit={handleSubmit}>
                     <input className="issueTitleInput" placeholder="Title your issue..." type="text" value={issueTitle} onChange={e => setIssueTitle(e.target.value)} />
                     <textarea className="issueTextInput" value={issueText} type="text" placeholder="Explain your issue..." onChange={e => setIssueText(e.target.value)} />
-                    <input className="issueSubmit" type="submit" />
+                    {/* <Link to={`/issues/${uid}`}> */}
+                        <input className="issueSubmit" type="submit" />
+                    {/* </Link> */}
                 </form>
             </div>
         </div>

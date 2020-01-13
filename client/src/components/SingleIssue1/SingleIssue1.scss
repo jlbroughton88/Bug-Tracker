@@ -1,3 +1,6 @@
+hr{
+    width: 100%;
+}
 .singleMother{
     height: calc(100vh - 100px);
     .singleMain{
@@ -6,37 +9,70 @@
         justify-content: center;
         padding: 50px;
 
+        .titleTextDiv{
 
-        .singleTitle{ 
-            text-align: start;
-            margin-bottom: 10px;
+            .singleTitle{ 
+                text-align: start;
+                margin-bottom: 10px;
+                max-width: 800px;
+            }
+
+            .singleText{
+                max-width: 800px;
+                text-align: start;
+                margin-bottom: 10px;
+                white-space: pre-wrap;
+            }
         }
 
-        .singleText{
-            text-align: start;
-            margin-bottom: 10px;
-        }
 
-        .descDiv{
+
+        .descCont{
             display: flex;
             justify-content: flex-end;
-            flex-direction: column;
-            align-items: flex-end;
-            .dateTime{
-                display: flex;
-                flex-direction: row;
-                .singleDate{
-                    &:before{
-                        content: "\00a0 on \00a0";
-                    }
+            margin-top: 10px;
+            position: relative;
+            padding-bottom: 100px;
+            
+            .deleteDiv{
+                position: absolute;
+                top: 0;
+                left: 0;
+                .deleteBtn{
+                    border: none;
+                    padding: 5px;
+                    color: red;
+                    font-size: 0.8rem;
+                    margin-right: 70px;
                 }
-                .singleTime{
-                    &:before{
-                        content: "At\00a0";
-                    }
-
-                }        
             }
+            .descDiv{
+                position: absolute;
+                top: 0;
+                right: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                align-self: flex-end;
+                padding: 10px;
+                background: lightblue;
+                .dateTime{
+                    display: flex;
+                    flex-direction: row;
+                    .singleDate{
+                        &:before{
+                            content: "\00a0 on \00a0";
+                        }
+                    }
+                    .singleTime{
+                        &:before{
+                            content: "At\00a0";
+                        }
+
+                    }        
+                }
+            }
+
 
             .singleNickname{
                 font-weight: 700;
@@ -53,5 +89,81 @@
             }
         }
 
+
     }
+        .deleteModal{
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -450%) scale(0);
+            transition: 200ms ease-in-out;
+            border: 3px black solid;
+            max-width: 300px;
+            padding: 10px;
+            position: relative;
+            border-radius: 5px;
+            background: #ffffff;
+            z-index: 2;
+            
+            .modalHead{
+                display: flex;
+                justify-content: space-evenly;
+                padding: 10px;
+                width: calc(100% - 20px);
+                position: relative;
+                
+
+                .modalTitle{
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    font-size: 1.3rem;
+                }
+                .modalClose{
+                    position: absolute;
+                    color: red;
+                    font-size: 1.3rem;
+                    border: none;
+                    font-weight: 900;
+                    margin: 0;
+                    right: 0;
+                    top: 0;
+                }
+            }
+            .modalPara{
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            .deleteBtn{
+                width: 100%;
+                border: none;
+                border: #333 solid 1px;
+                background: red;
+                font-weight: 600;
+                font-size: 1rem;
+                padding: 5px;
+                text-align: center;
+                cursor: pointer;
+            }
+        }
+
+        .deleteModal.active{
+            transform: translate(-50%, -400%) scale(1);
+        }
+        #overlay{
+            position: fixed;
+            opacity: 0;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, .5);
+            pointer-events: none;
+            transition: 200ms ease-in-out;
+
+        }            
+        #overlay.active{
+                opacity: 1;
+                pointer-events: all;
+            }
 }

@@ -89,11 +89,9 @@ const Profile1 = () => {
                     <div className="issuesDiv">
 
                         {issueArr.length <= 5 ?
-
                             issueArr.map(issue =>
                                 <div key={issue.uid} className="issuePost">
-                                    {console.log(issueArr)}
-                                    <Link to={`/user/issues/${issue.uid}`}>
+                                    <Link to={`/issues/${issue.uid}`}>
                                         <h2 className="issueTitle">{issue.issue_title}</h2>
                                     </Link>
                                     <p className="issuePara">{`${issue.date_created} | ${issue.time_created}`}</p>
@@ -103,15 +101,13 @@ const Profile1 = () => {
                                 {
                                     issueArr.slice(0, 5).map(issue =>
                                         <div key={issue.uid} className="issuePost">
-                                           
-                                            {console.log("slicing 5")}
                                             <Link to={`/issues/${issue.uid}`}>
                                                 <h2 className="issueTitle">{issue.issue_title}</h2>
                                             </Link>
                                             <p className="issuePara">{`${issue.date_created} | ${issue.time_created}`}</p>
                                         </div>
                                     )
-                              
+
                                 }
                                 <Link to={`/all/${dbUser.uid}/`}>
                                     <button className="issueViewBtn">View All</button>
