@@ -27,7 +27,8 @@ export class Auth0Provider extends Component {
     };
 
 
-    componentDidMount() {        
+    componentDidMount() {      
+        console.log(this.config)  
         
         if(process.env.NODE_ENV === "development"){
             this.setState({ statusUrl: "http://localhost:5002" })
