@@ -2,6 +2,7 @@ import React, { Component, createContext, useContext } from "react";
 import createAuth0Client from "@auth0/auth0-spa-js";
 const axios = require("axios");
 const moment = require("moment");
+require('dotenv').config();
 
 // Create the context
 export const Auth0Context = createContext();
