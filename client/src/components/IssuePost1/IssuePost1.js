@@ -9,18 +9,13 @@ const IssuePost = () => {
 
     const [issueTitle, setIssueTitle] = useState("");
     const [issueText, setIssueText] = useState("");
-    const { dbUser } = useAuth0();
+    const { dbUser, statusUrl } = useAuth0();
     const [issueUid, setIssueUid] = useState("")
     const [loading, setLoading] = useState(true);
       
-    // useEffect(() => {
-    //     document.getElementById("issueForm").onkeypress = function (e) {
-    //         var key = e.charCode || e.keyCode || 0;
-    //         if (key == 13) {
-    //             e.preventDefault();
-    //         }
-    //     }
-    // })
+    useEffect(() => {
+        console.log(statusUrl)
+    })
 
 
     const getRandomInt = (min, max) => {
@@ -38,7 +33,7 @@ const IssuePost = () => {
         let formattedTime = time.replace(/\s/, "")
         let formattedDate = date.replace(/\//g, "-")
         axios
-            .post("http://localhost:5002/api/issue/post", {
+            .post(`${statusUrl}/api/issue/post`, {
                 uid: formattedUid,
                 user_uid: user_uid,
                 nickname: dbUser.nickname,

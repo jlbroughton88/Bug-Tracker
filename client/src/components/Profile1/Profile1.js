@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "./Profile1.scss";
 
 const Profile1 = () => {
-    const { isLoading, user, dbUser } = useAuth0();
+    const { isLoading, user, dbUser, statusUrl } = useAuth0();
     const [first, setFirst] = useState("");
     const [last, setLast] = useState("");
     const [company, setCompany] = useState("");
@@ -15,7 +15,7 @@ const Profile1 = () => {
 
     const getIssue = (() => {
         axios
-            .get(`http://localhost:5002/api/issues/${dbUser.uid}`)
+            .get(`${statusUrl}/api/issues/${dbUser.uid}`)
             .then(response => setIssueArr(() => [...response.data].reverse()))
             .catch(err => console.log(err))
     })
@@ -40,14 +40,14 @@ const Profile1 = () => {
 
     const addName = () => {
         axios
-            .get(`http://localhost:5002/api/addname/${first}/${last}/${user.email}`, { timeout: 200 })
+            .get(`${statusUrl}/api/addname/${first}/${last}/${user.email}`, { timeout: 200 })
             .then(response => console.log(response))
             .catch(err => console.log(err));
     }
 
     const addCompRole = () => {
         axios
-            .get(`http://localhost:5002/api/addcomprole/${company}/${role}/${user.email}`, { timeout: 200 })
+            .get(`${statusUrl}/api/addcomprole/${company}/${role}/${user.email}`, { timeout: 200 })
             .then(res => console.log(res))
             .catch(err => console.log(err))
     }

@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
+import { useAuth0 } from "../../contexts/auth0-context";
 import "./SingleIssue1.scss";
 import axios from "axios";
 
 const SingleIssue1 = () => {
 
     const [issue, setIssue] = useState({});
+    const { statusUrl } = useAuth0();
    
 
     useEffect(() => {
         let issueUid = window.location.pathname.replace("/issues/", "")
         axios
-            .get(`http://localhost:5002/api/getissue/${issueUid}`)
+            .get(`${statusUrl}/api/getissue/${issueUid}`)
             .then(response => setIssue(response.data))
             .catch(err => console.log(err))
 
@@ -52,7 +54,7 @@ const SingleIssue1 = () => {
 
     const deleteIssue = (e) => {
        axios
-       .get(`http://localhost:5002/api/deleteissue/${issue.uid}`, { timeout: 300 })
+       .get(`${statusUrl}/api/deleteissue/${issue.uid}`, { timeout: 300 })
        .then(response => console.log(response))
        .catch(err => console.log(err))
     }

@@ -15,7 +15,8 @@ export class Auth0Provider extends Component {
         isLoading: true,
         isAuthenticated: false,
         user: null,
-        dbUser: null
+        dbUser: null, 
+        statusUrl: ""
     };
 
     config = {
@@ -25,7 +26,13 @@ export class Auth0Provider extends Component {
     };
 
 
-    componentDidMount() {
+    componentDidMount() {        
+        
+        if(process.env.NODE_ENV === "development"){
+            this.setState({ statusUrl: "http://localhost:5002" })
+        } else {
+            this.setState({ statusUrl: "https://bug-tracker-jb.herokuapp.com/" })
+        }
         this.initializeAuth0()
     };
 
@@ -38,13 +45,13 @@ export class Auth0Provider extends Component {
     addUser = (newUser, randomNum, date, time) => {
         if (newUser.given_name) {
             axios
-                .get(`http://localhost:5002/api/newuser/${randomNum}/${newUser.email}/${newUser.given_name}/${newUser.family_name}/${newUser.nickname}/${"null"}/${"null"}/${date}/${time}`, { timeout: 200 })
+                .get(`${this.state.statusUrl}/api/newuser/${randomNum}/${newUser.email}/${newUser.given_name}/${newUser.family_name}/${newUser.nickname}/${"null"}/${"null"}/${date}/${time}`, { timeout: 200 })
                 .then(response => console.log(response.data))
                 .catch(error => console.log(error))
 
         } else if (newUser.email) {
             axios
-                .get(`http://localhost:5002/api/newuser/${randomNum}/${newUser.email}/${"null"}/${"null"}/${newUser.nickname}/${"null"}/${"null"}/${date}/${time}`, { timeout: 200 })
+                .get(`${this.state.statusUrl}/api/newuser/${randomNum}/${newUser.email}/${"null"}/${"null"}/${newUser.nickname}/${"null"}/${"null"}/${date}/${time}`, { timeout: 200 })
                 .then(response => console.log(response.data))
                 .catch(error => console.log(error))
         }
@@ -55,7 +62,7 @@ export class Auth0Provider extends Component {
         this.setState({ isLoading: true });
         console.log(newUser)
         axios
-            .get(`http://localhost:5002/api/finduser/${newUser.email}`)
+            .get(`${this.state.statusUrl}/api/finduser/${newUser.email}`)
             .then(response => {
                 if (response.data === "") {
                     let uid = this.getRandomInt(100000000, 1000000000);
@@ -80,7 +87,7 @@ export class Auth0Provider extends Component {
         const user = this.state.user;
         if(user) {
             axios
-                .get(`http://localhost:5002/api/finduser/${user.email}`)
+                .get(`${this.state.statusUrl}/api/finduser/${user.email}`)
                 .then(response => this.setState({ dbUser: response.data, isLoading: false }))
                 .catch(err => console.log(err))
 
@@ -88,6 +95,8 @@ export class Auth0Provider extends Component {
             console.log("no user, cant do it")
             this.setState({ isLoading: false })
         }
+
+
     }
 
     // Initialize the auth0 library
@@ -124,7 +133,7 @@ export class Auth0Provider extends Component {
 
 
     render() {
-        const { auth0Client, isLoading, isAuthenticated, user, dbUser } = this.state;
+        const { auth0Client, isLoading, isAuthenticated, user, dbUser, statusUrl} = this.state;
         const { children } = this.props;
 
         const configObject = {
@@ -132,6 +141,7 @@ export class Auth0Provider extends Component {
             isAuthenticated,
             user,
             dbUser,
+            statusUrl,
             loginWithRedirect: (...p) => auth0Client.loginWithRedirect(...p),
             getTokenSilently: (...p) => auth0Client.getTokenSilently(...p),
             getIdTokenClaims: (...p) => auth0Client.getIdTokenClaims(...p),

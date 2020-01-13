@@ -6,12 +6,12 @@ import "./AllIssues1.scss";
 
 const AllIssues1 = () => {
 
-    const { isLoading, user, dbUser } = useAuth0();
+    const { isLoading, user, dbUser, statusUrl } = useAuth0();
     const [issueArr, setIssueArr] = useState([]);
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5002/api/issues/${dbUser.uid}`)
+            .get(`${statusUrl}/api/issues/${dbUser.uid}`)
             .then(response => setIssueArr([...response.data]))
             .catch(err => console.log(err))
     }, [])
