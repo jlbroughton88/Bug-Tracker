@@ -93,21 +93,30 @@ const Profile1 = () => {
                             issueArr.reverse().map(issue =>
                                 <div key={issue.uid} className="issuePost">
                                     {console.log("not slicing")}
-                                    <Link to={`/issues/${issue.uid}`}>
+                                    <Link to={`/user/issues/${issue.uid}`}>
                                         <h2 className="issueTitle">{issue.issue_title}</h2>
                                     </Link>
                                     <p className="issuePara">{`${issue.date_created} | ${issue.time_created}`}</p>
                                 </div>
                             ) :
-                            issueArr.reverse().slice(0, 5).map(issue =>
-                                <div key={issue.uid} className="issuePost">
-                                    {console.log("slicing 5")}
-                                    <Link to={`/issues/${issue.uid}`}>
-                                        <h2 className="issueTitle">{issue.issue_title}</h2>
-                                    </Link>
-                                    <p className="issuePara">{`${issue.date_created} | ${issue.time_created}`}</p>
-                                </div>
-                            )
+                            <div>
+                                {
+                                    issueArr.reverse().slice(0, 5).map(issue =>
+                                        <div key={issue.uid} className="issuePost">
+                                            {console.log("slicing 5")}
+                                            <Link to={`/issues/${issue.uid}`}>
+                                                <h2 className="issueTitle">{issue.issue_title}</h2>
+                                            </Link>
+                                            <p className="issuePara">{`${issue.date_created} | ${issue.time_created}`}</p>
+                                        </div>
+                                    )
+                                }
+                                <Link to={`/all/${dbUser.uid}/`}>
+                                    <button className="issueViewBtn">View All</button>
+                                </Link>
+
+                            </div>
+
                         }
                     </div>
                 </div>

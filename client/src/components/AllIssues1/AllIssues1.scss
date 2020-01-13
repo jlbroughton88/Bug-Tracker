@@ -1,0 +1,46 @@
+.bioSection{
+    display: flex;
+    flex-direction: row;
+    border-bottom: black solid 3px;
+    width:  calc(100% - 30px);
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-bottom: 20px;
+
+    .profilePic{
+        height: auto;
+        width: 100px;
+        border-radius: 5px;
+    }
+
+    .bioInfo{
+        display: flex;
+        flex-direction: column;
+        padding-left: 20px;
+        .profileName{
+            font-size: 3rem;
+
+        }
+        .profileRoleComp{}   
+    }
+}
+.issuesSection{
+        .issuePost{                
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid #333;
+            padding: 10px 20px;
+
+            .issueTitle{
+                font-size: 1.3rem;
+                margin-bottom: 5px;
+                color: blue;
+            }
+            .issuePara{}
+            .issueViewBtn{
+                background: skyblue;
+                border-radius: 5px;
+                font-size: 1rem;
+            }
+        }
+}

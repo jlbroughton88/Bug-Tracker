@@ -23,6 +23,8 @@ const SingleIssue1 = () => {
                 <p className="singleText">{issue.issue_text}</p>
                 <p className="singleDate">{issue.date_created}</p>
                 <p className="singleTime">{issue.time_created}</p>
+                <p className="singleUpvotes">Upvotes: {issue.upvotes}</p>
+                <p className="singleDownvotes">Downvotes: {issue.downvotes}</p>
             </div>
 
         </div>

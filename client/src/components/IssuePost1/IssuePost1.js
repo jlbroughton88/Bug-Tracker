@@ -31,7 +31,6 @@ const IssuePost = () => {
 
 
     const postIssue = (uid) => {
-        // const uid = getRandomInt(10000000, 100000000);
         const formattedUid = uid.toString();
         const user_uid = dbUser.uid.toString();
         let time = moment().format('LT');

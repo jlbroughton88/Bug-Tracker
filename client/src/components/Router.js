@@ -5,6 +5,7 @@ import { useAuth0 } from "../contexts/auth0-context";
 import Profile from "./pages/Profile";
 import SingleIssue from "./pages/SingleIssue"
 import IssuePost from "./pages/IssuePost";
+import AllIssues from "./pages/AllIssues";
 
 
 const AppRouter = () => (
@@ -12,6 +13,7 @@ const AppRouter = () => (
         <Route exact path="/" component={Home} />
         <Route path="/post" component={IssuePost}/>
         <Route path="/issues/:issueuid" component={SingleIssue}/>
+        <Route path="/all/:useruid" component={AllIssues}/>
         <PrivateRoute path="/profile" component={Profile} />
     </Switch>
 )

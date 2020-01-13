@@ -1,10 +1,13 @@
-Add styles to everything, make it preeeetty
+Give single issue page some style
+Add commenting database and functionality for each issue
+
+
+
 Let users comment on issues
 Let users upvote on comments, reply to them.
 
-TABLES
 
-Text: use nvarchar (unicode, many languages)
+
 
  - Users
     - UID
