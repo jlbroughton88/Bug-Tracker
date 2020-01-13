@@ -2,8 +2,6 @@ import React, { Component, createContext, useContext } from "react";
 import createAuth0Client from "@auth0/auth0-spa-js";
 const axios = require("axios");
 const moment = require("moment");
-require('dotenv').config();
-
 
 // Create the context
 export const Auth0Context = createContext();
@@ -22,8 +20,8 @@ export class Auth0Provider extends Component {
     };
 
     config = {
-        domain: process.env.REACT_APP_AUTH0_DOMAIN,
-        client_id: process.env.REACT_APP_AUTH0_CLIENT_ID,
+        domain: "jlb1999.auth0.com",
+        client_id: "piWchDvXGOycCbEuR95WgYqkX0BvC6cQ",
         redirect_uri: window.location.origin
     };
 
