@@ -74,5 +74,13 @@ exports.delete_selected_issue = (req, res) => {
             if(err) throw err;
         }
     )
-    console.log(`Issue ${req.params.uid} deleted!`)
+}
+
+exports.add_comment = (req, res) => {
+    let comm = req.body
+    connection.query(`INSERT INTO comments (comm_uid, user_uid, issue_uid, comm_text, date_created, time_created, upvotes, downvotes) VALUES ("${comm.comm_uid}","${comm.user_uid}","${comm.issue_uid}","${comm.comm_text}","${comm.date_created}","${comm.time_created}","${comm.upvotes}","${comm.downvotes}")`, 
+        (err, rows, fields) => {
+            if(err) throw err;
+        }
+    )
 }

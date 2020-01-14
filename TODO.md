@@ -1,6 +1,4 @@
-Give single issue page some style
 Add commenting database and functionality for each issue
-
 
 
 Let users comment on issues
