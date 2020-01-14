@@ -77,9 +77,19 @@ exports.delete_selected_issue = (req, res) => {
 }
 
 exports.add_comment = (req, res) => {
-    let comm = req.body
-    connection.query(`INSERT INTO comments (comm_uid, user_uid, issue_uid, comm_text, date_created, time_created, upvotes, downvotes) VALUES ("${comm.comm_uid}","${comm.user_uid}","${comm.issue_uid}","${comm.comm_text}","${comm.date_created}","${comm.time_created}","${comm.upvotes}","${comm.downvotes}")`, 
+    let comm = req.body;
+    connection.query(`INSERT INTO comments (comm_uid, user_uid, issue_uid, comm_nickname, comm_text, date_created, time_created, upvotes, downvotes) VALUES ("${comm.comm_uid}","${comm.user_uid}","${comm.issue_uid}", "${comm.comm_nickname}", "${comm.comm_text}","${comm.date_created}","${comm.time_created}","${comm.upvotes}","${comm.downvotes}")`, 
         (err, rows, fields) => {
+            if(err) throw err;
+        }
+    )
+}
+
+exports.get_comments = (req, res) => {
+    console.log(req.params.issueuid)
+    connection.query(`SELECT * FROM comments WHERE issue_uid = "${req.params.issueuid}"`, 
+        (err, rows, field) => {
+            res.send(rows)
             if(err) throw err;
         }
     )

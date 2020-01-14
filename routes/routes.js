@@ -14,5 +14,6 @@ router.get("/issues/:user_uid", user_controller.get_user_issues);
 router.get("/getissue/:uid", user_controller.get_selected_issue);
 router.get("/deleteissue/:uid", user_controller.delete_selected_issue);
 router.post("/addcomment/:issueuid", user_controller.add_comment);
+router.get("/getcomments/:issueuid", user_controller.get_comments);
 
 module.exports = router;

@@ -10,6 +10,7 @@ const SingleIssue1 = () => {
     const [issue, setIssue] = useState({});
     const [newComment, setNewComment] = useState("");
     const { statusUrl, dbUser } = useAuth0();
+    const [comments, setComments] = useState([]);
    
 
     useEffect(() => {
@@ -19,6 +20,8 @@ const SingleIssue1 = () => {
             .then(response => setIssue(response.data))
             .catch(err => console.log(err))
 
+        getComments(issueUid);
+           
     }, [])
 
     const getRandomInt = (min, max) => {
@@ -47,12 +50,13 @@ const SingleIssue1 = () => {
         let date = moment().format('L')
         let formattedTime = time.replace(/\s/, "")
         let formattedDate = date.replace(/\//g, "-")
-
+        console.log(dbUser)
         axios
         .post(`${statusUrl}/api/addcomment/${issueUid}`, {
             comm_uid: uid,
             user_uid: formattedUserUid,
             issue_uid: formattedIssueUid,
+            comm_nickname: dbUser.nickname,
             comm_text: newComment,
             date_created: formattedDate, 
             time_created: formattedTime,
@@ -61,6 +65,13 @@ const SingleIssue1 = () => {
         })
 
         e.preventDefault();
+    }
+
+    const getComments = (issueUid) => {
+        axios
+            .get(`${statusUrl}/api/getcomments/${issueUid}`, { timeout: 500 })
+            .then(response => setComments([...response.data]))
+            .catch(err => console.log(err))
     }
 
     const openModal = (modal) => { 
@@ -127,6 +138,15 @@ const SingleIssue1 = () => {
                         <textarea className="commentInput" onChange={handleCommentChange} placeholder="Add a informative and helpful comment..."/>
                         <input className="commentSubmit" placeholder="Submit" type="submit" />
                     </form>
+                    <div>
+                        {
+                            comments.map(comment => 
+                            <div key={comment.uid}>
+                                <h3>{comment.comm_text}</h3>
+                            </div>
+                            )
+                        }
+                    </div>
                 </section>
             </div>
 
