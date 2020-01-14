@@ -11,7 +11,7 @@ const SingleIssue1 = () => {
     const [newComment, setNewComment] = useState("");
     const { statusUrl, dbUser } = useAuth0();
     const [comments, setComments] = useState([]);
-   
+
 
     useEffect(() => {
         let issueUid = window.location.pathname.replace("/issues/", "")
@@ -21,7 +21,7 @@ const SingleIssue1 = () => {
             .catch(err => console.log(err))
 
         getComments(issueUid);
-           
+
     }, [])
 
     const getRandomInt = (min, max) => {
@@ -41,7 +41,7 @@ const SingleIssue1 = () => {
         setNewComment(e.target.value)
     }
 
-    const handleSubmit = (e ) => {
+    const handleSubmit = (e) => {
         let issueUid = window.location.pathname.replace("/issues/", "")
         const uid = getRandomInt(10000000, 100000000);
         const formattedUserUid = dbUser.uid.toString();
@@ -52,19 +52,19 @@ const SingleIssue1 = () => {
         let formattedDate = date.replace(/\//g, "-")
         console.log(dbUser)
         axios
-        .post(`${statusUrl}/api/addcomment/${issueUid}`, {
-            comm_uid: uid,
-            user_uid: formattedUserUid,
-            issue_uid: formattedIssueUid,
-            comm_nickname: dbUser.nickname,
-            comm_text: newComment,
-            date_created: formattedDate, 
-            time_created: formattedTime,
-            upvotes: 0,
-            downvotes: 0
-        })
+            .post(`${statusUrl}/api/addcomment/${issueUid}`, {
+                comm_uid: uid,
+                user_uid: formattedUserUid,
+                issue_uid: formattedIssueUid,
+                comm_nickname: dbUser.nickname,
+                comm_text: newComment,
+                date_created: formattedDate,
+                time_created: formattedTime,
+                upvotes: 0,
+                downvotes: 0
+            })
 
-        e.preventDefault();
+        // e.preventDefault();
     }
 
     const getComments = (issueUid) => {
@@ -74,17 +74,17 @@ const SingleIssue1 = () => {
             .catch(err => console.log(err))
     }
 
-    const openModal = (modal) => { 
+    const openModal = (modal) => {
         const overlay = document.getElementById("overlay");
-        if(modal == null) return;
+        if (modal == null) return;
         modal.classList.add("active");
         overlay.classList.add("active");
     }
 
     const closeModal = (e, modal) => {
-       const overlay = document.getElementById("overlay"); 
-       
-       if(e.target.id === "modalClose"){
+        const overlay = document.getElementById("overlay");
+
+        if (e.target.id === "modalClose") {
 
             const button = e.target;
             const modal = button.closest('.deleteModal')
@@ -102,10 +102,10 @@ const SingleIssue1 = () => {
     }
 
     const deleteIssue = (e) => {
-       axios
-       .get(`${statusUrl}/api/deleteissue/${issue.uid}`, { timeout: 300 })
-       .then(response => console.log(response))
-       .catch(err => console.log(err))
+        axios
+            .get(`${statusUrl}/api/deleteissue/${issue.uid}`, { timeout: 300 })
+            .then(response => console.log(response))
+            .catch(err => console.log(err))
     }
 
     return (
@@ -135,15 +135,22 @@ const SingleIssue1 = () => {
                 <section className="commentSection">
                     <h2 className="commentsHead">Comments</h2>
                     <form className="commentForm" onSubmit={handleSubmit} type="submit">
-                        <textarea className="commentInput" onChange={handleCommentChange} placeholder="Add a informative and helpful comment..."/>
+                        <textarea className="commentInput" onChange={handleCommentChange} placeholder="Add a informative and helpful comment..." />
                         <input className="commentSubmit" placeholder="Submit" type="submit" />
                     </form>
-                    <div>
+                    <div className="commentList">
                         {
-                            comments.map(comment => 
-                            <div key={comment.uid}>
-                                <h3>{comment.comm_text}</h3>
-                            </div>
+                            comments.map(comment =>
+                                <div className="commItem" key={comment.comm_uid}>
+                                <h3 className="commText">{comment.comm_text} - <strong>{comment.comm_nickname}</strong></h3>
+                                   
+                                    <div className="dateTimeNameDiv"> 
+                                        {/* <p className="commName">{comment.comm_nickname}</p> */}
+                                       <p className="commTime">{comment.time_created}</p> 
+                                       <p className="commDate">{comment.date_created}</p>
+                                        
+                                    </div>
+                                </div>
                             )
                         }
                     </div>
@@ -161,7 +168,7 @@ const SingleIssue1 = () => {
                 <div className="modalPara">If you would like to delete this post, please press the "Delete" button. If not, click the "X".</div>
                 <Link to={"/profile"}>
                     <button onClick={deleteIssue} className="deleteBtn">Delete</button>
-                    </Link>
+                </Link>
             </div>
 
             <div onClick={overlayClose} className="" id="overlay"></div>

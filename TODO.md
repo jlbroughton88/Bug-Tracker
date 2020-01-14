@@ -1,5 +1,4 @@
-Add commenting database and functionality for each issue
-
+Add solved functionality to comments and posts
 
 Let users comment on issues
 Let users upvote on comments, reply to them.
