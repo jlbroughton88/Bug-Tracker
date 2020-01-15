@@ -30,8 +30,6 @@ strong{
             }
         }
 
-
-
         .descSection{
             display: flex;
             justify-content: flex-end;
@@ -111,6 +109,7 @@ strong{
                     margin-bottom: 10px;
                     padding: 10px;
                     resize: none;
+                    white-space: pre-wrap;
                 }
                 .commentSubmit{
                     width: 100px;
@@ -130,7 +129,9 @@ strong{
                     margin: 10px 0;
                     padding: 10px;
                     background: rgb(228, 228, 228);
-                    .commText{}
+                    .commText{
+                        white-space: pre-wrap;
+                    }
                     
                     .dateTimeNameDiv{
                         display: flex;
@@ -149,24 +150,20 @@ strong{
                 }
             }
         }
-
-
-
-
     }
         .deleteModal{
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -450%) scale(0);
+            position: absolute;
+            width: 250px;
+            top: -170px;
+            left: -3px;
+            transform:  scale(0);
             transition: 200ms ease-in-out;
             border: 3px black solid;
             max-width: 300px;
-            padding: 10px;
-            position: relative;
             border-radius: 5px;
             background: #ffffff;
             z-index: 2;
+            padding: 10px;
             
             .modalHead{
                 display: flex;
@@ -181,6 +178,7 @@ strong{
                     left: 0;
                     top: 0;
                     font-size: 1.3rem;
+                    color: black;
                 }
                 .modalClose{
                     position: absolute;
@@ -197,11 +195,12 @@ strong{
                 margin-top: 20px;
                 margin-bottom: 20px;
             }
-            .deleteBtn{
+            .deleteBtnModal{
                 width: 100%;
                 border: none;
                 border: #333 solid 1px;
                 background: red;
+                color: black;
                 font-weight: 600;
                 font-size: 1rem;
                 padding: 5px;
@@ -211,7 +210,7 @@ strong{
         }
 
         .deleteModal.active{
-            transform: translate(-50%, -400%) scale(1);
+            transform: scale(1);
         }
         #overlay{
             position: fixed;

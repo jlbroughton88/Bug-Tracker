@@ -116,13 +116,28 @@ const SingleIssue1 = () => {
                     <p className="singleText">{issue.issue_text}</p>
                 </section>
 
+
+                <div onClick={overlayClose} className="" id="overlay"></div>
                 <hr></hr>
 
                 <section className="descSection">
-                    <div className="deleteDiv">
+                    <div className="deleteDiv">            
+                    
+                    {/* Delete Modal */}
+                        <div id="deleteModal" className="deleteModal">
+                            <div className="modalHead">
+                                <h4 className="modalTitle">Notice!</h4>
+                                <button onClick={closeModal} id="modalClose" className="modalClose">&times;</button>
+                            </div>
+                            <div className="modalPara">If you would like to delete this post, please press the "Delete" button. If not, click the "X".</div>
+                            <Link to={"/profile"}>
+                                <button onClick={deleteIssue} className="deleteBtnModal">Delete</button>
+                            </Link>
+                        </div>
                         <button data-modal-target="#deleteModal" className="deleteBtn" onClick={handleDelete}>
                             Delete
                         </button>
+
                     </div>
                     <div className="descDiv">
                         <p className="singleNickname">{issue.nickname}</p>
@@ -142,13 +157,13 @@ const SingleIssue1 = () => {
                         {
                             comments.map(comment =>
                                 <div className="commItem" key={comment.comm_uid}>
-                                <h3 className="commText">{comment.comm_text} - <strong>{comment.comm_nickname}</strong></h3>
-                                   
-                                    <div className="dateTimeNameDiv"> 
+                                    <h3 className="commText">{comment.comm_text} - <strong>{comment.comm_nickname}</strong></h3>
+
+                                    <div className="dateTimeNameDiv">
                                         {/* <p className="commName">{comment.comm_nickname}</p> */}
-                                       <p className="commTime">{comment.time_created}</p> 
-                                       <p className="commDate">{comment.date_created}</p>
-                                        
+                                        <p className="commTime">{comment.time_created}</p>
+                                        <p className="commDate">{comment.date_created}</p>
+
                                     </div>
                                 </div>
                             )
@@ -159,19 +174,7 @@ const SingleIssue1 = () => {
 
 
 
-            {/* Delete Modal */}
-            <div id="deleteModal" className="deleteModal">
-                <div className="modalHead">
-                    <h4 className="modalTitle">Notice!</h4>
-                    <button onClick={closeModal} id="modalClose" className="modalClose">&times;</button>
-                </div>
-                <div className="modalPara">If you would like to delete this post, please press the "Delete" button. If not, click the "X".</div>
-                <Link to={"/profile"}>
-                    <button onClick={deleteIssue} className="deleteBtn">Delete</button>
-                </Link>
-            </div>
 
-            <div onClick={overlayClose} className="" id="overlay"></div>
         </div>
     )
 }
