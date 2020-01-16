@@ -41,6 +41,15 @@ exports.add_comp_role = (req, res) => {
     )
 }
 
+exports.get_all_issues = (req, res) => {
+    connection.query(`SELECT * FROM issues`, 
+        (err, rows, fields) => {
+            if (err) throw err;
+            res.send(rows);
+        }
+    )
+}
+
 exports.get_selected_issue = (req, res) => {
     connection.query(`SELECT * FROM issues WHERE uid="${req.params.uid}"`, 
         (err, rows, fields) => {
@@ -94,3 +103,4 @@ exports.get_comments = (req, res) => {
         }
     )
 }
+

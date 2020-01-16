@@ -1,11 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "../../contexts/auth0-context";
+import Loading from "../Loading/Loading";
 import "./Navbar.scss";
 
 const NavBar = () => {
 
     const { isLoading, loginWithRedirect, logout, user } = useAuth0();
+
+    if(isLoading) {
+        return (
+            <Loading/>
+        )
+    }
 
     return (
         <nav className="navMother">

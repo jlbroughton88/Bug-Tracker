@@ -6,16 +6,103 @@
         justify-content: center;
         text-align: center;
 
-        .issuePromptBtn{
-            border: none;
-            border-radius: 5px;
-            background: lightgrey;
-            margin-top: 20px;
-            padding: 10px;
-            
-            &:hover{
-                cursor: pointer;
-            }
+        .noUserCont{
+            // Figure out why this doesnt wanna work right
+        }
+        .userCont{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            .userContChild{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                text-align: center;
+                flex-direction: column;
+                .headDiv{
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                    
+                    .homeHead{
+                        width: 100%;
+                        text-align: left;
+                        padding: 20px;
+
+                    }
+
+                    .promptBtnDiv{
+                        padding: 20px;
+                        .issuePromptBtn{
+                            width: 140px;
+                            border: none;
+                            border-radius: 5px;
+                            background: red;
+                            color: #333;
+                            font-weight: 700;
+                            font-size: 1rem;
+                            padding: 10px;
+                            
+                            &:hover{
+                                cursor: pointer;
+                            }
+                        }   
+                    }
+                }
+
+                    .recentIssuesDiv{
+                        padding: 20px;
+                        .recentHeadDiv{
+                            
+                            .recentHead{
+
+                            }
+                        }
+
+                        .recentIssuesList{
+                            .issuePost{
+                                display: flex;
+                                flex-direction: column;
+                                align-items: flex-start;
+                                border-bottom: black solid 1px;
+                                margin-top: 10px;
+                                padding: 10px;
+                                .issueTitle{
+                                    margin-bottom: 10px;
+                                }
+                                
+                                .recentDateTime{
+                                    display:  flex;
+                                    flex-direction: row;
+                                    align-self: flex-start;
+                                    background: lightblue;
+                                    padding: 5px;
+                                    border-radius: 3px;
+
+                                    .issueNickname{
+                                        &:after{
+                                            color: blue;
+                                            content: '\00a0  ||| \00a0'
+                                        }}
+
+                                    .issueDate{
+                                        &:after{
+                                            color: blue;
+                                            content: '\00a0  ||| \00a0'
+                                        }
+                                    }
+                                    .issueTime{}
+                                }
+                            }
+                        }
+                    }
+                }
         }
     }
 }

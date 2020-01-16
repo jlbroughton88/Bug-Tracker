@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAuth0 } from "../../contexts/auth0-context";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Loading from "../Loading/Loading";
 import "./AllIssues1.scss";
 
 const AllIssues1 = () => {
@@ -19,7 +20,7 @@ const AllIssues1 = () => {
     if (isLoading) {
 
         return (
-            <div>Loading...</div>
+           <Loading/>
         )
     }
 

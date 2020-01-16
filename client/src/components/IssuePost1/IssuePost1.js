@@ -52,7 +52,6 @@ const IssuePost = () => {
         setIssueUid(uid);
         e.preventDefault();
         // return <Redirect to={`/issues/${uid}`}/>
-        
     };
 
     return (

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAuth0 } from "../../contexts/auth0-context";
+import Loading from "../Loading/Loading";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./Profile1.scss";
@@ -25,7 +26,7 @@ const Profile1 = () => {
     }, [])
 
     if (isLoading) {
-        return <div>Loading...</div>
+        return <Loading/>
     }
 
     const handleSubmitName = (e) => {

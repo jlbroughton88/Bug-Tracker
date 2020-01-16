@@ -1,5 +1,6 @@
-Add solved functionality to comments and posts
-
+Improve home page
+   - Show all recent posts
+   
 Let users comment on issues
 Let users upvote on comments, reply to them.
 

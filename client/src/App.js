@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 import NavBar from "./components/Navbar/NavBar";
 import { useAuth0 } from "./contexts/auth0-context";
 import AppRouter from "./components/Router";
+import Loading from "./components/Loading/Loading";
 import './App.css';
 
 const App = () => {
@@ -11,7 +12,7 @@ const App = () => {
   const { isLoading, user } = useAuth0();
 
   if (isLoading) {
-    return <div>Loading...</div> 
+    return <Loading/>
   }
   
 
