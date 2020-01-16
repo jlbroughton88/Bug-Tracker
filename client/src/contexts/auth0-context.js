@@ -72,12 +72,11 @@ export class Auth0Provider extends Component {
                     let formattedTime = time.replace(/\s/, "")
                     let formattedDate = date.replace(/\//g, "-")
                     this.addUser(newUser, uid, formattedDate, formattedTime);
-
+                    console.log(response)
                     this.findUserAgain();
                     this.setState({ isLoading: false })
                 } else {
                     console.log("User already exists!");
-                    console.log(response.data);
                     this.setState({ dbUser: response.data, isLoading: false  });
                 }
             })

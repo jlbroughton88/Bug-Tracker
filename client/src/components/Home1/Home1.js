@@ -8,6 +8,10 @@ const Home1 = () => {
 
     const { isLoading, user, dbUser } = useAuth0();
 
+    useEffect(() => {
+        console.log(dbUser)
+    }, [])
+
     return (
         <div className="home1Mother">
             <div className="home1Main">
