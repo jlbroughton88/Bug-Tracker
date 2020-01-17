@@ -1,6 +1,6 @@
 Improve home page
-   - Show all recent posts
-   
+<------ Fix bug on deployed app(s) ----->
+
 Let users comment on issues
 Let users upvote on comments, reply to them.
 

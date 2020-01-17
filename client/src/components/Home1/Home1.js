@@ -13,7 +13,7 @@ const Home1 = () => {
     useEffect(() => {
         axios
             .get(`${statusUrl}/api/getallissues`)
-            .then(response => setIssues([...response.data]))
+            .then(response => setIssues([...response.data].reverse()))
             .catch(err => console.log(err))
 
     }, [])
@@ -51,16 +51,17 @@ const Home1 = () => {
                                 <div className="recentIssuesList">
                                     {
                                         issues.map(issue =>
-                                            <div className="issuePost" key={issue.uid}>
-                                                <h3 className="issueTitle">{issue.issue_title}</h3>
-                                                
-                                                <div className="recentDateTime">
-                                                    <p className="issueNickname">{issue.nickname}</p>
-                                                    <p className="issueDate">{issue.date_created}</p>
-                                                    <p className="issueTime">{issue.time_created}</p>
+                                            <Link to={`/issues/${issue.uid}`}>
+                                                    <div className="issuePost" key={issue.uid}>
+                                                        <h3 className="issueTitle">{issue.issue_title}</h3>
+                                                        <div className="recentDateTime">
+                                                            <p className="issueNickname">{issue.nickname}</p>
+                                                            <p className="issueDate">{issue.date_created}</p>
+                                                            <p className="issueTime">{issue.time_created}</p>
+                                                        </div>
                                                 </div>
+                                            </Link>
 
-                                            </div>
                                         )
                                     }
                                 </div>

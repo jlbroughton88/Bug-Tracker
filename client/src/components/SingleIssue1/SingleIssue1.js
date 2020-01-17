@@ -9,8 +9,10 @@ const SingleIssue1 = () => {
 
     const [issue, setIssue] = useState({});
     const [newComment, setNewComment] = useState("");
-    const { statusUrl, dbUser } = useAuth0();
+    const { statusUrl, dbUser, user } = useAuth0();
     const [comments, setComments] = useState([]);
+    const [downVotes, setDownVotes] = useState();
+    const [upVotes, setUpVotes] = useState();
 
 
     useEffect(() => {
@@ -108,6 +110,13 @@ const SingleIssue1 = () => {
             .catch(err => console.log(err))
     }
 
+    const handleUpVote = (e) => {
+        console.log(e.target)
+    }
+
+    const handleDownVote = (e) => {
+        console.log(e.target)
+    }
     return (
         <div className="singleMother">
             <div className="singleMain">
@@ -134,11 +143,20 @@ const SingleIssue1 = () => {
                                 <button onClick={deleteIssue} className="deleteBtnModal">Delete</button>
                             </Link>
                         </div>
-                        <button data-modal-target="#deleteModal" className="deleteBtn" onClick={handleDelete}>
+                        { dbUser.nickname === issue.nickname ? 
+                         <button data-modal-target="#deleteModal" className="deleteBtn" onClick={handleDelete}>
                             Delete
-                        </button>
+                        </button> 
+                        :
+                        <div>
+                            <button onClick={handleUpVote}>Up</button>
+                            <button onClick={handleDownVote}>Down</button>
+                        </div>
+                        }
+
 
                     </div>
+
                     <div className="descDiv">
                         <p className="singleNickname">{issue.nickname}</p>
                         <div className="dateTime">
