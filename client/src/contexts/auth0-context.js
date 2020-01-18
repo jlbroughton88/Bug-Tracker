@@ -32,7 +32,7 @@ export class Auth0Provider extends Component {
         if(process.env.NODE_ENV === "development"){
             this.setState({ statusUrl: "http://localhost:5002" })
         } else {
-            this.setState({ statusUrl: "https://bug-tracker-jb.herokuapp.com/" })
+            this.setState({ statusUrl: "https://bug-tracker-jb.herokuapp.com" })
         }
         this.initializeAuth0()
     };
