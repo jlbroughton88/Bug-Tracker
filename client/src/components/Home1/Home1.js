@@ -51,8 +51,8 @@ const Home1 = () => {
                                 <div className="recentIssuesList">
                                     {
                                         issues.map(issue =>
-                                            <Link to={`/issues/${issue.uid}`}>
-                                                    <div className="issuePost" key={issue.uid}>
+                                            <Link key={issue.uid} to={`/issues/${issue.uid}`}>
+                                                    <div className="issuePost" >
                                                         <h3 className="issueTitle">{issue.issue_title}</h3>
                                                         <div className="recentDateTime">
                                                             <p className="issueNickname">{issue.nickname}</p>

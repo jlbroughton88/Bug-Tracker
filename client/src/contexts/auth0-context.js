@@ -61,10 +61,12 @@ export class Auth0Provider extends Component {
 
     findUser = (newUser) => {
         this.setState({ isLoading: true });
-        console.log(newUser)
         axios
             .get(`${this.state.statusUrl}/api/finduser/${newUser.email}`)
             .then(response => {
+                console.log(response)
+                console.log(response.data)
+                console.log(typeof(response.data))
                 if (response.data === "") {
                     let uid = this.getRandomInt(100000000, 1000000000);
                     let time = moment().format('LT');

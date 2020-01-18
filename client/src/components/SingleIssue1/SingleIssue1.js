@@ -7,12 +7,15 @@ import axios from "axios";
 
 const SingleIssue1 = () => {
 
+    // const [issueUid, setIssueUid] = useState(window.location.pathname.replace("/issues/", ""))
     const [issue, setIssue] = useState({});
     const [newComment, setNewComment] = useState("");
     const { statusUrl, dbUser, user } = useAuth0();
     const [comments, setComments] = useState([]);
+    let [votes, setVotes] = useState([]);
     const [downVotes, setDownVotes] = useState();
     const [upVotes, setUpVotes] = useState();
+    const currentUser = dbUser.uid.toString();
 
 
     useEffect(() => {
@@ -22,6 +25,7 @@ const SingleIssue1 = () => {
             .then(response => setIssue(response.data))
             .catch(err => console.log(err))
 
+        getVotes(issueUid);
         getComments(issueUid);
 
     }, [])
@@ -31,8 +35,7 @@ const SingleIssue1 = () => {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min) + max)
     }
-
-
+    
     const handleDelete = (e) => {
         const button = e.target;
         const modal = document.querySelector(button.dataset.modalTarget)
@@ -76,6 +79,13 @@ const SingleIssue1 = () => {
             .catch(err => console.log(err))
     }
 
+    const getVotes = (issueUid) => {
+        axios
+            .get(`${statusUrl}/api/getvotes/${issueUid}`, { timeout: 300 })
+            .then(response => setVotes([...response.data]))
+            .catch(err => console.log(err))
+    }
+
     const openModal = (modal) => {
         const overlay = document.getElementById("overlay");
         if (modal == null) return;
@@ -110,13 +120,68 @@ const SingleIssue1 = () => {
             .catch(err => console.log(err))
     }
 
+    const voteQuery = (upvote, downvote, issueUid) => {
+
+        let time = moment().format('LT');
+        let date = moment().format('L')
+        let formattedTime = time.replace(/\s/, "")
+        let formattedDate = date.replace(/\//g, "-")
+
+        if (votes.length === 0) {
+            handleVotePost(issueUid, currentUser, upvote, downvote, formattedDate, formattedTime);
+            window.location.reload();
+        } else {
+
+            for (let i = 0; i < votes.length; i++) {
+
+                if (votes[i].user_uid === currentUser) {
+
+                    handleVoteUpdate(upvote, downvote, issueUid, currentUser)
+                    break;
+
+                } else {
+
+                    handleVotePost(issueUid, currentUser, upvote, downvote, formattedDate, formattedTime);
+                    break;
+
+                }
+            }
+        }
+    }
+
     const handleUpVote = (e) => {
-        console.log(e.target)
+        let issueUid = window.location.pathname.replace("/issues/", "")
+        voteQuery(1, 0, issueUid);
     }
 
     const handleDownVote = (e) => {
-        console.log(e.target)
+        let issueUid = window.location.pathname.replace("/issues/", "")
+        voteQuery(0, 1, issueUid)
     }
+
+    const handleVotePost = (issue_uid, user_uid, upvoted, downvoted, date_voted, time_voted) => {
+        axios
+            .post(`${statusUrl}/api/postvote`, {
+                issue_uid,
+                user_uid,
+                upvoted,
+                downvoted,
+                date_voted,
+                time_voted
+            }, { timeout: 300 })
+            .then(response => console.log(response))
+            .catch(err => console.log(err))
+        window.location.reload();
+    }
+
+    const handleVoteUpdate = (upvote, downvote, issueUid, currentUser) => {
+        axios
+        .get(`${statusUrl}/api/updatevote/${upvote}/${downvote}/${issueUid}/${currentUser}`, { timeout: 300 })
+        .then(response => console.log(response))
+        .catch(err => console.log(err))
+    window.location.reload();
+    }
+
     return (
         <div className="singleMother">
             <div className="singleMain">
@@ -128,11 +193,16 @@ const SingleIssue1 = () => {
 
                 <div onClick={overlayClose} className="" id="overlay"></div>
                 <hr></hr>
+                {<div>
+                    {console.log(votes)}
+                    <h1>{votes.downvotes} downvotes</h1>
+                    <h1>{votes.upvotes} upvotes</h1>
+                </div>}
 
                 <section className="descSection">
-                    <div className="deleteDiv">            
-                    
-                    {/* Delete Modal */}
+                    <div className="deleteDiv">
+
+                        {/* Delete Modal */}
                         <div id="deleteModal" className="deleteModal">
                             <div className="modalHead">
                                 <h4 className="modalTitle">Notice!</h4>
@@ -143,15 +213,15 @@ const SingleIssue1 = () => {
                                 <button onClick={deleteIssue} className="deleteBtnModal">Delete</button>
                             </Link>
                         </div>
-                        { dbUser.nickname === issue.nickname ? 
-                         <button data-modal-target="#deleteModal" className="deleteBtn" onClick={handleDelete}>
-                            Delete
-                        </button> 
-                        :
-                        <div>
-                            <button onClick={handleUpVote}>Up</button>
-                            <button onClick={handleDownVote}>Down</button>
-                        </div>
+                        {dbUser.nickname === issue.nickname ?
+                            <button data-modal-target="#deleteModal" className="deleteBtn" onClick={handleDelete}>
+                                Delete
+                        </button>
+                            :
+                            <div>
+                                <button onClick={handleUpVote}>Up</button>
+                                <button onClick={handleDownVote}>Down</button>
+                            </div>
                         }
 
 

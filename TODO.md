@@ -1,8 +1,7 @@
-Improve home page
+Get upvotes/downvotes working correctly
 <------ Fix bug on deployed app(s) ----->
 
-Let users comment on issues
-Let users upvote on comments, reply to them.
+Let users reply to comments.
 
 
 
