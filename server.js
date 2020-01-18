@@ -6,33 +6,23 @@ const routes = require("./routes/routes.js")
 const bodyParser = require("body-parser")
 require("dotenv").config();
 
-console.log(process.env.JAWSDB_URL)
-
-if(process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"))
-    console.log("below should be the jawsdb URL")
-    console.log(process.env.JAWSDB_URL)
-    app.get("*", (req, res) => {
-        console.log(process.env.JAWSDB_URL)
-        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
-    })
-} else {
-    console.log("not production bucko")
-   app.get("/", (req, res) => {
-       console.log("/ not on production")
-   })
-}
 
 app.use(cors());
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next(); 
+    next();
 });
-
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/api", routes);
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static("client/build"))
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+    })
+}
 
 const port = process.env.PORT || 5002;
 
