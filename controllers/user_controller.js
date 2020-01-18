@@ -6,8 +6,10 @@ console.log(process.env.JAWSDB_URL)
 connection.connect();
 
 exports.get_user = (req, res) => {
+    console.log(req)
     connection.query(`SELECT * FROM users WHERE email = "${req.params.email}"`, (err, rows, fields) => {
         if (err) throw err;
+        console.log(rows)
         res.send(rows[0]);
     })
 }

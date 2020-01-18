@@ -10,8 +10,10 @@ console.log(process.env.JAWSDB_URL)
 
 if(process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"))
+    console.log("below should be the jawsdb URL")
+    console.log(process.env.JAWSDB_URL)
     app.get("*", (req, res) => {
-        console.log("server route on production")
+        console.log(process.env.JAWSDB_URL)
         res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
     })
 } else {
