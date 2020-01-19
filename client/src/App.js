@@ -5,7 +5,6 @@ import NavBar from "./components/Navbar/NavBar";
 import { useAuth0 } from "./contexts/auth0-context";
 import AppRouter from "./components/Router";
 import Loading from "./components/Loading/Loading";
-import Footer from "./components/Footer/Footer";
 import './App.css';
 
 const App = () => {
@@ -22,7 +21,6 @@ const App = () => {
       <div className="App">
         <NavBar />
         <AppRouter/>
-        <Footer/>
       </div>
    </Router>
 

@@ -1,307 +1,295 @@
-hr{
-    width: 100%;
+hr {
+  width: 100%;
 }
 
-strong{
-    color: blue;
-     font-size: 1rem;
+strong {
+  color: blue;
+  font-size: 1rem;
 }
-.singleMother{
-    height: calc(100vh - 100px);
-    .singleMain{
+.singleMother {
+  height: calc(100vh - 100px);
+  .singleMain {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+    padding-bottom: 0;
+
+    .titleTextSection {
+      .singleTitle {
+        text-align: start;
+        margin-bottom: 10px;
+        max-width: 800px;
+      }
+
+      .singleText {
+        max-width: 800px;
+        text-align: start;
+        margin-bottom: 10px;
+        white-space: pre-wrap;
+      }
+    }
+
+    .descSection {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+      position: relative;
+      padding-bottom: 100px;
+
+      .deleteDiv {
+        display: flex;
+        align-items: flex-start;
+        position: absolute;
+        top: 0;
+        left: 0;
+        .deleteBtn {
+          border: none;
+          color: red;
+          font-size: 0.8rem;
+          margin-right: 70px;
+          align-self: top;
+        }
+      }
+      .descDiv {
+        position: absolute;
+        top: 0;
+        right: 0;
         display: flex;
         flex-direction: column;
+        align-items: flex-end;
+        align-self: flex-end;
+        padding: 10px;
+        background: lightblue;
+        .dateTime {
+          display: flex;
+          flex-direction: row;
+          .singleDate {
+            &:before {
+              content: "\00a0 on \00a0";
+            }
+          }
+          .singleTime {
+            &:before {
+              content: "At\00a0";
+            }
+          }
+        }
+      }
+      .solvedDiv {
+        background: green;
+        height: 50px;
+        width: 211px;
+        margin-top: 10px;
+        color: #ffffff;
+        font-size: 1.2rem;
+        display: flex;
         justify-content: center;
-        padding: 50px;
-        padding-bottom: 0;
+        align-items: center;
 
-        .titleTextSection{
-
-            .singleTitle{ 
-                text-align: start;
-                margin-bottom: 10px;
-                max-width: 800px;
-            }
-
-            .singleText{
-                max-width: 800px;
-                text-align: start;
-                margin-bottom: 10px;
-                white-space: pre-wrap;
-            }
+        p {
+          margin: 0;
         }
+      }
 
-        .descSection{
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 10px;
-            position: relative;
-            padding-bottom: 100px;
-            
-            .deleteDiv{
-                display: flex;
-                align-items: flex-start;
-                position: absolute;
-                top: 0;
-                left: 0;
-                .deleteBtn{
-                    border: none;
-                    color: red;
-                    font-size: 0.8rem;
-                    margin-right: 70px;
-                    align-self: top;
-                }
-            }
-            .descDiv{
-                position: absolute;
-                top: 0;
-                right: 0;
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
-                align-self: flex-end;
-                padding: 10px;
-                background: lightblue;
-                .dateTime{
-                    display: flex;
-                    flex-direction: row;
-                    .singleDate{
-                        &:before{
-                            content: "\00a0 on \00a0";
-                        }
-                    }
-                    .singleTime{
-                        &:before{
-                            content: "At\00a0";
-                        }
-
-                    }        
-                }
-            }
-            .solvedDiv{
-                background: green;
-                height: 50px;
-                width: 211px;
-                margin-top: 10px;
-                color:#ffffff;
-                font-size: 1.2rem;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                p{
-                    margin: 0;
-                }
-                
-            }
-            
-
-            .singleNickname{
-                font-weight: 700;
-                &:before{
-                    content: 'Asked by ';
-                    font-weight: 400;
-                }
-            }
-            .singleUpvotes{
-                // text-align: center;
-            }
-            .singleDownvotes{
-                // text-align: center;
-            }
-
-            @media(max-width: 600px) {
-                display: grid;
-                grid-template-columns: 100%;
-                grid-template-rows: auto auto;
-                padding: 0;
-                .deleteDiv{
-                    grid-row: 2;
-                    position: relative;
-                    align-self: center;
-                    width: 100%;
-                    justify-content: center;
-                    // background: red;
-                    
-                    .deleteBtn{
-                        // color: #ffffff;
-                        padding: 5px 0;
-                        width: 100%;
-                        margin: 0;
-                        font-size: 1.2rem;
-                        font-weight: 600;
-                    }
-                }
-                .descDiv{
-                    grid-row: 1;
-                    position: relative;
-                    width: 100%;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 10px 0px;
-                    margin-bottom: 10px;
-
-                }
-
-            }
+      .singleNickname {
+        font-weight: 700;
+        &:before {
+          content: "Asked by ";
+          font-weight: 400;
         }
+      }
+      .singleUpvotes {
+        // text-align: center;
+      }
+      .singleDownvotes {
+        // text-align: center;
+      }
 
-        .commentSection{
+      @media (max-width: 600px) {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: auto auto;
+        padding: 0;
+        .deleteDiv {
+          grid-row: 2;
+          position: relative;
+          align-self: center;
+          width: 100%;
+          justify-content: center;
+          // background: red;
+
+          .deleteBtn {
+            // color: #ffffff;
+            padding: 5px 0;
             width: 100%;
-            margin-top: 30px;
-            .commentsHead{
-                margin-bottom: 10px;
-            }
-            .commentForm{
-                display: flex;
-                flex-direction: column;
-                max-width: 500px;
-                margin-bottom: 40px;
-                .commentInput{
-                    font-size: 1rem;
-                    height: 125px;
-                    margin-bottom: 10px;
-                    padding: 10px;
-                    resize: none;
-                    white-space: pre-wrap;
-                }
-                .commentSubmit{
-                    width: 100px;
-                    font-size: 1rem;
-                    font-weight: 600;
-                    padding: 5px 8px;
-                    background: lightblue;
-                    cursor: pointer;
-                    -webkit-appearance: none;
-                    border: none;
-                }
-            }
-
-            .commentList{
-                display: flex;
-                flex-direction: column;
-                .commItem{
-                    display: flex;
-                    flex-direction: column;
-                    border: 1px #333 solid;
-                    border-radius: 5px;
-                    margin: 10px 0;
-                    padding: 10px;
-                    background: rgb(228, 228, 228);
-                    .commText{
-                        white-space: pre-wrap;
-                    }
-                    
-                    .dateTimeNameDiv{
-                        display: flex;
-                        flex-direction: row;
-                        align-self: flex-end;
-                        .commDate{
-                            &:before{
-                                color: blue;
-                                content: "\00a0  ||| \00a0";
-                            }
-                        }
-                        .commTime{
-                        }
-                    }
-
-
-                }                    
-                .solved{
-                        border: 2px green solid;
-                        box-shadow: 4px 4px green;
-                    }
-            }
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+          }
         }
+        .descDiv {
+          grid-row: 1;
+          position: relative;
+          width: 100%;
+          justify-content: center;
+          align-items: center;
+          padding: 10px 0px;
+          margin-bottom: 10px;
+        }
+      }
     }
-        .deleteModal{
-            position: absolute;
-            width: 250px;
-            top: -170px;
-            left: -3px;
-            transform:  scale(0);
-            transition: 200ms ease-in-out;
-            border: 3px black solid;
-            max-width: 300px;
-            border-radius: 5px;
-            background: #ffffff;
-            z-index: 2;
-            padding: 10px;
-            
-            .modalHead{
-                display: flex;
-                justify-content: space-evenly;
-                padding: 10px;
-                width: calc(100% - 20px);
-                position: relative;
-                
 
-                .modalTitle{
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    font-size: 1.3rem;
-                    color: black;
-                }
-                .modalClose{
-                    position: absolute;
-                    color: red;
-                    font-size: 1.3rem;
-                    border: none;
-                    font-weight: 900;
-                    margin: 0;
-                    right: 0;
-                    top: 0;
-                }
-            }
-            .modalPara{
-                margin-top: 20px;
-                margin-bottom: 20px;
-            }
-            .deleteBtnModal{
-                width: 100%;
-                border: none;
-                border: #333 solid 1px;
-                background: red;
-                color: black;
-                font-weight: 600;
-                font-size: 1rem;
-                padding: 5px;
-                text-align: center;
-                cursor: pointer;
-            }
+    .commentSection {
+      width: 100%;
+      margin-top: 30px;
+      .commentsHead {
+        margin-bottom: 10px;
+      }
+      .commentForm {
+        display: flex;
+        flex-direction: column;
+        max-width: 500px;
+        margin-bottom: 40px;
+        .commentInput {
+          font-size: 1rem;
+          height: 125px;
+          margin-bottom: 10px;
+          padding: 10px;
+          resize: none;
+          white-space: pre-wrap;
         }
-
-        .deleteModal.active{
-            transform: scale(1);
+        .commentSubmit {
+          width: 100px;
+          font-size: 1rem;
+          font-weight: 600;
+          padding: 5px 8px;
+          background: lightblue;
+          cursor: pointer;
+          -webkit-appearance: none;
+          border: none;
         }
-        #overlay{
-            position: fixed;
-            opacity: 0;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            background-color: rgba(0, 0, 0, .5);
-            pointer-events: none;
-            transition: 200ms ease-in-out;
+      }
 
-        }            
-        #overlay.active{
-                opacity: 1;
-                pointer-events: all;
+      .commentList {
+        display: flex;
+        flex-direction: column;
+        .commItem {
+          display: flex;
+          flex-direction: column;
+          border: 1px #333 solid;
+          border-radius: 5px;
+          margin: 10px 0;
+          padding: 10px;
+          background: rgb(228, 228, 228);
+          .commText {
+            white-space: pre-wrap;
+          }
+
+          .dateTimeNameDiv {
+            display: flex;
+            flex-direction: row;
+            align-self: flex-end;
+            .commDate {
+              &:before {
+                color: blue;
+                content: "\00a0  ||| \00a0";
+              }
             }
-
-    .singleMain{
-        padding: 50px 25px 50px 25px;
-        .titleTextSection{
-            .singleTitle{
-
+            .commTime {
             }
-            .singleText{
-
-            }
+          }
         }
+        .solved {
+          border: 2px green solid;
+          box-shadow: 4px 4px green;
+        }
+      }
     }
+  }
+  .deleteModal {
+    position: absolute;
+    width: 250px;
+    top: -170px;
+    left: -3px;
+    transform: scale(0);
+    transition: 200ms ease-in-out;
+    border: 3px black solid;
+    max-width: 300px;
+    border-radius: 5px;
+    background: #ffffff;
+    z-index: 2;
+    padding: 10px;
+
+    .modalHead {
+      display: flex;
+      justify-content: space-evenly;
+      padding: 10px;
+      width: calc(100% - 20px);
+      position: relative;
+
+      .modalTitle {
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 1.3rem;
+        color: black;
+      }
+      .modalClose {
+        position: absolute;
+        color: red;
+        font-size: 1.3rem;
+        border: none;
+        font-weight: 900;
+        margin: 0;
+        right: 0;
+        top: 0;
+      }
+    }
+    .modalPara {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .deleteBtnModal {
+      width: 100%;
+      border: none;
+      border: #333 solid 1px;
+      background: red;
+      color: black;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 5px;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
+
+  .deleteModal.active {
+    transform: scale(1);
+  }
+  #overlay {
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    transition: 200ms ease-in-out;
+  }
+  #overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .singleMain {
+    padding: 50px 25px 50px 25px;
+    .titleTextSection {
+      .singleTitle {
+      }
+      .singleText {
+      }
+    }
+  }
 }

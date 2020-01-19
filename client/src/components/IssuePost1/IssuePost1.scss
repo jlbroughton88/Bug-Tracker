@@ -1,62 +1,62 @@
-
-@mixin inputs{
-    border: none;
-    border: 1px solid #333;
-    border-radius: 5px;
+@mixin inputs {
+  border: none;
+  border: 1px solid #333;
+  border-radius: 5px;
 }
 
-input, textarea{
-    @include inputs();
+input,
+textarea {
+  @include inputs();
 }
 
-.issuePost1Mother{
-    .issuePost1Main{
-        height: calc(100vh - 100px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        flex-direction: column;
-        .issueHead{
-            margin-bottom: 30px;
-        }
-        .issueForm{
-            display: flex;
-            flex-direction: column;
-            width: 600px;
-            .issueTitleInput{
-                margin-bottom: 15px;
-                height: 10px;
-                font-size: 1rem;
-                padding: 10px;
-                
-            }
-            .issueTextInput{
-                margin-bottom: 15px;
-                height: 230px;
-                font-size: 0.9rem;
-                padding: 10px;
-            }
-            .issueSubmit{
-                width: 50%;
-                align-self: center;
-                padding: 5px;
-                font-size: 1.2rem;
-                background: skyblue;
-                cursor: pointer;
-                appearance: none;
-                border: none;
-            }
-        }
+.issuePost1Mother {
+  .issuePost1Main {
+    height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    .issueHead {
+      margin-bottom: 30px;
     }
+    .issueForm {
+      display: flex;
+      flex-direction: column;
+      width: 600px;
+      .issueTitleInput {
+        margin-bottom: 15px;
+        height: 10px;
+        font-size: 1rem;
+        padding: 10px;
+      }
+      .issueTextInput {
+        margin-bottom: 15px;
+        height: 230px;
+        font-size: 0.9rem;
+        padding: 10px;
+      }
+      .issueSubmit {
+        width: 50%;
+        align-self: center;
+        padding: 5px;
+        font-size: 1.2rem;
+        background: skyblue;
+        cursor: pointer;
+        appearance: none;
+        border: none;
+      }
+    }
+  }
 
-    @media(max-width: 600px) {
-        .issuePost1Main{
-            height: calc(100vh - 140px);
-            .issueHead{}
-            .issueForm {
-                width: 90%;
-            }
-        }
+  @media (max-width: 600px) {
+    .issuePost1Main {
+      height: calc(100vh - 140px);
+      .issueHead {
+      }
+      .issueForm {
+        width: 90%;
+      }
     }
+  }
 }

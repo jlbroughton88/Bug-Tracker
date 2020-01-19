@@ -1,145 +1,264 @@
-html{
-    height: 100%;
+html {
+  height: 100%;
 }
-.home1Mother{
-    .home1Main{
-        height: auto;
+.home1Mother {
+  .home1Main {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    .noUserCont {
+      // Figure out why this doesnt wanna work right
+      height: calc(100vh - 100px);
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .userCont {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      .userContChild {
+        width: 100%;
+        height: 100%;
         display: flex;
-        align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
+        align-items: flex-start;
         text-align: center;
+        flex-direction: column;
+        .headDiv {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+          justify-content: flex-start;
 
-        .noUserCont{
-            // Figure out why this doesnt wanna work right
-            height: calc(100vh - 100px);
+          .homeHead {
             width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        .userCont{
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            text-align: center;
-            .userContChild{
-                width: 100%;
-                height: 100%;
-                display: flex;
-                justify-content: flex-start;
-                align-items: flex-start;
-                text-align: center;
-                flex-direction: column;
-                .headDiv{
-                    width: 100%;
-                    display: flex;
-                    flex-direction: row;
-                    align-items: flex-start;
-                    justify-content: flex-start;
-                    
-                    .homeHead{
-                        width: 100%;
-                        text-align: left;
-                        margin: 20px 0 20px 20px;
+            text-align: left;
+            margin: 20px 0 20px 20px;
+          }
 
-                    }
+          .promptBtnDiv {
+            padding: 20px;
+            .issuePromptBtn {
+              width: 140px;
+              border: none;
+              border-radius: 5px;
+              background: red;
+              color: #333;
+              font-weight: 700;
+              font-size: 1rem;
+              padding: 10px;
 
-                    .promptBtnDiv{
-                        padding: 20px;
-                        .issuePromptBtn{
-                            width: 140px;
-                            border: none;
-                            border-radius: 5px;
-                            background: red;
-                            color: #333;
-                            font-weight: 700;
-                            font-size: 1rem;
-                            padding: 10px;
-                            
-                            &:hover{
-                                cursor: pointer;
-                            }
-                        }   
-                    }
-                }
-
-                    .recentIssuesDiv{
-                        padding: 20px;
-                        .recentHeadDiv{
-                            
-                            .recentHead{
-
-                            }
-                        }
-
-                        .recentIssuesList{
-                            max-width: 650px;
-                            .issuePost{
-                                display: flex;
-                                flex-direction: column;
-                                align-items: flex-start;
-                                // border-bottom: black solid 1px;
-                                margin-top: 15px;
-                                padding: 10px;
-                                background: lightgrey;
-                                border-radius: 3px;
-                                .issueTitle{
-                                    margin-bottom: 10px;
-                                    text-align: start;
-                                }
-                                
-                                .recentDateTime{
-                                    display:  flex;
-                                    flex-direction: row;
-                                    align-self: flex-start;
-                                    background: lightblue;
-                                    padding: 5px;
-                                    border-radius: 3px;
-
-                                    .issueNickname{
-                                        &:after{
-                                            color: blue;
-                                            content: '\00a0  ||| \00a0'
-                                        }}
-
-                                    .issueDate{
-                                        &:after{
-                                            color: blue;
-                                            content: '\00a0  ||| \00a0'
-                                        }
-                                    }
-                                    .issueTime{}
-                                }
-                            }
-                        }
-                    }
-                }
-        }
-    }
-
-    @media(max-width: 600px) {
-        .home1Main{
-            .userCont{
-                .userContChild{
-                    .headDiv{
-                        width: calc(100% - 20px);
-                        display: flex;
-                        flex-direction: column;
-                        .homeHead{}
-                        .promptBtnDiv{
-                            padding: 0;
-                            margin-left: 20px;
-                            .issuePromptBtn{
-
-                            }
-                        }
-                    }
-                }
+              &:hover {
+                cursor: pointer;
+              }
             }
+          }
         }
+        .issuesParent {
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+
+          .openIssuesDiv {
+            width: 50%;
+            padding: 20px;
+            .openHeadDiv {
+              .openHead {
+              }
+            }
+
+            .openIssuesList {
+              max-width: 650px;
+              .issuePost {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                // border-bottom: black solid 1px;
+                margin-top: 15px;
+                padding: 10px;
+                background: lightgrey;
+                border-radius: 3px;
+
+                .openDiv {
+                  background: green;
+                }
+                .issueTitle {
+                  margin-bottom: 10px;
+                  text-align: start;
+                }
+
+                .openDateTime {
+                  display: flex;
+                  flex-direction: row;
+                  align-self: flex-start;
+                  background: lightblue;
+                  padding: 5px;
+                  border-radius: 3px;
+
+                  .issueNickname {
+                      font-weight: 700;
+                    &:after {
+                      color: blue;
+                      font-weight: 400;
+                      content: "\00a0  ||| \00a0";
+                    }
+                  }
+
+                  .issueDate {
+                    &:after {
+                      color: blue;
+                      content: "\00a0  ||| \00a0";
+                    }
+                  }
+                  .issueTime {
+                  }
+                }
+              }
+            }
+          }
+          .solvedIssuesDiv {
+            width: 50%;
+            padding: 20px;
+            .solvedHeadDiv {
+              .solvedHead {
+              }
+            }
+
+            .solvedIssuesList {
+              max-width: 650px;
+              .issuePost {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                margin-top: 15px;
+                padding: 10px;
+                background: lightgrey;
+                border-radius: 3px;
+
+                .issueTitle {
+                  margin-bottom: 10px;
+                  text-align: start;
+                }
+
+                .solvedDateTime {
+                  display: flex;
+                  flex-direction: row;
+                  align-self: flex-start;
+                  align-items: center;
+                  background: lightblue;
+                  padding: 5px;
+                  border-radius: 3px;
+
+                  .solvedDiv {
+                    background: green;
+                    padding: 5px 10px;
+                    color: #ffffff;
+                  }
+
+                  .issueNickname {
+                    font-weight: 700;
+                    &:after {
+                      color: blue;
+                      font-weight: 400;
+                      content: "\00a0  ||| \00a0";
+                    }
+                  }
+
+                  .issueDate {
+                    &:after {
+                      color: blue;
+                      content: "\00a0  ||| \00a0";
+                    }
+                  }
+                  .issueTime {
+                    &:after {
+                      color: blue;
+                      content: "\00a0  ||| \00a0";
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
+  }
 
+  @media (max-width: 670px) {
+    .home1Main {
+      .userCont {
+        .userContChild {
+          .headDiv {
+            width: calc(100% - 20px);
+            display: flex;
+            flex-direction: column;
+            .homeHead {
+            }
+            .promptBtnDiv {
+              padding: 0;
+              margin-left: 20px;
+              .issuePromptBtn {
+              }
+            }
+          }
+          .issuesParent {
+            flex-direction: column;
+            .openIssuesDiv {
+              width: calc(100% - 40px);
+              .openIssuesList{
+                  .issuePost{
+                      .openDateTime{
+                          width: 95%;
+                          align-self: center;
+                          justify-content: center;
+                          padding: 5px 0;
+                      }
+                  }
+              }
+            }
+            .solvedIssuesDiv {
+              width: calc(100% - 40px);
+              .solvedIssuesList {
+                .issuePost {
+                    display: flex;
+                  .solvedDateTime {
+                    justify-content: center;
+                    align-self: center;
+                    width: 95%;
 
+                    .issueNickname {
+                      &:after {
+                        color: blue;
+                        content: "\00a0  ||| \00a0";
+                      }
+                    }
+
+                    .issueDate {
+                      &:after {
+                        color: blue;
+                        content: "\00a0  ||| \00a0";
+                      }
+                    }
+                    .issueTime {
+                        display: none;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
