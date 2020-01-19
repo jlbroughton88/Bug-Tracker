@@ -1,0 +1,16 @@
+.footerMother{
+    width: 100%;
+    height: 100px;
+    background: #333;
+    margin-top: 50px;
+    .footerMain{
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .footerText{
+            color: white;
+            margin: 0;
+        }
+    }
+}

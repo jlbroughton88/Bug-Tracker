@@ -21,7 +21,7 @@ const SingleIssue1 = () => {
     useEffect(() => {
         let issueUid = window.location.pathname.replace("/issues/", "")
         axios
-            .get(`${statusUrl}/api/getissue/${issueUid}`)
+            .get(`${statusUrl}/api/getissue/${issueUid}`, { timeout: 300 })
             .then(response => setIssue(response.data))
             .catch(err => console.log(err))
 

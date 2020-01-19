@@ -68,4 +68,29 @@
             }
         }
     }
+
+    @media(max-width: 500px) {
+        .navMain{
+            .leftNav{
+                display: flex;
+                justify-content: center;
+                .logoDiv{
+                    width: 150px;
+                }
+            }
+            .rightNav{
+                display: flex;
+                justify-content: center;
+                .loginLogoutSect{
+                    width: 150px;
+                   .loggedInSect{
+                       .navPicture{
+                           width: 50px;
+                       }
+                    //    .navLogout
+                   }
+                }
+            }
+        }
+    }
 }
