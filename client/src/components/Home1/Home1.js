@@ -27,14 +27,17 @@ const Home1 = () => {
     return (
         <div className="home1Mother">
             <div className="home1Main">
-                <div className="noUserCont">
+                
                     {!isLoading && !user && (
+                    <div className="noUserCont">
                         <h1>Welcome to Bug Tracker!</h1>
+                    </div>
                     )}
-                </div>
+                
 
-                <div className="userCont">
-                    {!isLoading && dbUser && (
+               
+                    {!isLoading && dbUser && ( 
+                    <div className="userCont">
                         <div className="userContChild">
                             <div className="headDiv">
                                 <h1 className="homeHead">Welcome, {dbUser.given_name != "null" ? dbUser.given_name : dbUser.nickname}!</h1>
@@ -67,9 +70,9 @@ const Home1 = () => {
                                 </div>
                             </div>
                         </div>
-
+                    </div>
                     )}
-                </div>
+                
             </div>
         </div>
     )

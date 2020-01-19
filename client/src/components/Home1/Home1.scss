@@ -1,4 +1,8 @@
+html{
+    height: 100%;
+}
 .home1Mother{
+    margin-bottom: 100px;
     .home1Main{
         height: auto;
         display: flex;
@@ -8,6 +12,12 @@
 
         .noUserCont{
             // Figure out why this doesnt wanna work right
+            height: calc(100vh - 100px);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
         .userCont{
             width: 100%;
