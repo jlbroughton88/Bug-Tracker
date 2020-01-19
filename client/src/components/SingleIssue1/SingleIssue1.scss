@@ -77,6 +77,22 @@ strong{
                     }        
                 }
             }
+            .solvedDiv{
+                background: green;
+                height: 50px;
+                width: 211px;
+                margin-top: 10px;
+                color:#ffffff;
+                font-size: 1.2rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                p{
+                    margin: 0;
+                }
+                
+            }
 
             .singleNickname{
                 font-weight: 700;
@@ -152,7 +168,12 @@ strong{
                         }
                     }
 
-                }
+
+                }                    
+                .solved{
+                        border: 2px green solid;
+                        box-shadow: 4px 4px green;
+                    }
             }
         }
     }

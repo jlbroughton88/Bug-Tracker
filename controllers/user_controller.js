@@ -87,7 +87,7 @@ exports.delete_selected_issue = (req, res) => {
 
 exports.add_comment = (req, res) => {
     let comm = req.body;
-    connection.query(`INSERT INTO comments (comm_uid, user_uid, issue_uid, comm_nickname, comm_text, date_created, time_created, upvotes, downvotes) VALUES ("${comm.comm_uid}","${comm.user_uid}","${comm.issue_uid}", "${comm.comm_nickname}", "${comm.comm_text}","${comm.date_created}","${comm.time_created}","${comm.upvotes}","${comm.downvotes}")`,
+    connection.query(`INSERT INTO comments (comm_uid, user_uid, issue_uid, comm_nickname, comm_text, date_created, time_created, upvotes, downvotes, solved) VALUES ("${comm.comm_uid}","${comm.user_uid}","${comm.issue_uid}", "${comm.comm_nickname}", "${comm.comm_text}","${comm.date_created}","${comm.time_created}","${comm.upvotes}","${comm.downvotes}", "${comm.solved}")`,
         (err, rows, fields) => {
             if (err) throw err;
         }
@@ -125,15 +125,25 @@ exports.post_vote = (req, res) => {
 }
 
 exports.update_vote = (req, res) => {
-    console.log("updating fields")
-    console.log(req.params.upvoted)
-    console.log(req.params.downvoted)
-    console.log(req.params.issue_uid)
-    console.log(req.params.user_uid)
     connection.query(`UPDATE votes SET upvoted="${req.params.upvoted}", downvoted="${req.params.downvoted}" WHERE issue_uid="${req.params.issue_uid}" AND user_uid="${req.params.user_uid}"`, 
         (err, rows, fields) => {
             if(err) throw err;
             console.log(rows)
+        }
+    )
+}
+
+exports.update_solved = (req, res) => {
+    connection.query(`UPDATE comments SET solved="1" WHERE issue_uid="${req.params.issue_uid}" AND comm_uid="${req.params.comm_uid}"`, 
+        (err, rows, fields) => {
+            if(err) throw err;
+            console.log(rows[0])
+        }
+    )
+    connection.query(`UPDATE issues SET solved="1" WHERE uid=${req.params.issue_uid}`, 
+        (err, rows, field) => {
+            if(err) throw err;
+            console.log(rows[0])
         }
     )
 }

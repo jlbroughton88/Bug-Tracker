@@ -50,8 +50,7 @@ const IssuePost = () => {
         const uid = getRandomInt(10000000, 100000000);
         postIssue(uid);
         setIssueUid(uid);
-        e.preventDefault();
-        // return <Redirect to={`/issues/${uid}`}/>
+        window.location.href = `${statusUrl}/profile`
     };
 
     return (

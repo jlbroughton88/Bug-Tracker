@@ -1,6 +1,4 @@
-Get upvotes/downvotes working correctly
-<------ Fix bug on deployed app(s) ----->
-
+Add "solved" functionality.
 Let users reply to comments.
 
 

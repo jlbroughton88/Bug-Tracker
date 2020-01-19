@@ -35,7 +35,7 @@ const SingleIssue1 = () => {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min) + max)
     }
-    
+
     const handleDelete = (e) => {
         const button = e.target;
         const modal = document.querySelector(button.dataset.modalTarget)
@@ -55,7 +55,6 @@ const SingleIssue1 = () => {
         let date = moment().format('L')
         let formattedTime = time.replace(/\s/, "")
         let formattedDate = date.replace(/\//g, "-")
-        console.log(dbUser)
         axios
             .post(`${statusUrl}/api/addcomment/${issueUid}`, {
                 comm_uid: uid,
@@ -66,7 +65,8 @@ const SingleIssue1 = () => {
                 date_created: formattedDate,
                 time_created: formattedTime,
                 upvotes: 0,
-                downvotes: 0
+                downvotes: 0,
+                solved: 0
             })
 
         // e.preventDefault();
@@ -176,10 +176,23 @@ const SingleIssue1 = () => {
 
     const handleVoteUpdate = (upvote, downvote, issueUid, currentUser) => {
         axios
-        .get(`${statusUrl}/api/updatevote/${upvote}/${downvote}/${issueUid}/${currentUser}`, { timeout: 300 })
-        .then(response => console.log(response))
-        .catch(err => console.log(err))
-    window.location.reload();
+            .get(`${statusUrl}/api/updatevote/${upvote}/${downvote}/${issueUid}/${currentUser}`, { timeout: 300 })
+            .then(response => console.log(response))
+            .catch(err => console.log(err))
+        window.location.reload();
+    }
+
+    const handleSolved = (e) => {
+        let issueUid = window.location.pathname.replace("/issues/", "")
+        let comm = e.target.parentNode.parentNode.id;
+        console.log(comm)
+
+        axios
+            .get(`${statusUrl}/api/updatesolved/${issueUid}/${comm}`)
+            .then(response => console.log(response))
+            .catch(err => console.log(err))
+
+        window.location.reload();
     }
 
     return (
@@ -216,7 +229,7 @@ const SingleIssue1 = () => {
                         {dbUser.nickname === issue.nickname ?
                             <button data-modal-target="#deleteModal" className="deleteBtn" onClick={handleDelete}>
                                 Delete
-                        </button>
+                            </button>
                             :
                             <div>
                                 <button onClick={handleUpVote}>Up</button>
@@ -233,7 +246,14 @@ const SingleIssue1 = () => {
                             <p className="singleTime">{issue.time_created}</p>
                             <p className="singleDate">{issue.date_created}</p>
                         </div>
+                        {issue.solved === 1 && (
+                            <div className="solvedDiv">
+                                <p>Solved!</p>
+                            </div>
+                        )}
                     </div>
+
+
                 </section>
                 <section className="commentSection">
                     <h2 className="commentsHead">Comments</h2>
@@ -243,15 +263,18 @@ const SingleIssue1 = () => {
                     </form>
                     <div className="commentList">
                         {
-                            comments.map(comment =>
-                                <div className="commItem" key={comment.comm_uid}>
+                            comments.reverse().map(comment =>
+                                <div className={`commItem ${comment.solved ? " solved" : ""}`} id={`${comment.comm_uid}`} key={comment.comm_uid}>
                                     <p className="commText">{comment.comm_text} - <strong>{comment.comm_nickname}</strong></p>
 
                                     <div className="dateTimeNameDiv">
                                         {/* <p className="commName">{comment.comm_nickname}</p> */}
+                                        {issue.solved === 0 && (
+                                            <button className="solvedBtn" onClick={handleSolved}>Solved</button>
+                                        )}
+
                                         <p className="commTime">{comment.time_created}</p>
                                         <p className="commDate">{comment.date_created}</p>
-
                                     </div>
                                 </div>
                             )
