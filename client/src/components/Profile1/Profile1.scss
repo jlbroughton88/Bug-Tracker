@@ -3,8 +3,9 @@ h1, h2, h3, h4, h5, h6, p{
 }
 
 .profile1Mother{ 
+    margin-bottom: 100px;
     .profile1Main{
-        height: calc(100vh - 100px);
+        height: auto;
         display: flex;
         flex-direction: column;
         justify-items: center;
@@ -86,12 +87,48 @@ h1, h2, h3, h4, h5, h6, p{
                 .issueViewBtn{
                         background: skyblue;
                         border-radius: 5px;
-                        font-size: 1rem;
+                        font-size: 1.1rem;
                         margin-left: 10px;
-                        margin-top: 10px;;
+                        margin-top: 10px;
+                        font-weight: 500;
+                        border: none;
                     }
             }
 
+        }
+    }
+
+    @media(max-width: 600px) {
+        .profile1Main{
+            .bioSection{
+                .profilePic{
+                    height: 100px;
+                }
+                .bioInfo{
+                    .profileName{
+                        font-size: 2rem;
+                    }
+                    .profileRoleComp{
+                        font-size: 1.5rem;
+                        font-weight: 500;
+                    }
+                }
+            }
+
+            .issuesWrapper{
+                .issuesDiv{
+                    .issuePost{
+                        .issueTitle{
+                            font-size: 1.2rem;
+                        }
+                    }
+                }
+
+                .issueViewBtn{
+                    padding: 5px 10px;
+                    width: 100px;
+                }
+            }
         }
     }
 }

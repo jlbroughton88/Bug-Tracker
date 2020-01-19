@@ -193,11 +193,11 @@ const SingleIssue1 = () => {
 
                 <div onClick={overlayClose} className="" id="overlay"></div>
                 <hr></hr>
-                {<div>
+                {/* {<div>
                     {console.log(votes)}
                     <h1>{votes.downvotes} downvotes</h1>
                     <h1>{votes.upvotes} upvotes</h1>
-                </div>}
+                </div>} */}
 
                 <section className="descSection">
                     <div className="deleteDiv">
@@ -245,7 +245,7 @@ const SingleIssue1 = () => {
                         {
                             comments.map(comment =>
                                 <div className="commItem" key={comment.comm_uid}>
-                                    <h3 className="commText">{comment.comm_text} - <strong>{comment.comm_nickname}</strong></h3>
+                                    <p className="commText">{comment.comm_text} - <strong>{comment.comm_nickname}</strong></p>
 
                                     <div className="dateTimeNameDiv">
                                         {/* <p className="commName">{comment.comm_nickname}</p> */}

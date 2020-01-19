@@ -37,7 +37,7 @@ const Home1 = () => {
                     {!isLoading && dbUser && (
                         <div className="userContChild">
                             <div className="headDiv">
-                                <h1 className="homeHead">Welcome to Bug Tracker, {dbUser.given_name != "null" ? dbUser.given_name : dbUser.nickname}!</h1>
+                                <h1 className="homeHead">Welcome, {dbUser.given_name != "null" ? dbUser.given_name : dbUser.nickname}!</h1>
                                 <Link to="/post">
                                     <div className="promptBtnDiv">
                                         <button className="issuePromptBtn"> Post an issue? </button>

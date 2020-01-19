@@ -65,7 +65,7 @@ const Profile1 = () => {
                         <h1 className="profileName">{dbUser.given_name !== "null" ? dbUser.given_name : dbUser.nickname}'s Profile</h1>
 
                         {dbUser.company !== "null" && dbUser.role !== "null" && (
-                            <h1 className="profileRoleComp">{dbUser.role} at {dbUser.company}</h1>
+                            <h3 className="profileRoleComp">{dbUser.role} at {dbUser.company}</h3>
                         )}
                     </div>
 

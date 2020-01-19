@@ -44,6 +44,18 @@ input, textarea{
                 font-size: 1.2rem;
                 background: skyblue;
                 cursor: pointer;
+                appearance: none;
+                border: none;
+            }
+        }
+    }
+
+    @media(max-width: 600px) {
+        .issuePost1Main{
+            height: calc(100vh - 140px);
+            .issueHead{}
+            .issueForm {
+                width: 90%;
             }
         }
     }

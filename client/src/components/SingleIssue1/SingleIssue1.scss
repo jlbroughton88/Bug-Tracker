@@ -118,6 +118,8 @@ strong{
                     padding: 5px 8px;
                     background: lightblue;
                     cursor: pointer;
+                    -webkit-appearance: none;
+                    border: none;
                 }
             }
 
@@ -231,4 +233,16 @@ strong{
                 opacity: 1;
                 pointer-events: all;
             }
+
+    .singleMain{
+        padding: 50px 25px 50px 25px;
+        .titleTextSection{
+            .singleTitle{
+
+            }
+            .singleText{
+
+            }
+        }
+    }
 }

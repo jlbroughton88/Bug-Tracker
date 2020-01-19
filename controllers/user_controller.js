@@ -1,8 +1,6 @@
 const mysql = require("mysql");
 require("dotenv").config();
-console.log(process.env.JAWSDB_URL)
 const connection = mysql.createConnection(process.env.JAWSDB_URL)
-console.log(process.env.JAWSDB_URL)
 connection.connect();
 
 exports.get_user = (req, res) => {

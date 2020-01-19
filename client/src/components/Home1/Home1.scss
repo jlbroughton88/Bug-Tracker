@@ -1,6 +1,6 @@
 .home1Mother{
     .home1Main{
-        height: calc(100vh - 100px);
+        height: auto;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -33,7 +33,7 @@
                     .homeHead{
                         width: 100%;
                         text-align: left;
-                        padding: 20px;
+                        margin: 20px 0 20px 20px;
 
                     }
 
@@ -109,4 +109,28 @@
                 }
         }
     }
+
+    @media(max-width: 600px) {
+        .home1Main{
+            .userCont{
+                .userContChild{
+                    .headDiv{
+                        width: calc(100% - 20px);
+                        display: flex;
+                        flex-direction: column;
+                        .homeHead{}
+                        .promptBtnDiv{
+                            padding: 0;
+                            margin-left: 20px;
+                            .issuePromptBtn{
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
 }
