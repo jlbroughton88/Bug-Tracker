@@ -315,9 +315,9 @@ const SingleIssue1 = () => {
               </div>
             ))}
           </div>
-        </section>
+        </section> 
       </div>
-      <Footer />
+     
     </div>
   );
 };

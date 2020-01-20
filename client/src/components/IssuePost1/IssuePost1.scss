@@ -10,13 +10,16 @@ textarea {
 }
 
 .issuePost1Mother {
+  height: 100%;
+
   .issuePost1Main {
-    height: calc(100vh - 100px);
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     flex-direction: column;
+
     .issueHead {
       margin-bottom: 30px;
     }

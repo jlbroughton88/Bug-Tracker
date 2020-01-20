@@ -162,7 +162,7 @@ const Profile1 = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

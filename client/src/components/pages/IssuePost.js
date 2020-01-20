@@ -3,9 +3,7 @@ import IssuePost1 from "../IssuePost1/IssuePost1";
 
 const IssuePost = () => {
     return (
-        <div>
-            <IssuePost1/>
-        </div>
+        <IssuePost1/>
     )
 }
 

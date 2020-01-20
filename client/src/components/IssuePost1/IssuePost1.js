@@ -4,6 +4,7 @@ import "./IssuePost1.scss";
 import axios from "axios";
 import { useAuth0 } from "../../contexts/auth0-context";
 import moment from "moment";
+import Footer from "../Footer/Footer";
 
 const IssuePost = () => {
   const [issueTitle, setIssueTitle] = useState("");

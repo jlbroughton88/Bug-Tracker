@@ -22,7 +22,7 @@ const AllIssues1 = () => {
   }
 
   return (
-    <div>
+    <div className="allIssuesMother">
       <section className="bioSection">
         <img className="profilePic" src={user.picture} alt={dbUser.nickname} />
 
@@ -50,7 +50,6 @@ const AllIssues1 = () => {
           </div>
         ))}
       </section>
-      <Footer />
     </div>
   );
 };

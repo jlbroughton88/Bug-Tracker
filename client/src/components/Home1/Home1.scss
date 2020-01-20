@@ -1,13 +1,15 @@
-html {
-  height: 100%;
-}
 .home1Mother {
+  height: 100%;
+
   .home1Main {
-    height: auto;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    position: relative;
+    min-height: 100%;
+    // padding-bottom: 100px;
 
     .noUserCont {
       // Figure out why this doesnt wanna work right
@@ -69,6 +71,10 @@ html {
           width: 100%;
 
           .openIssuesDiv {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: column;
             width: 50%;
             padding: 20px;
             .openHeadDiv {
@@ -77,7 +83,12 @@ html {
             }
 
             .openIssuesList {
-              max-width: 650px;
+              width: calc(100% - 40px);
+              display: flex;
+              align-items: flex-start;
+              flex-direction: column;
+              justify-content: flex-start;
+              a{ width: 100%;}
               .issuePost {
                 display: flex;
                 flex-direction: column;
@@ -128,13 +139,22 @@ html {
           .solvedIssuesDiv {
             width: 50%;
             padding: 20px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: column;
             .solvedHeadDiv {
               .solvedHead {
               }
             }
 
             .solvedIssuesList {
-              max-width: 650px;
+            width: calc(100% - 40px);
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: flex-start;
+            a{ width: 100%;}
               .issuePost {
                 display: flex;
                 flex-direction: column;
@@ -143,6 +163,8 @@ html {
                 padding: 10px;
                 background: lightgrey;
                 border-radius: 3px;
+                width: calc(100% - 20px);
+                align-self: flex-start;
 
                 .issueTitle {
                   margin-bottom: 10px;
@@ -192,6 +214,60 @@ html {
         }
       }
     }
+  }
+
+  @media(min-width: 1400px) {
+    .home1Main {
+        .userCont {
+          .userContChild {
+            .headDiv {
+              .homeHead {
+              }
+              .promptBtnDiv {
+                .issuePromptBtn {
+                }
+              }
+            }
+            .issuesParent {
+              .openIssuesDiv {
+                .openIssuesList{
+                    .issuePost{
+                        .issueTitle{
+                            font-size: 1.4rem;
+                        }
+                        .openDateTime{
+                        }
+                    }
+                }
+              }
+              .solvedIssuesDiv {
+                .solvedIssuesList {
+                  .issuePost {
+                      .issueTitle{
+                          font-size: 1.4rem;
+                      }
+                    .solvedDateTime {
+                      .issueNickname {
+                        &:after {
+                          content: "\00a0  ||| \00a0";
+                        }
+                      }
+  
+                      .issueDate {
+                        &:after {
+                          content: "\00a0  ||| \00a0";
+                        }
+                      }
+                      .issueTime {
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
   }
 
   @media (max-width: 670px) {

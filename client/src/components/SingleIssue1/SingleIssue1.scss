@@ -8,12 +8,16 @@ strong {
 }
 .singleMother {
   height: calc(100vh - 100px);
+
   .singleMain {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 50px;
     padding-bottom: 0;
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 100px;
 
     .titleTextSection {
       .singleTitle {
