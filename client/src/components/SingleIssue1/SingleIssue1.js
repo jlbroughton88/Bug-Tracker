@@ -317,7 +317,6 @@ const SingleIssue1 = () => {
           </div>
         </section> 
       </div>
-     
     </div>
   );
 };

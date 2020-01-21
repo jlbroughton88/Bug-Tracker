@@ -117,20 +117,22 @@
 
                   .issueNickname {
                       font-weight: 700;
-                    &:after {
-                      color: blue;
+                    &:before {
+                      // color: blue;
                       font-weight: 400;
-                      content: "\00a0  ||| \00a0";
+                      content: "Asked By \00a0";
                     }
                   }
 
                   .issueDate {
+                    display: none;
                     &:after {
                       color: blue;
-                      content: "\00a0  ||| \00a0";
+                      // content: "\00a0  ||| \00a0";
                     }
                   }
                   .issueTime {
+                    display: none;
                   }
                 }
               }
@@ -188,24 +190,22 @@
 
                   .issueNickname {
                     font-weight: 700;
+                    // &:before {
+                    //   font-weight: 400;
+                    //   content: "Asked By \00a0";
+                    // }
                     &:after {
                       color: blue;
                       font-weight: 400;
-                      content: "\00a0  ||| \00a0";
+                      content: "\00a0 \00a0 || \00a0 \00a0";
                     }
                   }
 
                   .issueDate {
-                    &:after {
-                      color: blue;
-                      content: "\00a0  ||| \00a0";
-                    }
+                    display: none;
                   }
                   .issueTime {
-                    &:after {
-                      color: blue;
-                      content: "\00a0  ||| \00a0";
-                    }
+                    display: none;
                   }
                 }
               }
@@ -315,7 +315,7 @@
                     .issueNickname {
                       &:after {
                         color: blue;
-                        content: "\00a0  ||| \00a0";
+                        // content: "\00a0  ||| \00a0";
                       }
                     }
 
@@ -328,6 +328,62 @@
                     .issueTime {
                         display: none;
                     }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media(max-width: 450px) {
+    .home1Main {
+      .userCont {
+        .userContChild {
+          .headDiv {
+            .homeHead {
+            }
+            .promptBtnDiv {
+              .issuePromptBtn {}
+            }
+          }
+          .issuesParent {
+            .openIssuesDiv {
+              width: 100%;
+              padding: 0;
+              .openHeadDiv{
+                .openHead{
+                  margin-top: 30px;
+                }
+              }
+              .openIssuesList{
+                  .issuePost{
+                    .issueTitle{
+                      font-size: 1.1rem;
+                    }
+                      .openDateTime{}
+                  }
+              }
+            }
+            .solvedIssuesDiv {
+              width: 100%;
+              padding: 0;
+              .solvedHeadDiv{
+                .solvedHead{
+                  margin-top: 30px;
+                }
+              }
+              .solvedIssuesList {
+                .issuePost {
+                  .issueTitle{
+                    font-size: 1.1rem;
+                  }
+                  .solvedDateTime {
+                    .issueNickname {}
+                    .issueDate {}
+                    .issueTime {}
                   }
                 }
               }
