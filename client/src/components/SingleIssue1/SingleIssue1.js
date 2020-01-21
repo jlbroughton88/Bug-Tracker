@@ -72,7 +72,7 @@ const SingleIssue1 = () => {
   const getComments = issueUid => {
     axios
       .get(`${statusUrl}/api/getcomments/${issueUid}`, { timeout: 500 })
-      .then(response => setComments([...response.data]))
+      .then(response => setComments([...response.data].reverse()))
       .catch(err => console.log(err));
   };
 
@@ -291,7 +291,7 @@ const SingleIssue1 = () => {
             />
           </form>
           <div className="commentList">
-            {comments.reverse().map(comment => (
+            {comments.map(comment => (
               <div
                 className={`commItem ${comment.solved ? " solved" : ""}`}
                 id={`${comment.comm_uid}`}
