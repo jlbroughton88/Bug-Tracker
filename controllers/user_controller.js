@@ -4,12 +4,10 @@ const connection = mysql.createConnection(process.env.JAWSDB_URL);
 connection.connect();
 
 exports.get_user = (req, res) => {
-  console.log(req);
   connection.query(
     `SELECT * FROM users WHERE email = "${req.params.email}"`,
     (err, rows, fields) => {
       if (err) throw err;
-      console.log(rows);
       res.send(rows[0]);
     }
   );
@@ -24,7 +22,6 @@ exports.add_user_social = (req, res) => {
     `INSERT INTO users (uid, email, given_name, family_name, nickname, company, role, date_created, time_created) VALUES ("${req.params.uid}","${req.params.email}","${req.params.given_name}","${req.params.family_name}","${req.params.nickname}","${req.params.company}","${req.params.role}","${req.params.date_created}","${req.params.time_created}")`,
     (err, rows, fields) => {
       if (err) throw err;
-      console.log(rows[0]);
     }
   );
 };
@@ -110,7 +107,6 @@ exports.add_comment = (req, res) => {
 };
 
 exports.get_comments = (req, res) => {
-  console.log(req.params.issueuid);
   connection.query(
     `SELECT * FROM comments WHERE issue_uid = "${req.params.issueuid}"`,
     (err, rows, field) => {
@@ -147,7 +143,6 @@ exports.update_vote = (req, res) => {
     `UPDATE votes SET upvoted="${req.params.upvoted}", downvoted="${req.params.downvoted}" WHERE issue_uid="${req.params.issue_uid}" AND user_uid="${req.params.user_uid}"`,
     (err, rows, fields) => {
       if (err) throw err;
-      console.log(rows);
     }
   );
 };
@@ -157,14 +152,21 @@ exports.update_solved = (req, res) => {
     `UPDATE comments SET solved="1" WHERE issue_uid="${req.params.issue_uid}" AND comm_uid="${req.params.comm_uid}"`,
     (err, rows, fields) => {
       if (err) throw err;
-      console.log(rows[0]);
     }
   );
   connection.query(
     `UPDATE issues SET solved="1" WHERE uid=${req.params.issue_uid}`,
     (err, rows, field) => {
       if (err) throw err;
-      console.log(rows[0]);
     }
   );
 };
+
+exports.delete_comment = (req, res) => {
+  connection.query(`DELETE FROM comments WHERE comm_uid = "${req.params.comm_uid}"`, 
+    (err, rows, fields) => {
+      if(err) throw err;
+      console.log(rows);
+    }
+  )
+}

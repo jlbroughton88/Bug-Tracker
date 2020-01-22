@@ -20,5 +20,6 @@ router.get("/getvotes/:issueuid", user_controller.get_votes);
 router.post("/postvote", user_controller.post_vote);
 router.get("/updatevote/:upvoted/:downvoted/:issue_uid/:user_uid", user_controller.update_vote);
 router.get("/updatesolved/:issue_uid/:comm_uid", user_controller.update_solved);
+router.get("/deletecomment/:comm_uid", user_controller.delete_comment);
 
 module.exports = router;

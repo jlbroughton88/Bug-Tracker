@@ -194,23 +194,36 @@ strong {
             display: flex;
             flex-direction: row;
             align-self: flex-end;
+            padding-top: 10px;
             .solvedBtn{
               border: none;
               appearance: none;
               background: green;
               color: white;
               font-weight: 600;
+              cursor: pointer;
+              margin-left: 14px;
+            }
+            .deleteCommBtn{
+              border: none;
+              appearance: none;
+              background: red;
+              color: black;
+              font-weight: 600;
+              cursor: pointer;
+
+              
             }
             .commDate {
               &:before {
                 color: blue;
-                content: "\00a0  ||| \00a0";
+                content: "\00a0 | \00a0";
               }
             }
             .commTime {
               &:before {
                 color: blue;
-                content: "\00a0  ||| \00a0";
+                content: "\00a0 | \00a0";
               }
             }
           }
@@ -218,7 +231,6 @@ strong {
         .solved {
           border: 2px green solid;
           box-shadow: 4px 4px green;
-          
         }
       }
     }

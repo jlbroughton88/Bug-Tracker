@@ -200,7 +200,12 @@ const SingleIssue1 = () => {
   };
 
   const handleDeleteComment = (e) => {
+    axios
+      .get(`${statusUrl}/api/deletecomment/${e.target.id}`)
+      .then(response => console.log(response))
+      .catch(err => console.log(err))
 
+      window.location.reload();
   }
 
   const handleSolved = e => {
@@ -301,6 +306,9 @@ const SingleIssue1 = () => {
                 </p>
 
                 <div className="dateTimeNameDiv">
+                  {dbUser.uid.toString() == comment.user_uid && issue.solved === 0 && (
+                    <button className="deleteCommBtn" id={`${comment.comm_uid}`} onClick={handleDeleteComment} >Delete</button>
+                  )}
                   {dbUser.uid.toString() == issue.user_uid && issue.solved === 0 && (
                     <button className="solvedBtn" onClick={handleSolved}>
                       Solved?
