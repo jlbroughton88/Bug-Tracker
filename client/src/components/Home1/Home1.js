@@ -15,7 +15,7 @@ const Home1 = () => {
       .get(`${statusUrl}/api/getallissues`)
       .then(response => setIssues([...response.data].reverse()))
       .catch(err => console.log(err));
-  }, []);
+  }, [setIssues]);
 
   if (isLoading) {
     return <Loading />;

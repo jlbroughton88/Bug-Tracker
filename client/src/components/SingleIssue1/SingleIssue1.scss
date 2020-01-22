@@ -194,6 +194,13 @@ strong {
             display: flex;
             flex-direction: row;
             align-self: flex-end;
+            .solvedBtn{
+              border: none;
+              appearance: none;
+              background: green;
+              color: white;
+              font-weight: 600;
+            }
             .commDate {
               &:before {
                 color: blue;
@@ -201,12 +208,17 @@ strong {
               }
             }
             .commTime {
+              &:before {
+                color: blue;
+                content: "\00a0  ||| \00a0";
+              }
             }
           }
         }
         .solved {
           border: 2px green solid;
           box-shadow: 4px 4px green;
+          
         }
       }
     }

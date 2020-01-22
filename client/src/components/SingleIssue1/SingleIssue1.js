@@ -199,6 +199,10 @@ const SingleIssue1 = () => {
     window.location.reload();
   };
 
+  const handleDeleteComment = (e) => {
+
+  }
+
   const handleSolved = e => {
     let issueUid = window.location.pathname.replace("/issues/", "");
     let comm = e.target.parentNode.parentNode.id;
@@ -222,11 +226,6 @@ const SingleIssue1 = () => {
 
         <div onClick={overlayClose} className="" id="overlay"></div>
         <hr></hr>
-        {/* {<div>
-                    {console.log(votes)}
-                    <h1>{votes.downvotes} downvotes</h1>
-                    <h1>{votes.upvotes} upvotes</h1>
-                </div>} */}
 
         <section className="descSection">
           <div className="deleteDiv">
@@ -302,10 +301,9 @@ const SingleIssue1 = () => {
                 </p>
 
                 <div className="dateTimeNameDiv">
-                  {/* <p className="commName">{comment.comm_nickname}</p> */}
-                  {issue.solved === 0 && (
+                  {dbUser.uid.toString() == issue.user_uid && issue.solved === 0 && (
                     <button className="solvedBtn" onClick={handleSolved}>
-                      Solved
+                      Solved?
                     </button>
                   )}
 
