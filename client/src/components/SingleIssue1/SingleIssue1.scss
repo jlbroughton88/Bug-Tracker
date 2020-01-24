@@ -12,7 +12,6 @@ strong {
   .singleMain {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     padding: 50px;
     padding-bottom: 0;
     position: relative;
@@ -24,6 +23,12 @@ strong {
         text-align: start;
         margin-bottom: 10px;
         max-width: 800px;
+        background: lightgrey;
+        padding: 5px 5px 5px 8px;
+        border-radius: 3px;
+      }
+      .singleTitle.active{
+        border-left: 10px solid green;
       }
 
       .singleText {
@@ -195,6 +200,16 @@ strong {
             flex-direction: row;
             align-self: flex-end;
             padding-top: 10px;
+
+            .replyBtn{
+              border: none;
+              appearance: none;
+              background: lightblue;
+              color: black;
+              font-weight: 600;
+              cursor: pointer;
+            }
+
             .solvedBtn{
               border: none;
               appearance: none;
@@ -211,6 +226,7 @@ strong {
               color: black;
               font-weight: 600;
               cursor: pointer;
+              margin-left: 14px;
 
               
             }
@@ -295,6 +311,62 @@ strong {
   .deleteModal.active {
     transform: scale(1);
   }
+
+@keyframes fadein {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+@keyframes fadeout {
+  from {opacity: 1}
+  to {opacity: 0}
+}
+
+  .replyForm{
+    background: darkgrey;
+    padding: 20px 25px;
+    border-radius: 3px;
+    margin-top: 15px;
+    display: none;
+    position: relative;
+    transition: .25s all ease-in;
+    z-index: 2;
+    
+    .repForm{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      .repTextInput{
+        margin-bottom: 10px;
+        resize: none;
+        height: 100px;
+        padding: 8px;
+        font-size: 0.9rem;
+      }
+      .repSubmit{
+         width: 100px;
+         align-self: center;
+         padding: 5px 10px;
+      }
+    }
+    .repClose{
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: red;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      border-bottom-left-radius: 5px;
+    }
+  }
+
+  .replyForm.active{
+    animation: fadein 0.5s;
+    display: flex;
+  }
+
+
   #overlay {
     position: fixed;
     opacity: 0;
@@ -305,6 +377,7 @@ strong {
     background-color: rgba(0, 0, 0, 0.5);
     pointer-events: none;
     transition: 200ms ease-in-out;
+    z-index: 2;
   }
   #overlay.active {
     opacity: 1;

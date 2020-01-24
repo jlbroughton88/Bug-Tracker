@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
 import "./IssuePost1.scss";
 import axios from "axios";
 import { useAuth0 } from "../../contexts/auth0-context";
 import moment from "moment";
-import Footer from "../Footer/Footer";
+// import Footer from "../Footer/Footer";
 
 const IssuePost = () => {
   const [issueTitle, setIssueTitle] = useState("");
   const [issueText, setIssueText] = useState("");
   const { dbUser, statusUrl } = useAuth0();
   const [issueUid, setIssueUid] = useState("");
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     console.log(statusUrl);

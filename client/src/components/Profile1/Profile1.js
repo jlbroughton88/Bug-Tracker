@@ -14,6 +14,7 @@ const Profile1 = () => {
   const [role, setRole] = useState("");
   const [issueArr, setIssueArr] = useState([]);
   const [reversedArr, setReversedArr] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getIssue = () => {
     axios
@@ -24,9 +25,12 @@ const Profile1 = () => {
 
   useEffect(() => {
     getIssue();
-  }, []);
+    setTimeout(() => {
+      setLoading(false)
+    }, 300)
+  }, [loading]);
 
-  if (isLoading) {
+  if (isLoading || loading) {
     return <Loading />;
   }
 

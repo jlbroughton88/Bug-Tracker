@@ -1,4 +1,2 @@
-Let users delete THEIR OWN comments.
-Work on CSS
+Add reply functionality
 Fix unwanted logout on reload on mobile.
-Let users reply to comments.  

@@ -9,15 +9,24 @@ import axios from "axios";
 const Home1 = () => {
   const { isLoading, user, dbUser, statusUrl } = useAuth0();
   const [issues, setIssues] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const getIssues = () => {
     axios
       .get(`${statusUrl}/api/getallissues`)
       .then(response => setIssues([...response.data].reverse()))
       .catch(err => console.log(err));
+  }
+
+  useEffect(() => {
+      getIssues();
+
+      setTimeout(() => {
+        setLoading(false)
+      }, 300)
   }, [setIssues]);
 
-  if (isLoading) {
+  if (isLoading || loading) {
     return <Loading />;
   }
 
@@ -101,9 +110,9 @@ const Home1 = () => {
                                 <p className="issueTime">
                                   {issue.time_created}
                                 </p>
-                                <div className="solvedDiv">
+                                {/* <div className="solvedDiv">
                                   <p>Solved!</p>
-                                </div>
+                                </div> */}
                               </div>
                             </div>
                           </Link>

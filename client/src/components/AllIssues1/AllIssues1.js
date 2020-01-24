@@ -9,15 +9,23 @@ import "./AllIssues1.scss";
 const AllIssues1 = () => {
   const { isLoading, user, dbUser, statusUrl } = useAuth0();
   const [issueArr, setIssueArr] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    axios
+  const getIssues = () => {
+        axios
       .get(`${statusUrl}/api/issues/${dbUser.uid}`)
       .then(response => setIssueArr([...response.data]))
       .catch(err => console.log(err));
+  }
+
+  useEffect(() => {
+    getIssues();
+    setTimeout(() => {
+      setLoading(false)
+    }, 300)
   }, []);
 
-  if (isLoading) {
+  if (isLoading || loading) {
     return <Loading />;
   }
 
@@ -42,7 +50,6 @@ const AllIssues1 = () => {
       <section className="issuesSection">
         {issueArr.reverse().map(issue => (
           <div key={issue.uid} className="issuePost">
-            {console.log("not slicing")}
             <Link to={`/issues/${issue.uid}`}>
               <h2 className="issueTitle">{issue.issue_title}</h2>
             </Link>

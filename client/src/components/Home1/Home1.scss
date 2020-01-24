@@ -93,11 +93,11 @@
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;
-                // border-bottom: black solid 1px;
                 margin-top: 15px;
                 padding: 10px;
                 background: lightgrey;
                 border-radius: 3px;
+                border-left: red solid 5px;
 
                 .openDiv {
                   background: green;
@@ -118,7 +118,6 @@
                   .issueNickname {
                       font-weight: 700;
                     &:before {
-                      // color: blue;
                       font-weight: 400;
                       content: "Asked By \00a0";
                     }
@@ -167,6 +166,7 @@
                 border-radius: 3px;
                 width: calc(100% - 20px);
                 align-self: flex-start;
+                border-left: green solid 5px;
 
                 .issueTitle {
                   margin-bottom: 10px;
@@ -190,14 +190,9 @@
 
                   .issueNickname {
                     font-weight: 700;
-                    // &:before {
-                    //   font-weight: 400;
-                    //   content: "Asked By \00a0";
-                    // }
-                    &:after {
-                      color: blue;
+                    &:before {
                       font-weight: 400;
-                      content: "\00a0 \00a0 || \00a0 \00a0";
+                      content: "Asked By \00a0";
                     }
                   }
 

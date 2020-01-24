@@ -1,10 +1,10 @@
-import React, { useContext, useState, createContext } from "react";
+import React, { useContext, createContext } from "react";
 
 export const IssuesContext = createContext();
 export const useIssues = () => useContext(IssuesContext);
 
 export const IssuesProvider = props => {
-    const children = props;
+    // const children = props;
 
 
     const configObj = {

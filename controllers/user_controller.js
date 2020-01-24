@@ -170,3 +170,7 @@ exports.delete_comment = (req, res) => {
     }
   )
 }
+
+exports.add_reply = (req, res) => {
+  console.log(req.body);
+}
