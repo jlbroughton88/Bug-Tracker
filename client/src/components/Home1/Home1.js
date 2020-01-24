@@ -16,14 +16,14 @@ const Home1 = () => {
       .get(`${statusUrl}/api/getallissues`)
       .then(response => setIssues([...response.data].reverse()))
       .catch(err => console.log(err));
-  }
+  };
 
   useEffect(() => {
-      getIssues();
+    getIssues();
 
-      setTimeout(() => {
-        setLoading(false)
-      }, 300)
+    setTimeout(() => {
+      setLoading(false);
+    }, 300);
   }, [setIssues]);
 
   if (isLoading || loading) {
@@ -42,6 +42,17 @@ const Home1 = () => {
         {!isLoading && dbUser && (
           <div className="userCont">
             <div className="userContChild">
+              <div className="noticeDiv">
+                <h1 className="noticeH1">
+                &nbsp; Safari users will be logged out on refresh due to
+                  Safari's recent crackdown on cross-site cookie tracking. Auth0 is working on a solution for this, but until then, being
+                  logged out only occurs on Safari.
+                </h1>
+                <h3 className="noticeH3">
+                  
+                </h3>
+              </div>
+
               <div className="headDiv">
                 <h1 className="homeHead">
                   Welcome,{" "}
@@ -124,7 +135,6 @@ const Home1 = () => {
             </div>
           </div>
         )}
-        
       </div>
     </div>
   );

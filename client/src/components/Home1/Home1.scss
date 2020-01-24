@@ -34,6 +34,32 @@
         align-items: flex-start;
         text-align: center;
         flex-direction: column;
+
+        .noticeDiv{
+          background: yellow;
+          padding: 10px;
+          .noticeH1{
+            font-size: 1.5rem;
+            text-align: center;
+            &:before{
+              content: 'Notice';
+              background: black;
+              color: white;
+              border-radius: 3px;
+              padding: 2px 5px;
+            }
+          }
+          @media(max-width: 830px) {
+            .noticeH1{
+              font-size: 1.2rem;
+            }
+          }
+          @media(max-width: 550px) {
+            .noticeH1{
+              font-size: 1.0rem;
+            }
+          }
+        }
         .headDiv {
           width: 100%;
           display: flex;

@@ -27,7 +27,7 @@ strong {
         padding: 5px 5px 5px 8px;
         border-radius: 3px;
       }
-      .singleTitle.active{
+      .singleTitle.active {
         border-left: 10px solid green;
       }
 
@@ -186,67 +186,119 @@ strong {
         .commItem {
           display: flex;
           flex-direction: column;
-          border: 1px #333 solid;
-          border-radius: 5px;
-          margin: 10px 0;
-          padding: 10px;
-          background: rgb(228, 228, 228);
-          .commText {
-            white-space: pre-wrap;
-          }
-
-          .dateTimeNameDiv {
+          justify-content: flex-end;
+          margin: 20px 0;
+          
+          .commContainer {
             display: flex;
-            flex-direction: row;
-            align-self: flex-end;
-            padding-top: 10px;
-
-            .replyBtn{
-              border: none;
-              appearance: none;
-              background: lightblue;
-              color: black;
-              font-weight: 600;
-              cursor: pointer;
+            flex-direction: column;
+            border: 1px #333 solid;
+            border-radius: 5px;
+            
+            padding: 15px;
+            background: rgb(228, 228, 228);
+            z-index: 2;
+            .commText {
+              white-space: pre-wrap;
             }
 
-            .solvedBtn{
-              border: none;
-              appearance: none;
-              background: green;
-              color: white;
-              font-weight: 600;
-              cursor: pointer;
-              margin-left: 14px;
-            }
-            .deleteCommBtn{
-              border: none;
-              appearance: none;
-              background: red;
-              color: black;
-              font-weight: 600;
-              cursor: pointer;
-              margin-left: 14px;
+            .dateTimeNameDiv {
+              display: flex;
+              flex-direction: row;
+              align-self: flex-end;
+              padding-top: 10px;
 
-              
-            }
-            .commDate {
-              &:before {
-                color: blue;
-                content: "\00a0 | \00a0";
+              .replyBtn {
+                border: none;
+                appearance: none;
+                background: lightblue;
+                color: black;
+                font-weight: 600;
+                cursor: pointer;
               }
-            }
-            .commTime {
-              &:before {
-                color: blue;
-                content: "\00a0 | \00a0";
+
+              .solvedBtn {
+                border: none;
+                appearance: none;
+                background: green;
+                color: white;
+                font-weight: 600;
+                cursor: pointer;
+                margin-left: 14px;
+              }
+              .deleteCommBtn {
+                border: none;
+                appearance: none;
+                background: red;
+                color: black;
+                font-weight: 600;
+                cursor: pointer;
+                margin-left: 14px;
+              }
+              .commDate {
+                &:before {
+                  color: blue;
+                  content: "\00a0 | \00a0";
+                }
+              }
+              .commTime {
+                &:before {
+                  color: blue;
+                  content: "\00a0 | \00a0";
+                }
               }
             }
           }
-        }
-        .solved {
+
+          .repliesDiv {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            align-self: flex-end; 
+            padding: 4px;
+            width: 90%;
+            z-index: 1;
+            background: lightgrey;
+
+            .repItem {
+              width: calc(100% - 20px);
+              background: grey;
+              color: white;
+              padding: 5px 10px;
+              margin: 5px;
+              border-radius: 3px;
+              .repTextDiv {
+
+              }              
+              .repInfoDiv {    
+                width: 100%;            
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                .repNickname{}
+                .repTime{
+
+                  &:before {
+                    color: blue;
+                    content: "\00a0 | \00a0";
+                  }
+                }
+                .repDate{
+
+                  &:before {
+                    color: blue;
+                    content: "\00a0 | \00a0";
+                  }
+                }
+              }
+            }        
+          }
+
+          .solved {
           border: 2px green solid;
           box-shadow: 4px 4px green;
+        }
         }
       }
     }
@@ -312,45 +364,53 @@ strong {
     transform: scale(1);
   }
 
-@keyframes fadein {
-  from {opacity: 0}
-  to {opacity: 1}
-}
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 
-@keyframes fadeout {
-  from {opacity: 1}
-  to {opacity: 0}
-}
+  @keyframes fadeout {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
 
-  .replyForm{
+  .replyForm {
     background: darkgrey;
     padding: 20px 25px;
     border-radius: 3px;
     margin-top: 15px;
     display: none;
     position: relative;
-    transition: .25s all ease-in;
+    transition: 0.25s all ease-in;
     z-index: 2;
-    
-    .repForm{
+
+    .repForm {
       display: flex;
       flex-direction: column;
       width: 100%;
-      .repTextInput{
+      .repTextInput {
         margin-bottom: 10px;
         resize: none;
         height: 100px;
         padding: 8px;
         font-size: 0.9rem;
       }
-      .repSubmit{
-         width: 100px;
-         align-self: center;
-         padding: 5px 10px;
-         cursor: pointer;
+      .repSubmit {
+        width: 100px;
+        align-self: center;
+        padding: 5px 10px;
+        cursor: pointer;
       }
     }
-    .repClose{
+    .repClose {
       position: absolute;
       top: 0;
       right: 0;
@@ -362,11 +422,10 @@ strong {
     }
   }
 
-  .replyForm.active{
+  .replyForm.active {
     animation: fadein 0.5s;
     display: flex;
   }
-
 
   #overlay {
     position: fixed;

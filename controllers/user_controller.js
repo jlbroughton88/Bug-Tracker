@@ -180,3 +180,12 @@ exports.add_reply = (req, res) => {
     }
   )
 };
+
+exports.get_replies = (req, res) => {
+  connection.query(`SELECT * FROM replies WHERE issue_uid = "${req.params.issueuid}"`,
+    (err, rows, fields) => {
+      if(err) throw err;
+      res.send(rows);
+    }
+  )
+}

@@ -31,6 +31,7 @@ const SingleIssue1 = () => {
   useEffect(() => {
     let issueUid = window.location.pathname.replace("/issues/", "");
     getIssue(issueUid);
+    getReplies(issueUid);
     getVotes(issueUid);
     getComments(issueUid);
 
@@ -87,6 +88,13 @@ const SingleIssue1 = () => {
       .catch(err => console.log(err));
   };
 
+  const getReplies = issueUid => {
+    axios
+      .get(`${statusUrl}/api/getreplies/${issueUid}`)
+      .then(response => setReplies([...response.data]))
+      .catch(err => console.log(err));
+  };
+
   const getVotes = issueUid => {
     axios
       .get(`${statusUrl}/api/getvotes/${issueUid}`, { timeout: 300 })
@@ -113,7 +121,7 @@ const SingleIssue1 = () => {
       if (modal !== null) {
         modal.classList.remove("active");
       }
-      if(replyModal !== null) {
+      if (replyModal !== null) {
         replyModal.classList.remove("active");
       }
       overlay.classList.remove("active");
@@ -123,9 +131,9 @@ const SingleIssue1 = () => {
   const overlayClose = e => {
     const modal = document.querySelector(".deleteModal.active");
     const replyModals = document.getElementsByClassName("replyForm");
-    let replyModalsArr = [].slice.call(replyModals)
-    for(let i = 0; i < replyModalsArr.length; i++) {
-      if(replyModalsArr[i].className.includes("active")) {
+    let replyModalsArr = [].slice.call(replyModals);
+    for (let i = 0; i < replyModalsArr.length; i++) {
+      if (replyModalsArr[i].className.includes("active")) {
         closeModal(e, modal, replyModalsArr[i]);
       }
     }
@@ -247,12 +255,12 @@ const SingleIssue1 = () => {
   const replyFormOpen = e => {
     const overlay = document.getElementById("overlay");
     const commentList = document.getElementsByClassName("replyForm");
-    let commArr = [].slice.call(commentList)
+    let commArr = [].slice.call(commentList);
 
-    for(let i = 0; i < commArr.length; i++) {
-      if(commArr[i].className.includes(e.target.id)) {
+    for (let i = 0; i < commArr.length; i++) {
+      if (commArr[i].className.includes(e.target.id)) {
         overlay.classList.add("active");
-        commArr[i].classList.add("active")
+        commArr[i].classList.add("active");
       }
     }
   };
@@ -260,20 +268,19 @@ const SingleIssue1 = () => {
   const replyFormClose = e => {
     const overlay = document.getElementById("overlay");
     const commentList = document.getElementsByClassName("replyForm");
-    let commArr = [].slice.call(commentList)
+    let commArr = [].slice.call(commentList);
 
-    for(let i = 0; i < commArr.length; i++) {
-        overlay.classList.remove("active");
-        commArr[i].classList.remove("active")
+    for (let i = 0; i < commArr.length; i++) {
+      overlay.classList.remove("active");
+      commArr[i].classList.remove("active");
     }
   };
 
   const handleReplyForm = e => {
-    setReply(e.target.value)
-  }
+    setReply(e.target.value);
+  };
 
   const handleReplySubmit = e => {
-
     let issueUid = window.location.pathname.replace("/issues/", "");
     const uid = getRandomInt(10000000, 100000000);
     const formattedUserUid = dbUser.uid.toString();
@@ -284,21 +291,25 @@ const SingleIssue1 = () => {
     let formattedDate = date.replace(/\//g, "-");
 
     axios
-      .post(`http://localhost:5002/api/addreply`, {
-        rep_uid: uid.toString(),
-        issue_uid: formattedIssueUid,
-        user_uid: formattedUserUid,
-        comm_uid: e.target.id,
-        rep_text: reply,
-        user_nickname: dbUser.nickname,
-        time_created: formattedTime,
-        date_created: formattedDate
-      }, {timeout: 200})
+      .post(
+        `http://localhost:5002/api/addreply`,
+        {
+          rep_uid: uid.toString(),
+          issue_uid: formattedIssueUid,
+          user_uid: formattedUserUid,
+          comm_uid: e.target.id,
+          rep_text: reply,
+          user_nickname: dbUser.nickname,
+          time_created: formattedTime,
+          date_created: formattedDate
+        },
+        { timeout: 200 }
+      )
       .then(response => console.log(response))
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
 
     e.preventDefault();
-  }
+  };
 
   if (isLoading || loading) {
     return <Loading />;
@@ -317,6 +328,7 @@ const SingleIssue1 = () => {
         <div onClick={overlayClose} className="" id="overlay"></div>
 
         <hr></hr>
+        {console.log(replies)}
 
         <section className="descSection">
           <div className="deleteDiv">
@@ -384,49 +396,88 @@ const SingleIssue1 = () => {
           <div id="commentList" className="commentList">
             {comments.map(comment => (
               <div
-                className={`commItem ${comment.solved ? " solved" : ""}`}
+                className={`commItem `}
                 id={`${comment.comm_uid}`}
                 key={comment.comm_uid}
               >
-                <p className="commText">
-                  {comment.comm_text} - <strong>{comment.comm_nickname}</strong>
-                </p>
+                <div className={`commContainer  ${comment.solved ? " solved" : ""}`}>
+                  <p className="commText">
+                    {comment.comm_text} -{" "}
+                    <strong>{comment.comm_nickname}</strong>
+                  </p>
 
-                <div className="dateTimeNameDiv">
-                  <button
-                    className="replyBtn"
-                    id={`${comment.comm_uid}`}
-                    onClick={replyFormOpen}
+                  <div className="dateTimeNameDiv">
+                    <button
+                      className="replyBtn"
+                      id={`${comment.comm_uid}`}
+                      onClick={replyFormOpen}
+                    >
+                      Reply
+                    </button>
+                    {dbUser.uid.toString() == comment.user_uid &&
+                      issue.solved === 0 && (
+                        <button
+                          className="deleteCommBtn"
+                          id={`${comment.comm_uid}`}
+                          onClick={handleDeleteComment}
+                        >
+                          Delete
+                        </button>
+                      )}
+                    {dbUser.uid.toString() == issue.user_uid &&
+                      issue.solved === 0 && (
+                        <button className="solvedBtn" onClick={handleSolved}>
+                          Solved?
+                        </button>
+                      )}
+
+                    <p className="commTime">{comment.time_created}</p>
+                    <p className="commDate">{comment.date_created}</p>
+                  </div>
+
+                  <div
+                    key={comment.comm_uid}
+                    className={`replyForm ${comment.comm_uid}`}
+                    id="replyForm"
                   >
-                    Reply
-                  </button>
-                  {dbUser.uid.toString() == comment.user_uid &&
-                    issue.solved === 0 && (
-                      <button
-                        className="deleteCommBtn"
-                        id={`${comment.comm_uid}`}
-                        onClick={handleDeleteComment}
-                      >
-                        Delete
-                      </button>
-                    )}
-                  {dbUser.uid.toString() == issue.user_uid &&
-                    issue.solved === 0 && (
-                      <button className="solvedBtn" onClick={handleSolved}>
-                        Solved?
-                      </button>
-                    )}
-
-                  <p className="commTime">{comment.time_created}</p>
-                  <p className="commDate">{comment.date_created}</p>
+                    <form
+                      onSubmit={handleReplySubmit}
+                      id={comment.comm_uid}
+                      className="repForm"
+                    >
+                      <textarea
+                        className="repTextInput"
+                        onChange={handleReplyForm}
+                        placeholder="Reply here"
+                      />
+                      <input
+                        className="repSubmit"
+                        type="submit"
+                        placeholder="Submit"
+                      />
+                    </form>
+                    <button className="repClose" onClick={replyFormClose}>
+                      X
+                    </button>
+                  </div>
                 </div>
+                <div className="repliesDiv">
+                  {replies.map(
+                    rep =>
+                      rep.comm_uid === comment.comm_uid && (
+                        <div key={rep.rep_uid} className="repItem">
+                          <div className="repTextDiv">
+                            <p>{rep.rep_text}</p>
+                          </div>
 
-                <div key={comment.comm_uid} className={`replyForm ${comment.comm_uid}`} id="replyForm">
-                  <form onSubmit={handleReplySubmit} id={comment.comm_uid} className="repForm">
-                    <textarea className="repTextInput" onChange={handleReplyForm} placeholder="Reply here" />
-                    <input className="repSubmit" type="submit" placeholder="Submit" />
-                  </form>
-                  <button className="repClose" onClick={replyFormClose}>X</button>
+                          <div className="repInfoDiv">
+                            <p className="repNickname">{rep.user_nickname}</p>
+                            <p className="repTime">{rep.time_created}</p>
+                            <p className="repDate" >{rep.date_created}</p>
+                          </div>
+                        </div>
+                      )
+                  )}
                 </div>
               </div>
             ))}
