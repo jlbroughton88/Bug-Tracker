@@ -172,5 +172,11 @@ exports.delete_comment = (req, res) => {
 }
 
 exports.add_reply = (req, res) => {
-  console.log(req.body);
-}
+  let rep = req.body;
+  connection.query(`INSERT INTO replies (rep_uid, issue_uid, user_uid, comm_uid, rep_text, user_nickname, time_created, date_created) VALUES ("${rep.rep_uid}", "${rep.issue_uid}", "${rep.user_uid}", "${rep.comm_uid}", "${rep.rep_text}", "${rep.user_nickname}", "${rep.time_created}", "${rep.date_created}")`,
+   (err, rows, fields) => {
+     if(err) throw err;
+     console.log(rows);
+    }
+  )
+};

@@ -13,6 +13,7 @@ const SingleIssue1 = () => {
   const [newComment, setNewComment] = useState("");
   const { isLoading, statusUrl, dbUser, user } = useAuth0();
   const [comments, setComments] = useState([]);
+  const [reply, setReply] = useState("");
   const [replies, setReplies] = useState([]);
   let [votes, setVotes] = useState([]);
   const [downVotes, setDownVotes] = useState();
@@ -267,6 +268,38 @@ const SingleIssue1 = () => {
     }
   };
 
+  const handleReplyForm = e => {
+    setReply(e.target.value)
+  }
+
+  const handleReplySubmit = e => {
+
+    let issueUid = window.location.pathname.replace("/issues/", "");
+    const uid = getRandomInt(10000000, 100000000);
+    const formattedUserUid = dbUser.uid.toString();
+    const formattedIssueUid = issue.uid.toString();
+    let time = moment().format("LT");
+    let date = moment().format("L");
+    let formattedTime = time.replace(/\s/, "");
+    let formattedDate = date.replace(/\//g, "-");
+
+    axios
+      .post(`http://localhost:5002/api/addreply`, {
+        rep_uid: uid.toString(),
+        issue_uid: formattedIssueUid,
+        user_uid: formattedUserUid,
+        comm_uid: e.target.id,
+        rep_text: reply,
+        user_nickname: dbUser.nickname,
+        time_created: formattedTime,
+        date_created: formattedDate
+      }, {timeout: 200})
+      .then(response => console.log(response))
+      .catch(err => console.log(err))
+
+    e.preventDefault();
+  }
+
   if (isLoading || loading) {
     return <Loading />;
   }
@@ -389,8 +422,8 @@ const SingleIssue1 = () => {
                 </div>
 
                 <div key={comment.comm_uid} className={`replyForm ${comment.comm_uid}`} id="replyForm">
-                  <form className="repForm">
-                    <textarea className="repTextInput" placeholder="Reply here" />
+                  <form onSubmit={handleReplySubmit} id={comment.comm_uid} className="repForm">
+                    <textarea className="repTextInput" onChange={handleReplyForm} placeholder="Reply here" />
                     <input className="repSubmit" type="submit" placeholder="Submit" />
                   </form>
                   <button className="repClose" onClick={replyFormClose}>X</button>
