@@ -4,6 +4,7 @@ import "./IssuePost1.scss";
 import axios from "axios";
 import { useAuth0 } from "../../contexts/auth0-context";
 import moment from "moment";
+import Loading from "../Loading/Loading";
 // import Footer from "../Footer/Footer";
 
 const IssuePost = () => {
@@ -11,11 +12,12 @@ const IssuePost = () => {
   const [issueText, setIssueText] = useState("");
   const { dbUser, statusUrl } = useAuth0();
   const [issueUid, setIssueUid] = useState("");
-  // const [loading, setLoading] = useState(true);
+  const [recentIssue, setRecentIssue] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    console.log(statusUrl);
-  });
+  // useEffect(() => {
+  //   console.log(statusUrl);
+  // });
 
   const getRandomInt = (min, max) => {
     min = Math.ceil(min);
@@ -48,12 +50,28 @@ const IssuePost = () => {
       .catch(err => console.log(err));
   };
 
+  const getRecentIssue = uid => {
+    axios
+      .get(`${statusUrl}/api/getissue/${uid}`)
+      .then(response => setRecentIssue(response.data.uid))
+      .catch(err => console.log(err));
+  };
+
   const handleSubmit = e => {
     const uid = getRandomInt(10000000, 100000000);
     postIssue(uid);
     setIssueUid(uid);
-    window.location.href = `${statusUrl}/profile`;
+    e.preventDefault();
+    setLoading(true);
+    setTimeout(() => {
+      getRecentIssue(uid);
+      setLoading(false);
+    }, 500);
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="issuePost1Mother">
@@ -74,11 +92,15 @@ const IssuePost = () => {
             placeholder="Explain your issue..."
             onChange={e => setIssueText(e.target.value)}
           />
-          {/* <Link to={`/issues/${uid}`}> */}
           <input className="issueSubmit" type="submit" />
-          {/* </Link> */}
         </form>
       </div>
+      {recentIssue !== "" && (
+        <div className="forbidden">
+          <h3 className="forbHead">Issue Posted!</h3>
+          <Link className="forbLink" to={`/issues/${recentIssue}`}>Click Here</Link>
+        </div>
+      )}
     </div>
   );
 };

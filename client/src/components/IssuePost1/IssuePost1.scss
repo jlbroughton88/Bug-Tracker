@@ -62,4 +62,29 @@ textarea {
       }
     }
   }
+
+  .forbidden{
+    position: absolute;
+    width: 200px;
+    height: 70px;
+    top: 200px;
+    left: calc(50% - 100px);
+    right: calc(50% - 100px);
+    background: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+
+    .forbHead{
+      margin-bottom: 5px;
+    }
+    .forbLink{
+      background: grey;
+      padding: 4px 6px;
+      border-radius: 3px;
+      color: white;
+    }
+  }
 }
