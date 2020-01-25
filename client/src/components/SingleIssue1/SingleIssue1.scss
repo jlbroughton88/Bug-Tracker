@@ -256,7 +256,7 @@ strong {
             align-items: center;
             justify-content: center;
             align-self: flex-end; 
-            padding: 4px;
+            padding: 0 6px;
             width: 90%;
             z-index: 1;
             background: lightgrey;
@@ -276,6 +276,7 @@ strong {
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-end;
+
                 .repNickname{}
                 .repTime{
 
