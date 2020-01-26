@@ -292,7 +292,7 @@ const SingleIssue1 = () => {
 
     axios
       .post(
-        `http://localhost:5002/api/addreply`,
+        `${statusUrl}/api/addreply`,
         {
           rep_uid: uid.toString(),
           issue_uid: formattedIssueUid,
@@ -469,9 +469,11 @@ const SingleIssue1 = () => {
                           </div>
 
                           <div className="repInfoDiv">
-                            <p className="repNickname">{rep.user_nickname}</p>
+                            <div className="repInfo">
+                                                         <p className="repNickname">{rep.user_nickname}</p>
                             <p className="repTime">{rep.time_created}</p>
                             <p className="repDate" >{rep.date_created}</p>
+                            </div>
                           </div>
                         </div>
                       )

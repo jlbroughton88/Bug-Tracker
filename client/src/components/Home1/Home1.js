@@ -48,9 +48,6 @@ const Home1 = () => {
                   Safari's recent crackdown on cross-site cookie tracking. Auth0 is working on a solution for this, but until then, being
                   logged out only occurs on Safari.
                 </h1>
-                <h3 className="noticeH3">
-                  
-                </h3>
               </div>
 
               <div className="headDiv">

@@ -42,19 +42,32 @@
     }
   }
   .issuesSection {
+    margin-left: 20px;
+    margin-top: 20px;
+    max-width: 600px;
     .issuePost {
       display: flex;
       flex-direction: column;
-      border-bottom: 1px solid #333;
-      padding: 10px 20px;
+      padding: 4px 10px;
+      background: lightgrey;
+      margin-bottom: 10px;
+      border-radius: 5px;
 
       .issueTitle {
         font-size: 1.3rem;
         margin-bottom: 5px;
-        color: blue;
+        color: #333;
       }
-      .issuePara {
+      .issueParaDiv{
+        align-self: flex-start;
+        display: flex;
+        justify-content: flex-start;
+        background: lightblue;      
+        .issuePara {
+        padding: 5px;
       }
+      }
+
       .issueViewBtn {
         background: skyblue;
         border-radius: 5px;

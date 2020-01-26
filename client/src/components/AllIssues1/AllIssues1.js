@@ -49,12 +49,16 @@ const AllIssues1 = () => {
       </section>
       <section className="issuesSection">
         {issueArr.reverse().map(issue => (
-          <div key={issue.uid} className="issuePost">
-            <Link to={`/issues/${issue.uid}`}>
+         <Link key={issue.uid} to={`/issues/${issue.uid}`}>
+         <div  className="issuePost">
+            
               <h2 className="issueTitle">{issue.issue_title}</h2>
-            </Link>
-            <p className="issuePara">{`${issue.date_created} | ${issue.time_created}`}</p>
+            
+            <div className="issueParaDiv">
+              <p className="issuePara">{`${issue.date_created} | ${issue.time_created}`}</p>
+            </div>
           </div>
+          </Link>
         ))}
       </section>
     </div>

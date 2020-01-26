@@ -151,12 +151,16 @@ const Profile1 = () => {
             ) : (
               <div>
                 {issueArr.slice(0, 5).map(issue => (
-                  <div key={issue.uid} className="issuePost">
-                    <Link to={`/issues/${issue.uid}`}>
+                  <Link key={issue.uid} to={`/issues/${issue.uid}`}>
+                    <div  className="issuePost">
+                    
                       <h2 className="issueTitle">{issue.issue_title}</h2>
-                    </Link>
-                    <p className="issuePara">{`${issue.date_created} | ${issue.time_created}`}</p>
+                    
+                    <div className="issueParaDiv">
+                      <p className="issuePara">{`${issue.date_created} | ${issue.time_created}`}</p>
+                    </div>
                   </div>
+                  </Link>
                 ))}
                 <Link to={`/all/${dbUser.uid}/`}>
                   <button className="issueViewBtn">View All</button>

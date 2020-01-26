@@ -52,12 +52,14 @@ strong {
         position: absolute;
         top: 0;
         left: 0;
+        
         .deleteBtn {
           border: none;
           color: red;
           font-size: 0.8rem;
           margin-right: 70px;
           align-self: top;
+          cursor: pointer;
         }
       }
       .descDiv {
@@ -70,6 +72,7 @@ strong {
         align-self: flex-end;
         padding: 10px;
         background: lightblue;
+        border-radius: 3px;
         .dateTime {
           display: flex;
           flex-direction: row;
@@ -188,13 +191,13 @@ strong {
           flex-direction: column;
           justify-content: flex-end;
           margin: 20px 0;
-          
+
           .commContainer {
             display: flex;
             flex-direction: column;
             border: 1px #333 solid;
             border-radius: 5px;
-            
+
             padding: 15px;
             background: rgb(228, 228, 228);
             z-index: 2;
@@ -255,7 +258,7 @@ strong {
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            align-self: flex-end; 
+            align-self: flex-end;
             padding: 0 6px;
             width: 90%;
             z-index: 1;
@@ -269,37 +272,44 @@ strong {
               margin: 5px;
               border-radius: 3px;
               .repTextDiv {
-
-              }              
-              .repInfoDiv {    
-                width: 100%;            
+                white-space: pre-wrap;
+              }
+              .repInfoDiv {
+                width: 100%;
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-end;
-
-                .repNickname{}
-                .repTime{
-
-                  &:before {
-                    color: blue;
-                    content: "\00a0 | \00a0";
+                margin-top: 10px;
+                .repInfo {
+                  display: flex;
+                  flex-direction: row;
+                  border-radius: 3px;
+                  padding: 5px;
+                  background: lightblue;
+                  color: #333;
+                  .repNickname {
                   }
-                }
-                .repDate{
-
-                  &:before {
-                    color: blue;
-                    content: "\00a0 | \00a0";
+                  .repTime {
+                    &:before {
+                      color: blue;
+                      content: "\00a0 | \00a0";
+                    }
+                  }
+                  .repDate {
+                    &:before {
+                      color: blue;
+                      content: "\00a0 | \00a0";
+                    }
                   }
                 }
               }
-            }        
+            }
           }
 
           .solved {
-          border: 2px green solid;
-          box-shadow: 4px 4px green;
-        }
+            border: 2px green solid;
+            box-shadow: 4px 4px green;
+          }
         }
       }
     }
