@@ -29,6 +29,7 @@ const Home1 = () => {
   if (isLoading || loading) {
     return <Loading />;
   }
+  
 
   return (
     <div className="home1Mother">
@@ -36,6 +37,11 @@ const Home1 = () => {
         {!isLoading && !user && (
           <div className="noUserCont">
             <h1>Welcome to Bug Tracker!</h1>
+            <div className="demoLoginDiv">
+              <h3>Demo Login</h3>
+              <p><strong>Email: </strong> admin@gmail.com</p>
+              <p><strong>Password: </strong> admin99?</p>
+            </div>
           </div>
         )}
 

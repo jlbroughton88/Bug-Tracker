@@ -12,17 +12,17 @@ const AllIssues1 = () => {
   const [loading, setLoading] = useState(true);
 
   const getIssues = () => {
-        axios
+    axios
       .get(`${statusUrl}/api/issues/${dbUser.uid}`)
       .then(response => setIssueArr([...response.data]))
       .catch(err => console.log(err));
-  }
+  };
 
   useEffect(() => {
     getIssues();
     setTimeout(() => {
-      setLoading(false)
-    }, 300)
+      setLoading(false);
+    }, 300);
   }, []);
 
   if (isLoading || loading) {
@@ -49,15 +49,14 @@ const AllIssues1 = () => {
       </section>
       <section className="issuesSection">
         {issueArr.reverse().map(issue => (
-         <Link key={issue.uid} to={`/issues/${issue.uid}`}>
-         <div  className="issuePost">
-            
+          <Link key={issue.uid} to={`/issues/${issue.uid}`}>
+            <div className="issuePost">
               <h2 className="issueTitle">{issue.issue_title}</h2>
-            
-            <div className="issueParaDiv">
-              <p className="issuePara">{`${issue.date_created} | ${issue.time_created}`}</p>
+
+              <div className="issueParaDiv">
+                <p className="issuePara">{`${issue.date_created} | ${issue.time_created}`}</p>
+              </div>
             </div>
-          </div>
           </Link>
         ))}
       </section>

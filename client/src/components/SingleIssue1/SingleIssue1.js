@@ -241,8 +241,7 @@ const SingleIssue1 = () => {
 
   const handleSolved = e => {
     let issueUid = window.location.pathname.replace("/issues/", "");
-    let comm = e.target.parentNode.parentNode.id;
-    console.log(comm);
+    let comm = e.target.parentNode.parentNode.parentNode.id;
 
     axios
       .get(`${statusUrl}/api/updatesolved/${issueUid}/${comm}`)
