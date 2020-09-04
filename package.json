@@ -38,7 +38,7 @@
     "express": "^4.17.1",
     "moment": "^2.24.0",
     "mysql": "^2.17.1",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "path": "^0.12.7",
     "react-promise-tracker": "^2.0.5",
     "use-state-with-callback": "^1.0.18",
